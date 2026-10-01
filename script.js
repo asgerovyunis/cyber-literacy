@@ -668,11 +668,35 @@
     });
   }
 
-  // Klik kənara edildikdə dropdown-u bağla
+  const headerSearchWrap = document.getElementById('header-search-wrap');
+  const searchToggleBtn = document.getElementById('header-search-toggle-btn');
+
+  if (searchToggleBtn && headerSearchWrap) {
+    searchToggleBtn.addEventListener('click', (e) => {
+      if (window.innerWidth >= 769 && window.innerWidth <= 1180) {
+        e.stopPropagation();
+        const expanded = headerSearchWrap.classList.toggle('is-expanded');
+        searchToggleBtn.setAttribute('aria-expanded', String(expanded));
+        if (expanded && globalSearchInput) {
+          globalSearchInput.focus();
+        } else {
+          if (headerSearchDropdown) headerSearchDropdown.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  // Klik kənara edildikdə dropdown-u və genişlənmiş axtarışı bağla
   document.addEventListener('click', (e) => {
     const wrap = e.target.closest('.header-search-wrap');
-    if (!wrap && headerSearchDropdown) {
-      headerSearchDropdown.style.display = 'none';
+    if (!wrap) {
+      if (headerSearchDropdown) {
+        headerSearchDropdown.style.display = 'none';
+      }
+      if (headerSearchWrap && headerSearchWrap.classList.contains('is-expanded')) {
+        headerSearchWrap.classList.remove('is-expanded');
+        if (searchToggleBtn) searchToggleBtn.setAttribute('aria-expanded', 'false');
+      }
     }
   });
 
@@ -681,6 +705,13 @@
     if (e.key === 'Escape') {
       if (headerSearchDropdown) {
         headerSearchDropdown.style.display = 'none';
+      }
+      if (headerSearchWrap && headerSearchWrap.classList.contains('is-expanded')) {
+        headerSearchWrap.classList.remove('is-expanded');
+        if (searchToggleBtn) {
+          searchToggleBtn.setAttribute('aria-expanded', 'false');
+          searchToggleBtn.focus();
+        }
       }
       if (globalSearchInput && document.activeElement === globalSearchInput) {
         globalSearchInput.blur();
