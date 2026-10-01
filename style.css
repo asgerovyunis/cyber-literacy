@@ -1,0 +1,2293 @@
+/* ==========================================================================
+   Kiber Savadlılıq — Nəşr və Bələdçi Üslubunda Stil Cədvəli
+   Sakit, etibarlı, yüksək kontrastlı və oxunaqlı dizayn.
+   Heç bir neon qradiyent, parıltılı kölgə və ya lazımsız bəzək yoxdur.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Dizayn Dəyişənləri və Mövzular
+   -------------------------------------------------------------------------- */
+:root {
+  --font-serif: "Newsreader", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* İşıqlı rejim (Təbii kağız / qəzet tonu) */
+  --bg-page: #f6f4ef;
+  --bg-surface: #edeae2;
+  --bg-surface-hover: #e5e0d5;
+  --bg-callout: #ece7db;
+  --bg-phone: #ffffff;
+  
+  --text-primary: #14181f;
+  --text-secondary: #404754;
+  --text-muted: #6b7280;
+  --text-inverse: #f6f4ef;
+
+  --rule-subtle: #ded8cb;
+  --rule-strong: #14181f;
+
+  /* Əsas Vurğu Rəngi: Təmkinli Meşə Yaşılı */
+  --accent: #1f5d50;
+  --accent-hover: #154238;
+  --accent-subtle: #e6eee9;
+  --accent-rule: #a4c2ba;
+
+  /* Xəbərdarlıq və Nəticə Rəngləri */
+  --signal-warn-bg: #faece7;
+  --signal-warn-text: #962a12;
+  --signal-warn-rule: #e8a594;
+  --signal-good-bg: #eaf3ee;
+  --signal-good-text: #194e43;
+  --signal-good-rule: #9ec1b4;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --container-max: 74rem;
+  --transition-fast: 0.15s ease;
+}
+
+[data-theme="dark"] {
+  --bg-page: #12151a;
+  --bg-surface: #1a1e24;
+  --bg-surface-hover: #232932;
+  --bg-callout: #1c2129;
+  --bg-phone: #171b21;
+
+  --text-primary: #f2efe9;
+  --text-secondary: #c2bcb0;
+  --text-muted: #8b929e;
+  --text-inverse: #12151a;
+
+  --rule-subtle: #29303d;
+  --rule-strong: #f2efe9;
+
+  --accent: #52a996;
+  --accent-hover: #6bc2af;
+  --accent-subtle: #172b26;
+  --accent-rule: #2a584e;
+
+  --signal-warn-bg: #2d1815;
+  --signal-warn-text: #f08973;
+  --signal-warn-rule: #692c22;
+  --signal-good-bg: #142822;
+  --signal-good-text: #6ec4b0;
+  --signal-good-rule: #285e51;
+}
+
+/* --------------------------------------------------------------------------
+   2. Əsas və Tipoqrafiya
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 18px; /* Hər yaş üçün rahat və oxunaqlı şrift ölçüsü */
+  line-height: 1.65;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1.5rem;
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Ekran oxuyucular üçün gizli köməkçi sinif (Screen Reader Only) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.68;
+  margin-bottom: 1.25rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+button {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Yuxarı Naviqasiya Paneli
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-page);
+  border-bottom: 1px solid var(--rule-subtle);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.25rem;
+  gap: 1rem;
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.wordmark-period {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.nav-links {
+  display: none;
+  list-style: none;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 960px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-size: 0.925rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--rule-strong);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Qlobal Axtarış (Header Search) */
+.header-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 150px;
+  transition: width var(--transition-fast);
+}
+
+@media (min-width: 640px) {
+  .header-search-wrap {
+    width: 190px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .header-search-wrap {
+    width: 220px;
+  }
+}
+
+.header-search-wrap:focus-within {
+  width: 200px;
+}
+
+@media (min-width: 640px) {
+  .header-search-wrap:focus-within {
+    width: 250px;
+  }
+}
+
+.header-search-icon {
+  position: absolute;
+  left: 0.65rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.header-search-input {
+  width: 100%;
+  height: 40px;
+  padding: 0.4rem 1.85rem 0.4rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.header-search-input::placeholder {
+  color: var(--text-muted);
+  font-size: 0.825rem;
+}
+
+.header-search-input:focus {
+  border-color: var(--accent);
+  background-color: var(--bg-page);
+}
+
+.header-search-clear {
+  position: absolute;
+  right: 0.35rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.header-search-clear:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-surface-hover);
+}
+
+/* Axtarış Nəticələri Açılan Pəncərəsi (Dropdown) */
+.header-search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  max-width: 90vw;
+  max-height: 420px;
+  overflow-y: auto;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 200;
+}
+
+[data-theme="dark"] .header-search-dropdown {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border-color: var(--rule-subtle);
+}
+
+.search-dropdown-group {
+  padding: 0.35rem 0.75rem;
+}
+
+.search-dropdown-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.search-dropdown-item {
+  display: block;
+  padding: 0.45rem 0.6rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+
+.search-dropdown-item:hover,
+.search-dropdown-item:focus {
+  background-color: var(--bg-surface-hover);
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.search-no-results {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.search-no-results-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.search-no-results-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.search-dropdown-footer {
+  padding: 0.6rem 0.85rem 0.25rem 0.85rem;
+  border-top: 1px solid var(--rule-subtle);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Səhifə daxilində Axtarış Nəticəsi Yoxdur Mesajları */
+.search-empty-state {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background-color: var(--bg-surface);
+  border: 1px dashed var(--rule-subtle);
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+}
+
+.search-empty-state .search-empty-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.search-empty-state .search-empty-hint {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Mobil Drawer Axtarış Qutusu */
+.mobile-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.mobile-search-box .header-search-icon {
+  left: 0.75rem;
+}
+
+.mobile-search-box .header-search-input {
+  width: 100%;
+}
+
+.theme-button {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.theme-button:hover {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--text-secondary);
+}
+
+.mobile-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  min-width: 44px;
+  min-height: 44px;
+}
+
+@media (min-width: 960px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+.mobile-drawer {
+  display: none;
+  border-top: 1px solid var(--rule-subtle);
+  padding: 1.25rem 1.5rem;
+  background-color: var(--bg-page);
+}
+
+.mobile-drawer.is-open {
+  display: block;
+}
+
+.mobile-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobile-links-list a {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   4. Bölmə Nömrələri və Başlıqlar
+   -------------------------------------------------------------------------- */
+.editorial-section {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+  border-bottom: 1px solid var(--rule-subtle);
+}
+
+.section-eyebrow-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 0.65rem;
+}
+
+.section-index {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.section-category {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.section-editorial-header {
+  margin-bottom: 3rem;
+  max-width: 48rem;
+}
+
+.section-editorial-title {
+  font-size: 2.15rem;
+  line-height: 1.22;
+  margin-bottom: 0.85rem;
+}
+
+@media (min-width: 768px) {
+  .section-editorial-title {
+    font-size: 2.65rem;
+  }
+}
+
+.section-editorial-lede {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   5. Əsas Başlıq Bölməsi (Hero və Real SMS İllüstrasiyası)
+   -------------------------------------------------------------------------- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 4rem;
+  }
+}
+
+.hero-index {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.hero-headline {
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .hero-headline {
+    font-size: 3.5rem;
+  }
+}
+
+.hero-lede {
+  font-size: 1.18rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 2.25rem;
+  max-width: 36rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 46px;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-solid {
+  background-color: var(--accent);
+  color: #ffffff;
+  border: 1px solid var(--accent);
+}
+
+.btn-solid:hover {
+  background-color: var(--accent-hover);
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--rule-strong);
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-surface);
+}
+
+/* Real SMS İllüstrasiyası */
+.mockup-frame {
+  background-color: var(--bg-phone);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.mockup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule-subtle);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.mockup-sender {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sms-bubble {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.sms-bubble-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--signal-warn-text);
+  word-break: break-all;
+  background-color: var(--signal-warn-bg);
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--signal-warn-text);
+}
+
+.mockup-annotations {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.mockup-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: var(--text-secondary);
+}
+
+.mockup-bullet {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--signal-warn-text);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   6. "Niyə Vacibdir" Bölməsi (Asimmetrik və Xətti)
+   -------------------------------------------------------------------------- */
+.matters-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .matters-layout {
+    grid-template-columns: 4fr 8fr;
+    gap: 4rem;
+  }
+}
+
+.matters-aside h3 {
+  font-size: 1.85rem;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.matters-aside p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+.matters-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.matter-row {
+  border-top: 1px solid var(--rule-subtle);
+  padding: 1.75rem 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 680px) {
+  .matter-row {
+    grid-template-columns: 2.5rem 1fr 1.5fr;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+}
+
+.matter-number {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.matter-heading {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.matter-text {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Əsas Mövzular (Böyük Nömrəli Xətti Akkordeon)
+   -------------------------------------------------------------------------- */
+.topics-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--rule-subtle);
+  gap: 0.5rem;
+}
+
+.topics-count {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+}
+
+.topics-toggle-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-text-action {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  white-space: nowrap;
+}
+
+.btn-text-action:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.topics-accordion {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.topic-row {
+  border-bottom: 1px solid var(--rule-subtle);
+  transition: background-color var(--transition-fast);
+}
+
+.topic-row.is-open {
+  background-color: var(--bg-surface);
+}
+
+.topic-row-trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 2rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  text-align: left;
+  cursor: pointer;
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .topic-row-trigger {
+    grid-template-columns: 3.5rem 1fr 2rem;
+    padding: 1.75rem 0.75rem;
+  }
+}
+
+.topic-row-trigger:hover {
+  color: var(--accent);
+}
+
+.topic-num {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.topic-header-text h3 {
+  font-size: 1.28rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.topic-header-text p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.topic-indicator {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-align: right;
+  transition: transform var(--transition-fast);
+}
+
+.topic-row.is-open .topic-indicator {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+
+.topic-body {
+  display: none;
+  padding: 0 0.75rem 2rem 3.5rem;
+  border-top: 1px dashed var(--rule-subtle);
+}
+
+@media (max-width: 767px) {
+  .topic-body {
+    padding-left: 0;
+  }
+}
+
+.topic-row.is-open .topic-body {
+  display: block;
+}
+
+.topic-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 860px) {
+  .topic-columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.topic-col h4 {
+  font-size: 0.925rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.65rem;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--rule-subtle);
+  padding-bottom: 0.35rem;
+}
+
+.topic-col p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.topic-col ul {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.topic-col li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.45rem;
+  line-height: 1.55;
+}
+
+.topic-takeaway {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--accent-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.topic-takeaway strong {
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   8. Təcili Addımlar Siyahısı (Yoxlama Siyahısı)
+   -------------------------------------------------------------------------- */
+.emergency-wrapper {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--rule-subtle);
+  border-top: 3px solid var(--signal-warn-text);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .emergency-wrapper {
+    padding: 3rem;
+  }
+}
+
+.emergency-header-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-bottom: 1px solid var(--rule-subtle);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .emergency-header-row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+.emergency-header-row h3 {
+  font-size: 1.85rem;
+  line-height: 1.2;
+}
+
+.checklist-counter-display {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+  background-color: var(--bg-page);
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.checklist-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  background-color: var(--bg-page);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.check-item:hover {
+  border-color: var(--rule-strong);
+}
+
+.check-item.is-completed {
+  background-color: var(--signal-good-bg);
+  border-color: var(--signal-good-rule);
+}
+
+.check-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 2px solid var(--text-secondary);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-page);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.check-input::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  transform: scale(0);
+  background-color: var(--accent);
+  border-radius: 1px;
+  transition: transform 0.12s ease;
+}
+
+.check-input:checked {
+  border-color: var(--accent);
+}
+
+.check-input:checked::before {
+  transform: scale(1);
+}
+
+.check-content {
+  flex-grow: 1;
+}
+
+.check-step-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.check-item.is-completed .check-step-name {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.check-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.checklist-actions-bar {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule-subtle);
+  padding-top: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   9. Dələduzu Tanı (Test və Simulyasiya Bölməsi)
+   -------------------------------------------------------------------------- */
+.quiz-container {
+  max-width: 44rem;
+  margin: 0 auto;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .quiz-container {
+    padding: 2.5rem;
+  }
+}
+
+.quiz-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--rule-subtle);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.quiz-score-indicator {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.quiz-message-mockup {
+  background-color: var(--bg-phone);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.quiz-channel-tag {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.quiz-situation-text {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.quiz-simulated-text {
+  background-color: var(--bg-surface);
+  border-left: 3px solid var(--signal-warn-text);
+  padding: 0.85rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  word-break: break-word;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.quiz-ask-heading {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.quiz-answers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-choice-btn {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  background-color: var(--bg-page);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+  transition: all var(--transition-fast);
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  min-height: 52px;
+}
+
+.quiz-choice-btn:hover:not(:disabled) {
+  border-color: var(--rule-strong);
+  background-color: var(--bg-surface-hover);
+}
+
+.quiz-choice-marker {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.quiz-choice-btn.is-correct {
+  background-color: var(--signal-good-bg);
+  border-color: var(--signal-good-rule);
+  color: var(--signal-good-text);
+}
+
+.quiz-choice-btn.is-correct .quiz-choice-marker {
+  color: var(--signal-good-text);
+}
+
+.quiz-choice-btn.is-wrong {
+  background-color: var(--signal-warn-bg);
+  border-color: var(--signal-warn-rule);
+  color: var(--signal-warn-text);
+}
+
+.quiz-choice-btn.is-wrong .quiz-choice-marker {
+  color: var(--signal-warn-text);
+}
+
+.quiz-feedback-panel {
+  display: none;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+}
+
+.quiz-feedback-panel.show {
+  display: block;
+}
+
+.quiz-feedback-panel.correct {
+  background-color: var(--signal-good-bg);
+  border: 1px solid var(--signal-good-rule);
+}
+
+.quiz-feedback-panel.wrong {
+  background-color: var(--signal-warn-bg);
+  border: 1px solid var(--signal-warn-rule);
+}
+
+.feedback-lead {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.quiz-feedback-panel.correct .feedback-lead {
+  color: var(--signal-good-text);
+}
+
+.quiz-feedback-panel.wrong .feedback-lead {
+  color: var(--signal-warn-text);
+}
+
+.feedback-body {
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.quiz-nav-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.quiz-results-screen {
+  display: none;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.quiz-results-screen.show {
+  display: block;
+}
+
+.quiz-results-screen h3 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-final-score {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.quiz-final-note {
+  max-width: 28rem;
+  margin: 0 auto 2rem;
+  font-size: 1.05rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. Lüğət (Sadə Dildə Terminlər İndeksi)
+   -------------------------------------------------------------------------- */
+.glossary-controls {
+  max-width: 30rem;
+  margin-bottom: 2.5rem;
+}
+
+.glossary-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.glossary-input:focus {
+  border-color: var(--rule-strong);
+  outline: none;
+}
+
+.glossary-index {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .glossary-index {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+  }
+}
+
+.glossary-item {
+  border-top: 1px solid var(--rule-subtle);
+  padding-top: 1rem;
+}
+
+.glossary-item-term {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.glossary-item-cat {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.glossary-item-def {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.glossary-item-plain {
+  font-size: 0.875rem;
+  color: var(--accent);
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   11. Rəsmi Qurumlar (Birbaşa Bələdçi Siyahısı)
+   -------------------------------------------------------------------------- */
+.resources-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .resources-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+.resource-entry {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition-fast);
+}
+
+.resource-entry:hover {
+  border-color: var(--rule-strong);
+}
+
+.resource-origin {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.resource-headline {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resource-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.resource-action-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   12. Saytın Altlığı (Kolofon)
+   -------------------------------------------------------------------------- */
+.site-colophon {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--rule-subtle);
+}
+
+.colophon-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .colophon-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.colophon-notice h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.45rem;
+}
+
+.colophon-notice p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.colophon-links-heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.65rem;
+}
+
+.colophon-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.colophon-nav a {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.colophon-nav a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.colophon-bottom-row {
+  border-top: 1px solid var(--rule-subtle);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 640px) {
+  .colophon-bottom-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* OCTOBER CAMPAIGN START */
+/* --------------------------------------------------------------------------
+   Oktyabr Kibertəhlükəsizlik Maarifləndirmə Ayı Kampaniyası
+   Müstəqil və asanlıqla silinə bilən modul.
+   -------------------------------------------------------------------------- */
+
+/* 1. Bildiriş Zolağı (Announcement Bar) */
+.october-banner {
+  background-color: var(--accent);
+  color: #ffffff;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 101;
+}
+
+.october-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  min-height: 48px;
+}
+
+.october-banner-text {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  font-size: 0.925rem;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.october-banner-title {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.october-banner-sep {
+  opacity: 0.6;
+}
+
+.october-banner-link {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity var(--transition-fast);
+}
+
+.october-banner-link:hover {
+  opacity: 0.85;
+}
+
+.october-banner-link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.october-banner-close {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.october-banner-close:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.october-banner-close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: -2px;
+}
+
+/* 2. Hero Xüsusi Bloku */
+.october-hero-block {
+  margin-top: 2rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--rule-subtle);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 1.35rem 1.5rem;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.october-hero-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.october-hero-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.october-hero-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 3. 4 Həftəlik Çağırış Bölməsi */
+.october-challenge-section {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--rule-subtle);
+}
+
+.october-challenge-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule-subtle);
+}
+
+@media (min-width: 800px) {
+  .october-challenge-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.october-challenge-title-group {
+  max-width: 42rem;
+}
+
+.october-progress-card {
+  background-color: var(--bg-page);
+  border: 1px solid var(--rule-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  min-width: 240px;
+  flex-shrink: 0;
+}
+
+.october-progress-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.october-progress-label {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.october-progress-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.october-progress-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--bg-surface-hover);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.october-progress-bar {
+  height: 100%;
+  background-color: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.october-challenge-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.october-challenge-row {
+  display: grid;
+  grid-template-columns: 44px auto;
+  grid-template-areas:
+    "check num"
+    "text  text"
+    "link  link";
+  column-gap: 20px;
+  row-gap: 16px;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--rule-subtle);
+  transition: background-color var(--transition-fast);
+}
+
+.october-challenge-row:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .october-challenge-row {
+    grid-template-columns: 44px 64px 1fr auto;
+    grid-template-areas: "check num text link";
+    column-gap: 20px;
+    row-gap: 0;
+    align-items: center;
+  }
+}
+
+.october-checkbox-label {
+  grid-area: check;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  position: relative;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.october-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.october-custom-checkbox {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--text-secondary);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-page);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.october-checkbox:checked + .october-custom-checkbox {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.october-checkbox:checked + .october-custom-checkbox::after {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 13px;
+  border: solid #ffffff;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.october-checkbox:focus-visible + .october-custom-checkbox {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.october-row-num {
+  grid-area: num;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-style: italic;
+  color: var(--text-muted);
+  width: 64px;
+  flex-shrink: 0;
+  line-height: 1;
+  align-self: center;
+}
+
+.october-row-text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.october-week-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.october-task-text {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.october-challenge-row.is-completed .october-task-text {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.october-topic-link {
+  grid-area: link;
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  justify-self: start;
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  .october-topic-link {
+    justify-self: end;
+  }
+}
+
+.october-topic-link:hover {
+  background-color: var(--accent-subtle);
+  text-decoration: none;
+}
+
+.october-topic-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Qaranlıq Rejim Uyğunlaşması */
+[data-theme="dark"] .october-banner {
+  background-color: #17453b;
+}
+
+[data-theme="dark"] .october-custom-checkbox {
+  background-color: var(--bg-surface);
+  border-color: var(--text-muted);
+}
+
+[data-theme="dark"] .october-topic-link:hover {
+  background-color: rgba(31, 93, 80, 0.25);
+}
+
+/* Hərəkəti azaldan rejim (prefers-reduced-motion) */
+@media (prefers-reduced-motion: reduce) {
+  .october-progress-bar,
+  .october-banner,
+  .october-challenge-row {
+    transition: none !important;
+  }
+}
+/* OCTOBER CAMPAIGN END */
+
+/* SHARE AWARENESS START */
+/* --------------------------------------------------------------------------
+   Paylaşmazdan Əvvəl Düşünün Bloku (Sosial Media Fərqindəliyi)
+   Müstəqil və asanlıqla silinə bilən modul.
+   -------------------------------------------------------------------------- */
+
+.share-awareness-section {
+  border-bottom: 1px solid var(--rule-subtle);
+  background-color: var(--bg-page);
+  padding: 3rem 0;
+}
+
+.share-awareness-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .share-awareness-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.share-awareness-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.share-awareness-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.share-awareness-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.22;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .share-awareness-title {
+    font-size: 2.35rem;
+  }
+}
+
+.share-awareness-desc {
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.share-awareness-rule {
+  border-left: 3px solid var(--accent);
+  padding: 0.85rem 1.25rem;
+  background-color: var(--bg-surface);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-top: 1px solid var(--rule-subtle);
+  border-right: 1px solid var(--rule-subtle);
+  border-bottom: 1px solid var(--rule-subtle);
+}
+
+.share-rule-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.share-rule-text {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 500;
+}
+
+.share-awareness-panel {
+  border: 1px solid var(--rule-subtle);
+  background-color: var(--bg-surface);
+  padding: 1.5rem 1.5rem 1.25rem 1.5rem;
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 640px) {
+  .share-awareness-panel {
+    padding: 1.75rem 2rem 1.5rem 2rem;
+  }
+}
+
+.share-panel-title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+
+.share-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.share-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.6rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  min-height: 44px;
+  position: relative;
+  transition: background-color var(--transition-fast);
+}
+
+.share-check-item:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.share-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.share-custom-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-secondary);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-page);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.share-checkbox:checked + .share-custom-box {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.share-checkbox:checked + .share-custom-box::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.share-checkbox:focus-visible + .share-custom-box {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.share-check-text {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.share-result-box {
+  border-top: 1px solid var(--rule-subtle);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.share-result-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 540px) {
+  .share-result-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.share-result-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  transition: color var(--transition-fast);
+}
+
+.share-result-box[data-level="safe"] .share-result-text {
+  color: var(--accent);
+}
+
+.share-result-box[data-level="warn"] .share-result-text {
+  color: #9a4700;
+}
+
+.share-result-box[data-level="danger"] .share-result-text {
+  color: #b91c1c;
+}
+
+.share-action-link {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.share-action-link:hover {
+  background-color: var(--accent-subtle);
+  text-decoration: none;
+}
+
+.share-action-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Boarding Pass Şəkli */
+.share-figure {
+  margin: 0 0 1.25rem 0;
+  border: 1px solid var(--rule-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--bg-surface);
+}
+
+.share-figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 40% center;
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .share-figure {
+    margin: 0 0 32px 0;
+  }
+
+  .share-figure img {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+/* Qaranlıq Rejim Uyğunlaşması */
+[data-theme="dark"] .share-custom-box {
+  background-color: var(--bg-surface);
+  border-color: var(--text-muted);
+}
+
+[data-theme="dark"] .share-result-box[data-level="warn"] .share-result-text {
+  color: #f59e0b;
+}
+
+[data-theme="dark"] .share-result-box[data-level="danger"] .share-result-text {
+  color: #f87171;
+}
+
+[data-theme="dark"] .share-action-link:hover {
+  background-color: rgba(31, 93, 80, 0.25);
+}
+
+/* Hərəkəti azaldan rejim */
+@media (prefers-reduced-motion: reduce) {
+  .share-check-item,
+  .share-custom-box,
+  .share-action-link {
+    transition: none !important;
+  }
+}
+/* SHARE AWARENESS END */

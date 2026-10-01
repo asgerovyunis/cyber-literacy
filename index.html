@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiber Savadlılıq — Hər kəs üçün rəqəmsal təhlükəsizlik bələdçisi</title>
+  <meta name="description" content="Sadə dildə rəqəmsal təhlükəsizlik, dələduzluq üsulları və hesabların qorunması üzrə praktiki bələdçi.">
+
+  <!-- Open Graph / Sosial Paylaşım -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kiber Savadlılıq — Hər kəs üçün rəqəmsal təhlükəsizlik bələdçisi">
+  <meta property="og:description" content="Sadə dildə rəqəmsal təhlükəsizlik, dələduzluq üsulları və hesabların qorunması üzrə praktiki bələdçi.">
+  <meta property="og:url" content="https://kiber-savadliliq.az/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kiber Savadlılıq — Hər kəs üçün rəqəmsal təhlükəsizlik bələdçisi">
+  <meta name="twitter:description" content="Sadə dildə rəqəmsal təhlükəsizlik, dələduzluq üsulları və hesabların qorunması üzrə praktiki bələdçi.">
+
+  <!-- Google Fonts: Newsreader (Azərbaycan ə, ı, ğ, ş, ç, ö, ü hərfləri dəstəyi ilə) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&subset=latin,latin-ext&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./script.js"></script>
+</head>
+<body>
+  <!-- Ekran oxuyucular üçün keçid -->
+  <a href="#main-content" class="skip-link">Əsas məzmuna keçin</a>
+
+  <!-- OCTOBER CAMPAIGN START -->
+  <aside id="october-banner" class="october-banner" aria-label="Oktyabr Kibertəhlükəsizlik Maarifləndirmə Ayı elanı">
+    <div class="container october-banner-inner">
+      <div class="october-banner-text">
+        <span class="october-banner-title">Oktyabr Kibertəhlükəsizlik üzrə Maarifləndirmə Ayıdır</span>
+        <span class="october-banner-sep" aria-hidden="true">—</span>
+        <a href="#october-challenge" class="october-banner-link">Bu ayın tövsiyələri</a>
+      </div>
+      <button id="october-banner-close" class="october-banner-close" type="button" aria-label="Elanı bağla">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </aside>
+  <!-- OCTOBER CAMPAIGN END -->
+
+  <!-- Yuxarı Naviqasiya Paneli -->
+  <header class="site-header" role="banner">
+    <div class="container nav-row">
+      <a href="#hero" class="wordmark" aria-label="Kiber Savadlılıq ana səhifə">
+        Kiber Savadlılıq<span class="wordmark-period">.</span>
+      </a>
+
+      <nav aria-label="Əsas naviqasiya">
+        <ul class="nav-links">
+          <li><a href="#matters" class="nav-link">Niyə vacibdir</a></li>
+          <li><a href="#topics" class="nav-link">Əsas bələdçilər</a></li>
+          <li><a href="#emergency" class="nav-link">Təcili addımlar</a></li>
+          <li><a href="#quiz" class="nav-link">Dələduz testi</a></li>
+          <li><a href="#glossary" class="nav-link">Lüğət</a></li>
+          <li><a href="#resources" class="nav-link">Rəsmi qurumlar</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="header-search-wrap" role="search">
+          <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="global-search-input" class="header-search-input" placeholder="Axtarış..." aria-label="Sayt üzrə axtarış" autocomplete="off" spellcheck="false">
+          <button id="global-search-clear" class="header-search-clear" type="button" aria-label="Axtarışı təmizlə" style="display: none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <div id="header-search-dropdown" class="header-search-dropdown" style="display: none;" role="region" aria-live="polite"></div>
+        </div>
+
+        <button id="theme-toggle" class="theme-button" type="button" aria-label="Qaranlıq rejimə keç">
+          <span id="theme-label">Qaranlıq rejim</span>
+        </button>
+
+        <button id="mobile-toggle" class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Naviqasiya menyusunu aç">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobil Menyu -->
+    <div id="mobile-drawer" class="mobile-drawer">
+      <div class="mobile-search-box" role="search">
+        <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" id="mobile-search-input" class="header-search-input" placeholder="Bələdçilərdə və lüğətdə axtarış..." aria-label="Mobil axtarış" autocomplete="off" spellcheck="false">
+      </div>
+      <ul class="mobile-links-list">
+        <li><a href="#matters">Niyə ehtiyatlı olmaq vacibdir</a></li>
+        <li><a href="#topics">Əsas təhlükəsizlik bələdçiləri</a></li>
+        <li><a href="#emergency">Hesab oğurlandıqda təcili addımlar</a></li>
+        <li><a href="#quiz">Dələduz yoxlama testi</a></li>
+        <li><a href="#glossary">Sadə dildə kiber lüğət</a></li>
+        <li><a href="#resources">Rəsmi müraciət qurumları</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Əsas Məzmun -->
+  <main id="main-content">
+
+    <!-- SHARE AWARENESS START -->
+    <section id="share-awareness" class="editorial-section share-awareness-section" aria-labelledby="share-awareness-heading">
+      <div class="container">
+        <div class="share-awareness-grid">
+          <div class="share-awareness-info">
+            <figure class="share-figure">
+              <img src="images/boarding-pass-photo.webp" alt="Təyyarəyə minik talonu və rezervasiya barkodunun fotosu" width="2048" height="768" loading="lazy" decoding="async">
+            </figure>
+            <span class="share-awareness-label">Paylaşmazdan əvvəl</span>
+            <h2 id="share-awareness-heading" class="share-awareness-title">Siz paylaşırsınız, dələduz toplayır.</h2>
+            <p class="share-awareness-desc">
+              Tək-tək paylaşımlar zərərsiz görünür. Bir yerə yığılanda isə dələduz parolunuzu təxmin edə, tanış kimi zəng edib sizi inandıra bilər.
+            </p>
+            <div class="share-awareness-rule">
+              <span class="share-rule-label">Qayda</span>
+              <p class="share-rule-text">Paylaşmazdan əvvəl 5 saniyə dayanın və soruşun: bunu yad adam bilsə, mənə zərər verə bilərmi?</p>
+            </div>
+          </div>
+
+          <div class="share-awareness-panel">
+            <h3 class="share-panel-title">Son 6 ayda bunlardan hansını paylaşmısınız?</h3>
+            <div class="share-checklist" role="group" aria-label="Sosial mediada paylaşılan məlumatlar">
+              <label class="share-check-item">
+                <input type="checkbox" class="share-checkbox" data-share-index="0">
+                <span class="share-custom-box" aria-hidden="true"></span>
+                <span class="share-check-text">Ev ünvanı və ya yaşadığınız yer (lokasiya, xəritə)</span>
+              </label>
+
+              <label class="share-check-item">
+                <input type="checkbox" class="share-checkbox" data-share-index="1">
+                <span class="share-custom-box" aria-hidden="true"></span>
+                <span class="share-check-text">Uşağın şəkli məktəb forması, nömrə və ya ünvanla</span>
+              </label>
+
+              <label class="share-check-item">
+                <input type="checkbox" class="share-checkbox" data-share-index="2">
+                <span class="share-custom-box" aria-hidden="true"></span>
+                <span class="share-check-text">Bilet, sənəd, kart və ya QR kodun şəkli</span>
+              </label>
+
+              <label class="share-check-item">
+                <input type="checkbox" class="share-checkbox" data-share-index="3">
+                <span class="share-custom-box" aria-hidden="true"></span>
+                <span class="share-check-text">"Tətildəyik" kimi səfər tarixləri (evdə olmadığınız vaxt)</span>
+              </label>
+
+              <label class="share-check-item">
+                <input type="checkbox" class="share-checkbox" data-share-index="4">
+                <span class="share-custom-box" aria-hidden="true"></span>
+                <span class="share-check-text">Doğum tarixi, ana adı, ev heyvanının adı (parol və təhlükəsizlik sualları)</span>
+              </label>
+
+              <label class="share-check-item">
+                <input type="checkbox" class="share-checkbox" data-share-index="5">
+                <span class="share-custom-box" aria-hidden="true"></span>
+                <span class="share-check-text">İş yeri, vəzifə və iş yoldaşları</span>
+              </label>
+            </div>
+
+            <div class="share-result-box" id="share-result-box" data-level="safe" aria-live="polite">
+              <div class="share-result-row">
+                <p id="share-result-text" class="share-result-text">Heç birini seçməmisiniz. Əla, belə davam edin.</p>
+                <a href="#topics" class="share-action-link" id="share-action-link" data-target-topic="4">Nə etməli? →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SHARE AWARENESS END -->
+
+    <!-- Əsas Giriş Bölməsi (Hero) -->
+    <section id="hero" class="editorial-section" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-text-col">
+          <span class="hero-index">00 / Rəqəmsal Müdafiə Bələdçisi</span>
+          <h1 id="hero-heading" class="hero-headline">Dələduz sizin tələsməyinizi gözləyir. Dayanın və yoxlayın.</h1>
+          <p class="hero-lede">
+            Şəxsi məlumatlarınızı və vəsaitinizi qorumaq üçün İT mütəxəssisi olmağa ehtiyac yoxdur. Əsas qayda sadədir: kimsə sizdən tələsik SMS kod, bank kartı məlumatı və ya pul istəyirsə, 5 dəqiqə fasilə verib məlumatı rəsmi mənbədən dəqiqləşdirin.
+          </p>
+          <div class="hero-actions">
+            <a href="#topics" class="btn btn-solid">Bələdçiləri oxuyun ↓</a>
+            <a href="#quiz" class="btn btn-outline">10 real vəziyyətlə yoxlayın →</a>
+          </div>
+
+          <!-- OCTOBER CAMPAIGN START -->
+          <div class="october-hero-block" role="region" aria-labelledby="october-hero-heading">
+            <span class="october-hero-tag">Oktyabr 2026</span>
+            <h2 id="october-hero-heading" class="october-hero-title">Oktyabr Kibertəhlükəsizlik üzrə Maarifləndirmə Ayıdır</h2>
+            <p class="october-hero-desc">Hər ilin oktyabr ayında bütün dünyada insanlar rəqəmsal mühitdə təhlükəsiz qalmaq üçün vacib vərdişlərə diqqət yetirir. Bu bələdçi şəxsi hesablarınızı və məlumatlarınızı qorumağa başlamaq üçün ən münasib yerdir.</p>
+          </div>
+          <!-- OCTOBER CAMPAIGN END -->
+        </div>
+
+        <div class="hero-visual-col">
+          <div class="mockup-frame">
+            <div class="mockup-header">
+              <span class="mockup-sender">+994 50 211 48 92</span>
+              <span>10:42</span>
+            </div>
+            <div class="sms-bubble">
+              Azərpoçt bildirişi: Xaricdən gələn AZ928471 bağlamanızın çatdırılma ünvanı natamamdır. Bağlamanın geri qayıtmaması üçün 12 saat ərzində ünvanı təsdiqləyin və 2.30 AZN kuryer rüsumunu ödəyin:
+              <span class="sms-bubble-link">http://azerpoct-kuryer-catdirilma.info/ode</span>
+            </div>
+            <ul class="mockup-annotations" aria-label="Dələduz mesajının təhlili">
+              <li class="mockup-note">
+                <span class="mockup-bullet">01</span>
+                <span><strong>Süni tələskənlik:</strong> "12 saat ərzində" deyərək həyəcan yaradır və düşünmədən linkə keçməyə məcbur edirlər.</span>
+              </li>
+              <li class="mockup-note">
+                <span class="mockup-bullet">02</span>
+                <span><strong>Cüzi məbləğ tələsi:</strong> 2.30 AZN xırda görünür, lakin açılan saxta səhifə kart nömrənizi və CVV kodunuzu oğurlayır.</span>
+              </li>
+              <li class="mockup-note">
+                <span class="mockup-bullet">03</span>
+                <span><strong>Saxta sayt ünvanı:</strong> "Azərpoçt"un rəsmi portalı <code>azerpost.az</code>-dır; dövlət poçtu heç vaxt naməlum <code>.info</code> domenindən SMS göndərmir.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OCTOBER CAMPAIGN START -->
+    <section id="october-challenge" class="editorial-section october-challenge-section" aria-labelledby="october-challenge-heading">
+      <div class="container">
+        <div class="section-eyebrow-row">
+          <span class="section-index">★</span>
+          <span class="section-category">Kibertəhlükəsizlik Maarifləndirmə Ayı</span>
+        </div>
+
+        <div class="october-challenge-header">
+          <div class="october-challenge-title-group">
+            <h2 id="october-challenge-heading" class="section-editorial-title">Bu ayın 4 həftəlik çağırışı</h2>
+            <p class="section-editorial-lede">Hər həftə bircə sadə addım ataraq rəqəmsal təhlükəsizliyinizi addım-addım gücləndirin.</p>
+          </div>
+
+          <div class="october-progress-card">
+            <div class="october-progress-header">
+              <span class="october-progress-label">Aylıq çağırış</span>
+              <span id="october-progress-text" class="october-progress-text" aria-live="polite">0 / 4 tamamlandı</span>
+            </div>
+            <div class="october-progress-track" aria-hidden="true">
+              <div id="october-progress-bar" class="october-progress-bar" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="october-challenge-list" role="list">
+          <article class="october-challenge-row" role="listitem">
+            <label class="october-checkbox-label" for="october-check-0">
+              <input type="checkbox" id="october-check-0" class="october-checkbox" data-challenge-index="0">
+              <span class="october-custom-checkbox" aria-hidden="true"></span>
+              <span class="sr-only">1-ci həftə tapşırığını tamamlandı kimi qeyd edin</span>
+            </label>
+            <span class="october-row-num">01</span>
+            <div class="october-row-text">
+              <span class="october-week-badge">1-ci həftə</span>
+              <p class="october-task-text">E-poçtunuzda və bank tətbiqlərində iki mərhələli doğrulamanı aktivləşdirin</p>
+            </div>
+            <a href="#topics" class="october-topic-link" data-target-topic="2">Müvafiq bələdçi: 2FA →</a>
+          </article>
+
+          <article class="october-challenge-row" role="listitem">
+            <label class="october-checkbox-label" for="october-check-1">
+              <input type="checkbox" id="october-check-1" class="october-checkbox" data-challenge-index="1">
+              <span class="october-custom-checkbox" aria-hidden="true"></span>
+              <span class="sr-only">2-ci həftə tapşırığını tamamlandı kimi qeyd edin</span>
+            </label>
+            <span class="october-row-num">02</span>
+            <div class="october-row-text">
+              <span class="october-week-badge">2-ci həftə</span>
+              <p class="october-task-text">Parol menecerini qurun və ən vacib 3 parolunuzu dəyişin</p>
+            </div>
+            <a href="#topics" class="october-topic-link" data-target-topic="1">Müvafiq bələdçi: Parollar →</a>
+          </article>
+
+          <article class="october-challenge-row" role="listitem">
+            <label class="october-checkbox-label" for="october-check-2">
+              <input type="checkbox" id="october-check-2" class="october-checkbox" data-challenge-index="2">
+              <span class="october-custom-checkbox" aria-hidden="true"></span>
+              <span class="sr-only">3-cü həftə tapşırığını tamamlandı kimi qeyd edin</span>
+            </label>
+            <span class="october-row-num">03</span>
+            <div class="october-row-text">
+              <span class="october-week-badge">3-cü həftə</span>
+              <p class="october-task-text">Telefon və kompüterinizi yeniləyin, ehtiyat nüsxələrinizi yoxlayın</p>
+            </div>
+            <a href="#topics" class="october-topic-link" data-target-topic="7">Müvafiq bələdçi: Yenilənmələr →</a>
+          </article>
+
+          <article class="october-challenge-row" role="listitem">
+            <label class="october-checkbox-label" for="october-check-3">
+              <input type="checkbox" id="october-check-3" class="october-checkbox" data-challenge-index="3">
+              <span class="october-custom-checkbox" aria-hidden="true"></span>
+              <span class="sr-only">4-cü həftə tapşırığını tamamlandı kimi qeyd edin</span>
+            </label>
+            <span class="october-row-num">04</span>
+            <div class="october-row-text">
+              <span class="october-week-badge">4-cü həftə</span>
+              <p class="october-task-text">Valideyn, nənə-baba və ya uşaqla yayılmış dələduzluq üsulları haqqında danışın</p>
+            </div>
+            <a href="#topics" class="october-topic-link" data-target-topic="8">Müvafiq bələdçi: Ailə təhlükəsizliyi →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- OCTOBER CAMPAIGN END -->
+
+    <!-- Bölmə 01: Niyə Vacibdir -->
+    <section id="matters" class="editorial-section" aria-labelledby="matters-heading">
+      <div class="container">
+        <div class="section-eyebrow-row">
+          <span class="section-index">01</span>
+          <span class="section-category">Əsas Həqiqət</span>
+        </div>
+
+        <div class="matters-layout">
+          <div class="matters-aside">
+            <h2 id="matters-heading" class="section-editorial-title">Bir neçə sakit vərdiş hər şeyinizi necə qoruyur</h2>
+            <p>Kiber cinayətlərin böyük əksəriyyəti kompüterləri qırmaqla yox, insan psixologiyasındakı tələskənlik və narahatlıq hisslərindən sui-istifadə etməklə törədilir.</p>
+          </div>
+
+          <div class="matters-rows">
+            <article class="matter-row">
+              <span class="matter-number">01</span>
+              <h3 class="matter-heading">Şəxsi məlumatlar köhnəlmir</h3>
+              <p class="matter-text">Şifrəni bir neçə saniyəyə yeniləmək mümkündür. Lakin FİN kodunuz, şəxsiyyət vəsiqənizin seriyası və ünvanınız dəyişmir. Bu məlumatlar sızarsa, illərlə adınıza kredit və ya qeydiyyat cəhdləri edilə bilər.</p>
+            </article>
+
+            <article class="matter-row">
+              <span class="matter-number">02</span>
+              <h3 class="matter-heading">Oğurlanmış hesab qohumlarınızı hədəf alır</h3>
+              <p class="matter-text">WhatsApp və ya e-poçtunuz ələ keçdikdə dələduzlar sizin adınızdan valideynlərinizə, övladlarınıza və dostlarınıza yazaraq "təcili xəstəxanadayam, karta pul atın" deyə pul tələb edirlər.</p>
+            </article>
+
+            <article class="matter-row">
+              <span class="matter-number">03</span>
+              <h3 class="matter-heading">Geri qaytarılması mümkünsüz köçürmələr</h3>
+              <p class="matter-text">Rəsmi kart ödənişlərində etiraz (chargeback) hüququ olsa da, dələduza edilən kartdan-karta (C2C) köçürmələr saniyələr içində nağdlaşdırılır və geri qaytarılması son dərəcə çətin olur.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bölmə 02: Əsas Mövzular (Akkordeon) -->
+    <section id="topics" class="editorial-section" aria-labelledby="topics-heading">
+      <div class="container">
+        <div class="section-eyebrow-row">
+          <span class="section-index">02</span>
+          <span class="section-category">Təlimat Kitabçası</span>
+        </div>
+
+        <div class="section-editorial-header">
+          <h2 id="topics-heading" class="section-editorial-title">Doqquz əsas təhlükəsizlik ssenarisi</h2>
+          <p class="section-editorial-lede">Hər bir mövzunu açaraq hadisənin mahiyyəti, əsas əlamətləri və dərhal görülməli addımlarla tanış olun.</p>
+        </div>
+
+        <div class="topics-toolbar-row">
+          <span class="topics-count">9 əsas mövzu</span>
+          <div class="topics-toggle-btns">
+            <button id="btn-expand-all" type="button" class="btn-text-action">Hamısını aç</button>
+            <button id="btn-collapse-all" type="button" class="btn-text-action">Hamısını bağla</button>
+          </div>
+        </div>
+
+        <div class="topics-accordion" role="region" aria-label="Təhlükəsizlik bələdçiləri">
+
+          <!-- Mövzu 1: Fişinq -->
+          <div class="topic-row is-open">
+            <button class="topic-row-trigger" type="button" aria-expanded="true">
+              <span class="topic-num">01</span>
+              <div class="topic-header-text">
+                <h3>Fişinq (saxta SMS bildirişləri, aldadıcı e-poçtlar və saxta keçidlər)</h3>
+                <p>Poçt bağlaması, bank xəbərdarlığı və ya kommunal borc adı ilə göndərilən tələ linkləri.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Sizə Azərpoçt, bankınız və ya vergi orqanı adından təcili mesaj gəlir. Bağlamanızın saxlanıldığı və ya kartınızın bloklandığı iddia edilir. Daxil edilən link isə bank kartı məlumatlarınızı oğurlamaq üçün qurulmuş saxta surətdir.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Əsas şübhəli əlamətlər</h4>
+                  <ul>
+                    <li>Süni tələskənlik: "2 saat ərzində təsdiqləməsəniz, hesabınız ləğv ediləcək!"</li>
+                    <li>Göndərən adı şirkət kimi görünsə də, arxasındakı nömrə adi xarici və ya naməlum mobil nömrədir.</li>
+                    <li>Rəsmi saytın hərflərini dəyişərək saxtalaşdırılmış domenlər (məsələn, <code>kapitalbank-odenis24.info</code>).</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Gözlənilmədən gələn mesajlardakı keçidlərə heç vaxt daxil olmayın.</li>
+                    <li>Brauzerdə həmin qurumun rəsmi tətbiqini və ya saytını birbaşa özünüz açıb yoxlayın.</li>
+                    <li>Şübhəli SMS-i "Spam" olaraq qeyd edib silin, nömrəyə cavab yazmayın.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Rəsmi təşkilatlar məlumatı rəsmi saytından yoxlamaq üçün 5 dəqiqə vaxt ayırdığınıza görə sizə heç vaxt cərimə tətbiq etməz.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 2: Güclü Şifrələr -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">02</span>
+              <div class="topic-header-text">
+                <h3>Şifrə-ifadələri və şifrə menecerləri</h3>
+                <p>Onlarla mürəkkəb kombinasiyanı əzbərləmədən etibarlı giriş yaratmağın ən asan yolu.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Eyni şifrəni hər yerdə istifadə etdikdə, qeydiyyatdan keçdiyiniz sadə bir forumdan sızan şifrə ilə dələduzlar dərhal əsas e-poçtunuzu, sosial şəbəkələrinizi və bank tətbiqlərinizi açmağa cəhd edirlər.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Zəif vərdişlər</h4>
+                  <ul>
+                    <li>Ad, doğum ili, uşaqların və ya ev heyvanlarının adından ibarət şifrələr.</li>
+                    <li>Bir şifrənin kiçik dəyişiklikləri (məsələn: <code>Baki2025!</code> və <code>Baki2026!</code>).</li>
+                    <li>Şifrələri monitorda yapışqanlı kağızda və ya telefondakı qeydlər bölməsində saxlamaq.</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Şifrə-ifadələri qurun: bir-biri ilə əlaqəsi olmayan 4-5 sözü birləşdirin (məsələn: <code>qarpiz-durna-sahil-bulaq</code>).</li>
+                    <li>Etibarlı şifrə menecerindən (Bitwarden, Apple Keychain və ya Google Şifrə Meneceri) istifadə edin.</li>
+                    <li>Sizə yalnız şifrə menecerinizin bir əsas açar şifrəsini yadda saxlamaq kifayətdir.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Şifrənin uzunluğu onun qəlizliyindən daha önəmlidir. Sözlərdən ibarət uzun şifrəni proqramların tapması onilliklər tələb edir.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 3: İki Mərhələli Təsdiqləmə (2FA) -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">03</span>
+              <div class="topic-header-text">
+                <h3>İki mərhələli təsdiqləmə (2FA)</h3>
+                <p>Şifrəniz oğurlansa belə, kənar şəxslərin hesaba girməsinin qarşısını alan ikinci qıfıl.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>İki mərhələli təsdiqləmə (2FA) hesaba giriş üçün iki sübut tələb edir: bildiyiniz şey (şifrəniz) və sahib olduğunuz şey (fiziki telefonunuza gələn təsdiq və ya autentifikator kodu).</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Niyə mütləq lazımdır?</h4>
+                  <ul>
+                    <li>Şifrəniz internetə sızsa belə, telefonunuz olmadan heç kim hesabınıza daxil ola bilməz.</li>
+                    <li>Avtomatlaşdırılmış kiber hücumların 99%-i sadəcə 2FA açıq olduqda tamamilə zərərsizləşir.</li>
+                    <li>Telefonunuza gözlənilmədən təsdiq kodu gəlirsə, deməli kimsə şifrənizi yoxlayır.</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Əsas e-poçtunuzda (Gmail, Outlook və s.), WhatsApp və bank tətbiqlərində 2FA-nı aktivləşdirin.</li>
+                    <li>Mümkün olduqda SMS yerinə autentifikator tətbiqindən (Google Authenticator) istifadə edin.</li>
+                    <li>Sistem tərəfindən verilən ehtiyat bərpa kodlarını dəftərə qeyd edib evdə təhlükəsiz yerdə saxlayın.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Telefonunuza gələn birdəfəlik təsdiq kodunu telefon zəngində heç kimə deməyin. Heç bir bank əməkdaşı bu kodu sizdən istəyə bilməz.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 4: Sosial Mühəndislik və Zənglər -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">04</span>
+              <div class="topic-header-text">
+                <h3>Sosial mühəndislik və saxta telefon zəngləri</h3>
+                <p>"Bankın təhlükəsizlik xidmətindən zəng edirik" və "Qohumunuz qəzaya düşüb" ssenariləri.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Sosial mühəndislik texnologiyanı yox, insan emosiyalarını hədəf alır. Dələduzlar qorxu, həyəcan və ya hörmət hisslərindən istifadə edərək sizi təcili pul köçürməyə və ya kart məlumatlarınızı verməyə inandırırlar.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Əsas şübhəli əlamətlər</h4>
+                  <ul>
+                    <li>Nömrə saxtalaşdırması: Ekranda bankın və ya polis şöbəsinin nömrəsi görünsə də, xətt dələduzlar tərəfindən manipulyasiya edilmiş ola bilər.</li>
+                    <li>Dəstəyi asmamaq tələbi: "Dəstəyi asmayın, bank əməkdaşlarına heç nə demədən pulu nağdlaşdırıb dediyimiz hesaba göndərin."</li>
+                    <li>Təcili bədbəxt hadisə nağılı: "Nəvəniz qəza törədib, həbs olunmaması üçün kuryerlə pul göndərməlisiniz."</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Dərhal zəngi sonlandırın. Naməlum şəxsin zəngini dayandırmaqda heç bir ədəbsizlik yoxdur.</li>
+                    <li>Bank kartınızın arxasında yazılmış rəsmi qaynar xətt nömrəsinə özünüz zəng edin.</li>
+                    <li>Ailənizlə gizli təhlükəsizlik parolu müəyyən edin; belə zənglərdə həmin parolu soruşun.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Polis və ya rəsmi orqanlar cinayət işini bağlamaq və ya xilas etmək adı ilə kuryer göndərib nağd pul tələb etməz.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 5: WhatsApp və Sosial Şəbəkələr -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">05</span>
+              <div class="topic-header-text">
+                <h3>WhatsApp və sosial şəbəkə dələduzluğu</h3>
+                <p>"Salam ana, nömrəm xarab oldu" mesajları, klonlaşdırılmış profillər və tələ linklər.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Dələduzlar naməlum nömrədən övladınızın adından yazıb telefonunun suya düşdüyünü deyir, borc ödəmək üçün təcili karta pul köçürməyinizi xahiş edirlər. Yaxud dostunuzun sındırılmış profilindən "Bu videodakı sənsən?" deyə viruslu link göndərilir.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Əsas şübhəli əlamətlər</h4>
+                  <ul>
+                    <li>"Salam ata, bu mənim müvəqqəti nömrəmdir, təcili karta 150 manat göndərə bilərsən?" tipli israrlı mesajlar.</li>
+                    <li>"Səhvən sizin nömrəyə 6 rəqəmli kod getdi, zəhmət olmasa onu mənə göndərin" xahişi (Bu, WhatsApp hesabınızı ələ keçirmək cəhdidir!).</li>
+                    <li>Tanışınızın profilindən qəfil "sərfəli investisiya" və ya "kriptovalyuta qazancı" təklifləri.</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>WhatsApp qeydiyyat kodunu heç kimə göndərməyin. O kodu vermək hesabınızı dələduza hədiyyə etməkdir.</li>
+                    <li>Qohumunuza həmişə zəng etdiyiniz köhnə nömrəsi ilə birbaşa səsli zəng edin.</li>
+                    <li>WhatsApp tənzimləmələrinə daxil olub "İki addımlı doğrulama" (PIN kod) funksiyasını aktivləşdirin.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Yalnız mətn mesajına inanaraq heç vaxt pul göndərməyin. Şəxsin canlı səsini eşitmədən heç bir köçürmə etməyin.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 6: İctimai Wi-Fi -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">06</span>
+              <div class="topic-header-text">
+                <h3>İctimai Wi-Fi şəbəkələri</h3>
+                <p>Kafe, otel, hava limanı və parklardakı açıq simsiz şəbəkələrin təhlükələri.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Şifrəsiz ictimai Wi-Fi şəbəkələrində məlumatlar şifrələnmir. Yaxınlıqdakı bədniyyətli şəxs eyni adlı saxta giriş nöqtəsi ("Kafe_Pulsuz_WiFi") yaradaraq daxil etdiyiniz saytları izləyə bilər.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Əsas şübhəli əlamətlər</h4>
+                  <ul>
+                    <li>Məkanda bir-birinə çox oxşar bir neçə açıq şəbəkə adı (məsələn, "Otel_Qonaq" və "Otel_Pulsuz_WiFi").</li>
+                    <li>Brauzerdə qəfil görünən "Bağlantınız təhlükəsiz deyil" və ya sertifikat xətası xəbərdarlıqları.</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Bank əməliyyatları və alış-veriş üçün ictimai Wi-Fi əvəzinə telefonunuzun mobil internetindən istifadə edin.</li>
+                    <li>İctimai şəbəkələrə qoşulduqda etibarlı VPN xidmətindən istifadə edərək trafiki şifrələyin.</li>
+                    <li>Telefonunuzda "Açıq şəbəkələrə avtomatik qoşul" funksiyasını söndürün.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Mobil operatorların 4G/5G interneti simsiz ictimai Wi-Fi şəbəkələrinə nisbətən qat-qat təhlükəsizdir.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 7: Onlayn Alış-veriş və Kartlar -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">07</span>
+              <div class="topic-header-text">
+                <h3>Onlayn alış-veriş və bank kartlarının təhlükəsizliyi</h3>
+                <p>Saxta mağazaları tanımaq və vəsaitinizi qoruyan düzgün ödəniş vərdişləri.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Dələduzlar məşhur brendlərin (geyim, telefon, məişət texnikası) şəkillərini qoyaraq 80% endirim elan edirlər. Siz ödəniş edirsiniz, lakin ya heç nə göndərilmir, ya da kartınızdakı bütün qalıq silinir.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Əsas şübhəli əlamətlər</h4>
+                  <ul>
+                    <li>Məntiqsiz qiymətlər: 500 manatlıq orijinal gödəkcənin 29 manata təklif olunması.</li>
+                    <li>Ödəniş üçün rəsmi bank keçidi yerinə yalnız kartdan-karta birbaşa pul atmağı tələb edən səhifələr.</li>
+                    <li>Saytda hüquqi ünvan, VÖEN, əlaqə telefonu və geri qaytarma şərtlərinin olmaması.</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Onlayn sifarişlər üçün bank tətbiqinizdə ayrıca "Virtual Kart" açın və yalnız alış-veriş məbləği qədər pul qoyun.</li>
+                    <li>Saytın adını internetdə axtarıb digər alıcıların rəylərini yoxlayın.</li>
+                    <li>Əsas maaş və ya yığım kartınızın CVV kodunu heç vaxt şübhəli saytlarda saxlamayın.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Kartınızın arxasındakı 3 rəqəmli CVV kodunu və SMS-lə gələn 3D Secure təsdiq kodunu heç vaxt heç kimə bildirməyin.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 8: Yenilənmələr və Nüsxələmə -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">08</span>
+              <div class="topic-header-text">
+                <h3>Cihazların yenilənməsi, antivirus və nüsxələmə qaydaları</h3>
+                <p>Telefon və kompüterinizi əlavə proqramlara pul xərcləmədən müdafiə etmək.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Əməliyyat sistemlərində və brauzerlərdə mütəmadi olaraq təhlükəsizlik boşluqları aşkarlanır. İstehsalçılar bu deşikləri bağlamaq üçün yenilənmələr buraxır; yeniləmədikdə isə cihazlar müdafiəsiz qalır.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Təhlükəli vərdişlər</h4>
+                  <ul>
+                    <li>Sistem yenilənmələrini aylarla təxirə salmaq.</li>
+                    <li>İnternetdə qarşınıza çıxan "Kompüterinizdə 27 virus var, təmizləmək üçün klikləyin" bildirişlərinə inanmaq.</li>
+                    <li>Əhəmiyyətli ailə arxivlərini və sənədləri yalnız bircə yerdə (məsələn, köhnə noutbukda) saxlamaq.</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Smartfon və kompüterinizdə rəsmi "Avtomatik yenilənmə" seçimini aktiv saxlayın.</li>
+                    <li>Kompüterin öz daxili mühafizə sistemlərinə (Windows Təhlükəsizliyi / Apple daxili müdafiəsi) etibar edin.</li>
+                    <li>3-2-1 ehtiyat nüsxə qaydası: vacib sənədlərin 3 nüsxəsi olsun, 2 müxtəlif daşıyıcıda (kompüter və xarici disk), 1-i isə kənarda (bulud yaddaşında).</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Saytlar kompüterinizin içini skan edə bilməz. İnternet səhifəsində çıxan "Virus tapıldı" pəncərələri saxta aldatma vasitəsidir.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mövzu 9: Uşaqlar və Yaşlı Qohumlar -->
+          <div class="topic-row">
+            <button class="topic-row-trigger" type="button" aria-expanded="false">
+              <span class="topic-num">09</span>
+              <div class="topic-header-text">
+                <h3>Uşaqlar və yaşlı qohumlar üçün təhlükəsizlik vərdişləri</h3>
+                <p>Dələduzların ən çox hədəf aldığı ailə üzvlərimiz üçün nəzakətli və sakit dəstək.</p>
+              </div>
+              <span class="topic-indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="topic-body">
+              <div class="topic-columns">
+                <div class="topic-col">
+                  <h4>Hadisə necə baş verir?</h4>
+                  <p>Uşaqlar oyunlarda pulsuz hədiyyələr (Roblox, Brawl Stars) vədləri ilə aldadılır. Yaşlı nəsil isə təqaüd, pensiya artımı və ya "polisdən zəng edirik" hədələri ilə psixoloji təzyiq altına salınır.</p>
+                </div>
+                <div class="topic-col">
+                  <h4>Xəbərdaredici davranışlar</h4>
+                  <ul>
+                    <li>Uşaqların şübhəli saytlardan naməlum proqram və mod (.apk/.exe) yükləməsi.</li>
+                    <li>Yaşlı ailə üzvünün qəfil həyəcanlanması, telefonda kimsə ilə pıçıltı ilə danışıb banka qaçması.</li>
+                    <li>Zəng edən şəxsin kompüterə uzaqdan qoşulma proqramı (AnyDesk, TeamViewer) quraşdırmağı tələb etməsi.</li>
+                  </ul>
+                </div>
+                <div class="topic-col">
+                  <h4>Nə etməlisiniz?</h4>
+                  <ul>
+                    <li>Heç vaxt tanımadığınız zəng edənin kompüterinizə uzaqdan giriş proqramı qurmasına icazə verməyin.</li>
+                    <li>Uşaqların cihazlarında tətbiq yükləmələri və ödənişlər üçün valideyn icazəsini aktiv edin.</li>
+                    <li>Ailədə qınaqsız mühit yaradın: kimsə səhvən şübhəli linkə klikləyibsə, qorxmadan sizə deyə bilməlidir.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic-takeaway">
+                <strong>Əsas qayda:</strong> Dələduzlar qurbanların utanaraq susmasına ümid edirlər. Ailədə sakit və etibarlı ünsiyyət ən güclü qalxandır.
+              </div>
+            </div>
+          </div>
+
+          <!-- Axtarış Nəticəsi Yoxdur (Bələdçilər) -->
+          <div id="topics-empty-msg" class="search-empty-state" style="display: none;" role="status">
+            <p class="search-empty-title">Uyğun gələn bələdçi tapılmadı</p>
+            <p class="search-empty-hint">Axtarışınıza uyğun heç bir təhlükəsizlik mövzusu yoxdur. Fərqli açar söz sınayın (məsələn: "SMS", "şifrə", "kart", "zəng").</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bölmə 03: Təcili Addımlar Siyahısı -->
+    <section id="emergency" class="editorial-section" aria-labelledby="emergency-heading">
+      <div class="container">
+        <div class="section-eyebrow-row">
+          <span class="section-index">03</span>
+          <span class="section-category">Fövqəladə Protokol</span>
+        </div>
+
+        <div class="emergency-wrapper">
+          <div class="emergency-header-row">
+            <div>
+              <h2 id="emergency-heading" class="section-editorial-title" style="margin-bottom: 0.35rem;">Hesabınız ələ keçdikdə nə etməlisiniz?</h2>
+              <p style="margin: 0;">Sakit olun. Hər gün minlərlə insan bu vəziyyətdən uğurla çıxır. Aşağıdakı addımları ardıcıllıqla yerinə yetirin:</p>
+            </div>
+            <div class="checklist-counter-display">
+              <span id="checklist-progress-text">0 / 8 addım tamamlandı</span>
+            </div>
+          </div>
+
+          <div class="checklist-stack">
+            <!-- Addım 1 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 1: İnternet bağlantısını kəsin">
+              <div class="check-content">
+                <div class="check-step-name">1. Uzaqdan qoşulma baş veribsə, dərhal interneti söndürün</div>
+                <p class="check-desc">Əgər zəng edən şəxs kompüterinizə uzaqdan giriş proqramı ilə qoşulubsa, dərhal Wi-Fi-ı söndürün və ya internet kabelini çıxarın.</p>
+              </div>
+            </label>
+
+            <!-- Addım 2 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 2: Rəsmi bərpa səhifəsinə daxil olun">
+              <div class="check-content">
+                <div class="check-step-name">2. Təmiz cihazdan rəsmi bərpa proseduruna başlayın</div>
+                <p class="check-desc">Şübhəli olmayan telefon və ya kompüterdən xidmətin rəsmi səhifəsinə (məsələn, <code>accounts.google.com</code>) daxil olub "Şifrəni unutdum" bölməsini seçin.</p>
+              </div>
+            </label>
+
+            <!-- Addım 3 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 3: Yeni güclü şifrə təyin edin">
+              <div class="check-content">
+                <div class="check-step-name">3. Tamamilə yeni, 4 sözdən ibarət şifrə-ifadəsi təyin edin</div>
+                <p class="check-desc">Əvvəllər heç vaxt işlətmədiyiniz sözləri seçin. Əsas poçtunuz oğurlanıbsa, ona bağlı olan bank və sosial şəbəkə şifrələrini də dərhal dəyişin.</p>
+              </div>
+            </label>
+
+            <!-- Addım 4 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 4: Bütün cihazlardan çıxış edin">
+              <div class="check-content">
+                <div class="check-step-name">4. Bütün digər cihazlardan çıxış edin ("Bütün sessiyaları sonlandır")</div>
+                <p class="check-desc">Hesabınızın təhlükəsizlik bölməsindən "Aktiv cihazlar" siyahısına baxın və kənar şəxsi sistemdən atmaq üçün bütün digər girişləri ləğv edin.</p>
+              </div>
+            </label>
+
+            <!-- Addım 5 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 5: Bərpa məlumatlarını yoxlayın">
+              <div class="check-content">
+                <div class="check-step-name">5. Bərpa nömrəsini və yönləndirmə qaydalarını yoxlayın</div>
+                <p class="check-desc">Dələduzlar tez-tez gizlicə öz e-poçtlarını bərpa ünvanı kimi əlavə edir və ya məktub yönləndirməsi qururlar. Tanımadığınız bütün ünvanları silin.</p>
+              </div>
+            </label>
+
+            <!-- Addım 6 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 6: 2FA-nı aktivləşdirin">
+              <div class="check-content">
+                <div class="check-step-name">6. İki mərhələli təsdiqləməni (2FA) dərhal qoşun</div>
+                <p class="check-desc">Hesabınıza autentifikator tətbiqini və ya telefon təsdiqini bağlayın. Bu, dələduzun yenidən qapını açmasına qəti mane olacaq.</p>
+              </div>
+            </label>
+
+            <!-- Addım 7 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 7: Bankla əlaqə saxlayın">
+              <div class="check-content">
+                <div class="check-step-name">7. Hesabda kart qeyd olunubsa, bankınıza məlumat verin</div>
+                <p class="check-desc">Əgər həmin hesabda yadda saxlanılmış bank kartı məlumatları olubsa, dərhal kartınızı müvəqqəti bloklayın və son əməliyyatları yoxlayın.</p>
+              </div>
+            </label>
+
+            <!-- Addım 8 -->
+            <label class="check-item">
+              <input type="checkbox" class="check-input" aria-label="Addım 8: Yaxınlarınıza xəbərdarlıq edin">
+              <div class="check-content">
+                <div class="check-step-name">8. Yaxınlarınıza və dostlarınıza xəbərdarlıq edin</div>
+                <p class="check-desc">Ailənizə və tanışlarınıza xəbər verin ki, hesabınızdan sizin adınızla gələn təcili borc və ya link mesajlarına qətiyyən inanmasınlar.</p>
+              </div>
+            </label>
+          </div>
+
+          <div class="checklist-actions-bar">
+            <span style="font-size: 0.875rem; color: var(--text-muted);">Siyahıdakı irəliləyişiniz brauzerinizdə avtomatik yadda saxlanılır.</span>
+            <button id="btn-reset-checklist" type="button" class="btn-text-action">Siyahını sıfırla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bölmə 04: Dələduzu Tanı (Test) -->
+    <section id="quiz" class="editorial-section" aria-labelledby="quiz-heading">
+      <div class="container">
+        <div class="section-eyebrow-row">
+          <span class="section-index">04</span>
+          <span class="section-category">Bilik Sınağı</span>
+        </div>
+
+        <div class="section-editorial-header">
+          <h2 id="quiz-heading" class="section-editorial-title">Dələduzu tanı: 10 real həyati vəziyyət</h2>
+          <p class="section-editorial-lede">Ekranda qarşınıza çıxa biləcək real mesaj və zəngləri oxuyun, ən təhlükəsiz reaksiyanı seçin.</p>
+        </div>
+
+        <div class="quiz-container">
+          <!-- Aktiv Sual Paneli -->
+          <div id="quiz-card-view">
+            <div class="quiz-meta-bar">
+              <span id="quiz-counter">Vəziyyət 1 / 10</span>
+              <span id="quiz-score-badge" class="quiz-score-indicator">Nəticə: 0 / 0</span>
+            </div>
+
+            <div class="quiz-message-mockup">
+              <span id="quiz-scenario-tag" class="quiz-channel-tag">Gələn SMS Bildirişi</span>
+              <div id="quiz-scenario-content" class="quiz-situation-text">Vəziyyət yüklənir...</div>
+              <div id="quiz-scenario-snippet" class="quiz-simulated-text"></div>
+            </div>
+
+            <h3 id="quiz-prompt" class="quiz-ask-heading">Bu vəziyyətdə ən düzgün və təhlükəsiz addım hansıdır?</h3>
+
+            <div id="quiz-options" class="quiz-answers-grid">
+              <!-- script.js tərəfindən doldurulur -->
+            </div>
+
+            <div id="quiz-feedback" class="quiz-feedback-panel" role="status" aria-live="polite">
+              <div id="feedback-headline" class="feedback-lead"></div>
+              <p id="feedback-text" class="feedback-body"></p>
+            </div>
+
+            <div class="quiz-nav-row">
+              <button id="quiz-next-btn" type="button" class="btn btn-solid" style="display: none;">Növbəti vəziyyət →</button>
+            </div>
+          </div>
+
+          <!-- Yekun Nəticə Ekranı -->
+          <div id="quiz-result-view" class="quiz-results-screen">
+            <h3>Sınaq tamamlandı</h3>
+            <div id="result-score-text" class="quiz-final-score">10 sualdan 10 düzgün cavab</div>
+            <p id="result-message" class="quiz-final-note">Mükəmməl instinkt! Şübhəli əlamətləri və tələləri dərhal ayırd edə bilirsiniz.</p>
+            <button id="quiz-restart-btn" type="button" class="btn btn-solid">Testi yenidən keç</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bölmə 05: Lüğət -->
+    <section id="glossary" class="editorial-section" aria-labelledby="glossary-heading">
+      <div class="container">
+        <div class="section-eyebrow-row">
+          <span class="section-index">05</span>
+          <span class="section-category">Arayış</span>
+        </div>
+
+        <div class="section-editorial-header">
+          <h2 id="glossary-heading" class="section-editorial-title">Sadə dildə kiber təhlükəsizlik lüğəti</h2>
+          <p class="section-editorial-lede">Qəliz texniki terminlərin adi insan dilinə tərcüməsi.</p>
+        </div>
+
+        <div class="glossary-controls">
+          <input type="text" id="glossary-search" class="glossary-input" placeholder="Axtarış üçün yazın (məsələn: Fişinq, 2FA, VPN)..." aria-label="Terminləri axtar">
+        </div>
+
+        <div id="glossary-grid" class="glossary-index">
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Fişinq (Phishing)</span>
+              <span class="glossary-item-cat">Tələ</span>
+            </div>
+            <p class="glossary-item-def">Şifrələrinizi, şəxsi məlumatlarınızı və ya kart nömrənizi oğurlamaq üçün qurulmuş saxta e-poçt, SMS və ya saxta veb-sayt tələləri.</p>
+            <div class="glossary-item-plain">Bənzətmə: Saxta kuryerin bağlama gətirmək bəhanəsi ilə evinizin açarını istəməsi.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>İki mərhələli təsdiqləmə (2FA)</span>
+              <span class="glossary-item-cat">Müdafiə</span>
+            </div>
+            <p class="glossary-item-def">Hesaba daxil olarkən iki fərqli sübut tələb edən sistem: bildiyiniz şifrə və telefonunuza gələn təsdiq kodu.</p>
+            <div class="glossary-item-plain">Bənzətmə: Bankomatdan pul çıxarmaq üçün həm plastik kart, həm də 4 rəqəmli PİN kodun tələb olunması.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Şifrə meneceri (Password manager)</span>
+              <span class="glossary-item-cat">Alət</span>
+            </div>
+            <p class="glossary-item-def">Hər bir sayt üçün tamamilə fərqli və mürəkkəb şifrələr yaradan, onları şifrələnmiş seyfdə saxlayan və avtomatik dolduran proqram.</p>
+            <div class="glossary-item-plain">Bənzətmə: Bütün qapıların açarlarını etibarlı qoruyan bir dənə əsas seyf açarı.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>VPN (Virtual xüsusi şəbəkə)</span>
+              <span class="glossary-item-cat">Məxfilik</span>
+            </div>
+            <p class="glossary-item-def">Cihazınız ilə internet arasındakı bütün məlumat axınını şifrələyərək kənar şəxslərin (xüsusən ictimai Wi-Fi-da) sizi izləməsinə mane olan xidmət.</p>
+            <div class="glossary-item-plain">Bənzətmə: Açıq küçədə getmək əvəzinə pəncərələri qara zirehli tunellə hərəkət etmək.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Zərərverici proqram (Malware)</span>
+              <span class="glossary-item-cat">Təhlükə</span>
+            </div>
+            <p class="glossary-item-def">Kompüterinizə və ya telefonunuza gizlicə daxil olub məlumatları oğurlamaq, fəaliyyətinizi izləmək və ya faylları korlamaq üçün yazılmış proqramlar.</p>
+            <div class="glossary-item-plain">Bənzətmə: Evə gələn qonağın cibində gizlətdiyi dinləmə cihazı.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Fidyə proqramı (Ransomware)</span>
+              <span class="glossary-item-cat">Quldurluq</span>
+            </div>
+            <p class="glossary-item-def">Bütün şəxsi şəkillərinizi və sənədlərinizi şifrələyib kilidləyən, açmaq üçün isə sizdən pul tələb edən təhlükəli virus növü.</p>
+            <div class="glossary-item-plain">Bənzətmə: Oğrunun sənəd şkafınıza öz qıfılını vurub açar üçün nağd pul istəməsi.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Sosial mühəndislik</span>
+              <span class="glossary-item-cat">Aldatma</span>
+            </div>
+            <p class="glossary-item-def">Kompüteri deyil, insan psixologiyasını (tələskənlik, qorxu, nəzakət) manipulyasiya edərək məxfi məlumatları ələ keçirmək kələyi.</p>
+            <div class="glossary-item-plain">Bənzətmə: Formanı geyinib əlində sənəd qovluğu ilə mühafizəçinin yanından rahat keçən dələduz.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Smişinq və Vişinq (Smishing &amp; Vishing)</span>
+              <span class="glossary-item-cat">Növlər</span>
+            </div>
+            <p class="glossary-item-def">Fişinqin məxsusi olaraq SMS mesajları (Smishing) və ya birbaşa telefon zəngləri (Vishing) vasitəsilə həyata keçirilən forması.</p>
+            <div class="glossary-item-plain">Bənzətmə: Telefonla zəng edib özünü rəsmi idarəçi kimi təqdim edən dələduz.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Məlumat sızması (Data breach)</span>
+              <span class="glossary-item-cat">Hadisə</span>
+            </div>
+            <p class="glossary-item-def">Hər hansı bir şirkətin və ya saytın bazasından müştərilərin şifrələrinin, kartlarının və ya nömrələrinin kənar şəxslərin əlinə keçməsi.</p>
+            <div class="glossary-item-plain">Bənzətmə: Otelin qeydiyyat dəftərinin oğurlanıb kənar şəxslərə satılması.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Şifrələmə (Encryption)</span>
+              <span class="glossary-item-cat">Texnologiya</span>
+            </div>
+            <p class="glossary-item-def">Məlumatın yalnız açarı olan şəxs tərəfindən oxuna biləcək gizli riyazi koda çevrilməsi prosesi.</p>
+            <div class="glossary-item-plain">Bənzətmə: Yalnız alıcının oxuya biləcəyi gizli əlifba ilə məktub yazmaq.</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>HTTPS (Qıfıl işarəsi)</span>
+              <span class="glossary-item-cat">Standart</span>
+            </div>
+            <p class="glossary-item-def">Brauzerinizlə sayt arasındakı əlaqənin şifrələndiyini göstərir. Diqqət: Bu işarə rabitə xəttinin qorunduğunu bildirir, sayt sahibinin vicdanlı olduğunu yox!</p>
+            <div class="glossary-item-plain">Bənzətmə: Məktubun möhürlü zərfdə getməsi (poçtalyon oxuya bilməz, amma məktubun mətni yalan ola bilər).</div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-item-term">
+              <span>Şifrə-ifadəsi (Passphrase)</span>
+              <span class="glossary-item-cat">Müdafiə</span>
+            </div>
+            <p class="glossary-item-def">Bir-biri ilə əlaqəsiz dörd və ya daha çox sözdən ibarət, yadda saxlanması asan, lakin sındırılması qeyri-mümkün olan güclü şifrə.</p>
+            <div class="glossary-item-plain">Bənzətmə: "Q@rp!z123" əvəzinə "qarpiz-durna-sahil-bulaq" yazmaq.</div>
+          </article>
+        </div>
+
+        <div id="glossary-empty-msg" class="search-empty-state" style="display: none;" role="status">
+          <p class="search-empty-title">Uyğun gələn termin tapılmadı</p>
+          <p class="search-empty-hint">Lüğətdə bu sözə uyğun termin yoxdur. "Fişinq", "2FA" və ya "VPN" sözlərini yoxlayın.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bölmə 06: Rəsmi Qurumlar -->
+    <section id="resources" class="editorial-section" aria-labelledby="resources-heading">
+      <div class="container">
+        <div class="section-eyebrow-row">
+          <span class="section-index">06</span>
+          <span class="section-category">Rəsmi Dəstək</span>
+        </div>
+
+        <div class="section-editorial-header">
+          <h2 id="resources-heading" class="section-editorial-title">Rəsmi müraciət və yoxlama orqanları</h2>
+          <p class="section-editorial-lede">Azərbaycan Respublikasında kiber insidentlərin bildirilməsi və təhlükəsizlik yoxlamaları üçün rəsmi resurslar.</p>
+        </div>
+
+        <div class="resources-list">
+          <a href="https://cert.gov.az" target="_blank" rel="noopener noreferrer" class="resource-entry">
+            <span class="resource-origin">CERT.GOV.AZ (KİMM)</span>
+            <div class="resource-headline">
+              <span>cert.gov.az</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+            <p class="resource-desc">Azərbaycan Respublikasının Xüsusi Rabitə və İnformasiya Təhlükəsizliyi Dövlət Xidmətinin Kompüter İnsidentlərinə qarşı Mübarizə Mərkəzi. Kiber hücum və insidentləri bildirmək üçün rəsmi mərkəz.</p>
+            <span class="resource-action-link">CERT.GOV.AZ portalına keçid</span>
+          </a>
+
+          <a href="https://mia.gov.az" target="_blank" rel="noopener noreferrer" class="resource-entry">
+            <span class="resource-origin">Daxili İşlər Nazirliyi</span>
+            <div class="resource-headline">
+              <span>DİN Kibercinayətkarlıqla Mübarizə</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+            <p class="resource-desc">Kartlardan vəsait oğurluğu, qanunsuz müdaxilələr və dələduzluq cinayətləri ilə bağlı 102 Zəng Mərkəzi və ya rəsmi polis idarələrinə birbaşa müraciət.</p>
+            <span class="resource-action-link">DİN rəsmi səhifəsi</span>
+          </a>
+
+          <a href="https://cbar.az" target="_blank" rel="noopener noreferrer" class="resource-entry">
+            <span class="resource-origin">Mərkəzi Bank</span>
+            <div class="resource-headline">
+              <span>Mərkəzi Bank — Maliyyə Savadlılığı</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+            <p class="resource-desc">Azərbaycan Respublikasının Mərkəzi Bankı tərəfindən bank kartı təhlükəsizliyi və ödəniş sistemlərində dələduzluqdan qorunma üzrə rəsmi tövsiyələr.</p>
+            <span class="resource-action-link">Mərkəzi Bank portalına keçid</span>
+          </a>
+
+          <a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer" class="resource-entry">
+            <span class="resource-origin">Beynəlxalq Sızma Arayışı</span>
+            <div class="resource-headline">
+              <span>Have I Been Pwned?</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+            <p class="resource-desc">E-poçt ünvanınızın və ya telefon nömrənizin məlum qlobal internet sızmalarında yer alıb-almadığını pulsuz yoxlayan beynəlxalq təhlükəsizlik aləti.</p>
+            <span class="resource-action-link">E-poçtunuzu yoxlayın</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Saytın Altlığı (Kolofon) -->
+  <footer class="site-colophon" role="contentinfo">
+    <div class="container">
+      <div class="colophon-grid">
+        <div class="colophon-notice">
+          <h4>İctimai Bildiriş və Hüquqi Məlumat</h4>
+          <p>Kiber Savadlılıq layihəsi texniki olmayan adi vətəndaşların maarifləndirilməsi məqsədilə tərtib edilmiş ictimai təşəbbüsdür. Rəsmi hüquqi və ya məhkəmə-maliyyə məsləhəti hesab edilmir. Əgər aktiv maliyyə oğurluğu ilə qarşılaşmısınızsa, dərhal bankınızın müştəri xidmətlərinə və hüquq-mühafizə orqanlarına (102) müraciət edin.</p>
+        </div>
+
+        <div>
+          <h5 class="colophon-links-heading">Bölmələr</h5>
+          <ul class="colophon-nav">
+            <li><a href="#matters">Niyə ehtiyatlı olmaq vacibdir</a></li>
+            <li><a href="#topics">Əsas təhlükəsizlik bələdçiləri</a></li>
+            <li><a href="#emergency">Təcili addımlar siyahısı</a></li>
+            <li><a href="#quiz">Dələduz yoxlama testi</a></li>
+            <li><a href="#glossary">Sadə dildə kiber lüğət</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="colophon-bottom-row">
+        <span>© <span id="copyright-year">2026</span> Kiber Savadlılıq Layihəsi. Vətəndaşların rəqəmsal təhlükəsizliyi üçün hazırlanmışdır.</span>
+        <a href="#hero" style="color: var(--text-secondary); text-decoration: none;">Yuxarı qayıt ↑</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
