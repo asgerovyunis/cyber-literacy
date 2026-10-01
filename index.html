@@ -64,25 +64,15 @@
       </nav>
 
       <div class="nav-actions">
-        <div class="header-search-wrap" role="search" id="header-search-wrap">
-          <button type="button" id="header-search-toggle-btn" class="header-search-toggle-btn" aria-label="Axtarışı aç" aria-expanded="false">
-            <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-          <input type="search" id="global-search-input" class="header-search-input" placeholder="Axtarış..." aria-label="Sayt üzrə axtarış" autocomplete="off" spellcheck="false">
-          <button id="global-search-clear" class="header-search-clear" type="button" aria-label="Axtarışı təmizlə" style="display: none;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-          <div id="header-search-dropdown" class="header-search-dropdown" style="display: none;" role="region" aria-live="polite"></div>
-        </div>
-
-        <button id="theme-toggle" class="theme-button" type="button" aria-label="Qaranlıq rejimə keç">
-          <span id="theme-label">Qaranlıq rejim</span>
+        <button id="theme-toggle" class="theme-button" type="button" aria-label="Qaranlıq rejimə keç" aria-pressed="false">
+          <svg class="theme-bulb-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path class="theme-bulb-ray" d="M12 1.5v2"></path>
+            <path class="theme-bulb-ray" d="M4.5 4.5l1.5 1.5"></path>
+            <path class="theme-bulb-ray" d="M19.5 4.5l-1.5 1.5"></path>
+            <path class="theme-bulb-glass" d="M9 15c-1.5-1.5-2.5-3.2-2.5-5a5.5 5.5 0 1 1 11 0c0 1.8-1 3.5-2.5 5v3H9v-3z"></path>
+            <path d="M9 18h6"></path>
+            <path d="M10 21h4"></path>
+          </svg>
         </button>
 
         <button id="mobile-toggle" class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Naviqasiya menyusunu aç">
@@ -97,13 +87,6 @@
 
     <!-- Mobil Menyu -->
     <div id="mobile-drawer" class="mobile-drawer">
-      <div class="mobile-search-box" role="search">
-        <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="search" id="mobile-search-input" class="header-search-input" placeholder="Bələdçilərdə və lüğətdə axtarış..." aria-label="Mobil axtarış" autocomplete="off" spellcheck="false">
-      </div>
       <ul class="mobile-links-list">
         <li><a href="#matters">Niyə ehtiyatlı olmaq vacibdir</a></li>
         <li><a href="#topics">Əsas təhlükəsizlik bələdçiləri</a></li>
@@ -375,6 +358,24 @@
         <div class="section-editorial-header">
           <h2 id="topics-heading" class="section-editorial-title">Doqquz əsas təhlükəsizlik ssenarisi</h2>
           <p class="section-editorial-lede">Hər bir mövzunu açaraq hadisənin mahiyyəti, əsas əlamətləri və dərhal görülməli addımlarla tanış olun.</p>
+        </div>
+
+        <!-- Mövzu Axtarışı -->
+        <div class="topics-search-section">
+          <label for="topics-search-input" class="topics-search-label">Axtarış</label>
+          <div class="topics-search-box">
+            <svg class="topics-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" id="topics-search-input" class="topics-search-input" placeholder="Mövzu axtarın..." aria-label="Mövzu axtarın" autocomplete="off" spellcheck="false">
+            <button id="topics-search-clear" class="topics-search-clear" type="button" aria-label="Axtarışı təmizlə" style="display: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div class="topics-toolbar-row">

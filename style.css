@@ -343,38 +343,47 @@ button {
   flex-shrink: 0;
 }
 
-/* Qlobal Axtarış (Header Search) */
-.header-search-wrap {
+/* --------------------------------------------------------------------------
+   Mövzu Axtarışı (Əsas bələdçilər bölməsinin yuxarısında)
+   -------------------------------------------------------------------------- */
+.topics-search-section {
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 2rem;
+}
+
+.topics-search-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.topics-search-box {
   position: relative;
   display: flex;
   align-items: center;
-  width: clamp(150px, 14vw, 220px);
+  width: 100%;
+  max-width: 640px;
   height: 44px;
-  min-height: 44px;
-  border-radius: 6px;
-  flex-shrink: 0;
-  box-sizing: border-box;
-  transition: width var(--transition-fast);
 }
 
-.header-search-toggle-btn {
-  display: none;
-}
-
-.header-search-icon {
+.topics-search-icon {
   position: absolute;
-  left: 0.75rem;
+  left: 0.85rem;
   color: var(--text-muted);
   pointer-events: none;
   flex-shrink: 0;
 }
 
-.header-search-input {
+.topics-search-input {
   width: 100%;
   height: 44px;
-  padding: 0 2rem 0 2.25rem;
+  padding: 0 2.5rem 0 2.6rem;
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 18px;
   color: var(--text-primary);
   background-color: var(--bg-surface);
   border: 1px solid var(--rule-subtle);
@@ -384,192 +393,39 @@ button {
   transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.header-search-input::placeholder {
+.topics-search-input::placeholder {
   color: var(--text-muted);
-  font-size: 0.825rem;
+  font-size: 18px;
+  opacity: 0.85;
 }
 
-.header-search-input:focus {
+.topics-search-input:focus {
   border-color: var(--accent);
   background-color: var(--bg-page);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-.header-search-clear {
+.topics-search-clear {
   position: absolute;
-  right: 0.5rem;
+  right: 0.75rem;
   display: none;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
+  border: none;
+  background: transparent;
   color: var(--text-muted);
   cursor: pointer;
   padding: 0;
   transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.header-search-clear:hover {
+.topics-search-clear:hover {
   color: var(--text-primary);
   background-color: var(--bg-surface-hover);
-}
-
-@media (min-width: 769px) and (max-width: 1180px) {
-  .header-search-wrap {
-    width: 44px;
-    height: 44px;
-    position: relative;
-    transition: width 0.2s ease;
-  }
-
-  .header-search-icon {
-    display: none;
-  }
-
-  .header-search-toggle-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    border: 1px solid var(--rule-subtle);
-    border-radius: 6px;
-    background-color: var(--bg-surface);
-    color: var(--text-primary);
-    cursor: pointer;
-    flex-shrink: 0;
-    padding: 0;
-    transition: background-color var(--transition-fast), border-color var(--transition-fast);
-  }
-
-  .header-search-toggle-btn:hover {
-    background-color: var(--bg-surface-hover);
-    border-color: var(--text-secondary);
-  }
-
-  .header-search-wrap .header-search-input {
-    display: none;
-  }
-
-  /* Genişlənmiş axtarış vəziyyəti */
-  .header-search-wrap.is-expanded {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 280px;
-    z-index: 150;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-    border-radius: 6px;
-    background-color: var(--bg-page);
-  }
-
-  .header-search-wrap.is-expanded .header-search-toggle-btn {
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: none;
-    background: transparent;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .header-search-wrap.is-expanded .header-search-input {
-    display: block;
-    width: 100%;
-    height: 44px;
-    padding-left: 2.5rem;
-    padding-right: 2.25rem;
-    background-color: var(--bg-surface);
-    border-radius: 6px;
-  }
-}
-
-/* Axtarış Nəticələri Açılan Pəncərəsi (Dropdown) */
-.header-search-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: 320px;
-  max-width: 90vw;
-  max-height: 420px;
-  overflow-y: auto;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--rule-subtle);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 0;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  z-index: 200;
-}
-
-[data-theme="dark"] .header-search-dropdown {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  border-color: var(--rule-subtle);
-}
-
-.search-dropdown-group {
-  padding: 0.35rem 0.75rem;
-}
-
-.search-dropdown-group-title {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin-bottom: 0.35rem;
-  display: block;
-}
-
-.search-dropdown-item {
-  display: block;
-  padding: 0.45rem 0.6rem;
-  color: var(--text-primary);
-  text-decoration: none;
-  font-size: 0.875rem;
-  border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast);
-  line-height: 1.4;
-  margin-bottom: 2px;
-}
-
-.search-dropdown-item:hover,
-.search-dropdown-item:focus {
-  background-color: var(--bg-surface-hover);
-  text-decoration: none;
-  color: var(--accent);
-}
-
-.search-no-results {
-  padding: 1.25rem 1rem;
-  text-align: center;
-  color: var(--text-secondary);
-}
-
-.search-no-results-title {
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.35rem;
-  font-size: 0.95rem;
-}
-
-.search-no-results-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.search-dropdown-footer {
-  padding: 0.6rem 0.85rem 0.25rem 0.85rem;
-  border-top: 1px solid var(--rule-subtle);
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 /* Səhifə daxilində Axtarış Nəticəsi Yoxdur Mesajları */
@@ -595,45 +451,73 @@ button {
   margin: 0;
 }
 
-/* Mobil Drawer Axtarış Qutusu */
-.mobile-search-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
-
-.mobile-search-box .header-search-icon {
-  left: 0.75rem;
-}
-
-.mobile-search-box .header-search-input {
-  width: 100%;
-}
-
+/* Mövzu Dəyişdirici Düymə (Theme Toggle: İşıqlı / Qaranlıq Rejim) */
 .theme-button {
-  padding: 0 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
   border: 1px solid var(--rule-subtle);
   border-radius: 6px;
-  background-color: var(--bg-surface);
+  background-color: transparent;
+  background: transparent;
   color: var(--text-primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  min-height: 44px;
-  height: 44px;
-  white-space: nowrap;
-  box-sizing: border-box;
+  cursor: pointer;
   flex-shrink: 0;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  background-image: none !important;
   transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .theme-button:hover {
   background-color: var(--bg-surface-hover);
   border-color: var(--text-secondary);
+}
+
+.theme-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-bulb-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.theme-bulb-glass {
+  fill: none;
+  transition: fill 0.15s ease, fill-opacity 0.15s ease;
+}
+
+.theme-bulb-ray {
+  display: none;
+}
+
+[data-theme="dark"] .theme-bulb-glass {
+  fill: currentColor;
+  fill-opacity: 0.2;
+}
+
+[data-theme="dark"] .theme-bulb-ray {
+  display: inline;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav-row {
+    gap: 16px;
+  }
+
+  .nav-links {
+    gap: clamp(10px, 1.3vw, 16px);
+  }
 }
 
 .mobile-menu-btn {
@@ -718,10 +602,6 @@ button {
     text-overflow: ellipsis;
   }
 
-  .header-search-wrap {
-    display: none !important;
-  }
-
   .nav-actions {
     display: flex;
     align-items: center;
@@ -730,12 +610,11 @@ button {
   }
 
   .theme-button {
-    min-height: 44px;
+    width: 44px;
     height: 44px;
-    padding: 0.35rem 0.65rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    gap: 0.3rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
   }
 
   .mobile-drawer {

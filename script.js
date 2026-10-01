@@ -9,7 +9,6 @@
   // 1. Mövzu İdarəetməsi (Qaranlıq / İşıqlı Rejim)
   const THEME_KEY = 'kiber-savadliliq-tema';
   const themeToggleBtn = document.getElementById('theme-toggle');
-  const themeLabel = document.getElementById('theme-label');
 
   function getStoredTheme() {
     const saved = localStorage.getItem(THEME_KEY);
@@ -20,12 +19,11 @@
   }
 
   function applyTheme(theme) {
+    const isDark = theme === 'dark';
     document.documentElement.setAttribute('data-theme', theme);
-    if (themeLabel) {
-      themeLabel.textContent = theme === 'dark' ? 'İşıqlı rejim' : 'Qaranlıq rejim';
-    }
     if (themeToggleBtn) {
-      themeToggleBtn.setAttribute('aria-label', theme === 'dark' ? 'İşıqlı rejimə keç' : 'Qaranlıq rejimə keç');
+      themeToggleBtn.setAttribute('aria-label', isDark ? 'İşıqlı rejimə keç' : 'Qaranlıq rejimə keç');
+      themeToggleBtn.setAttribute('aria-pressed', String(isDark));
     }
   }
 
@@ -470,11 +468,9 @@
       .replace(/'/g, '&#039;');
   }
 
-  // 6. Qlobal Axtarış (Header Search) — Bələdçilər və Lüğət üzrə Real-vaxt Filtri
-  const globalSearchInput = document.getElementById('global-search-input');
-  const mobileSearchInput = document.getElementById('mobile-search-input');
-  const globalSearchClear = document.getElementById('global-search-clear');
-  const headerSearchDropdown = document.getElementById('header-search-dropdown');
+  // 6. Mövzu Axtarışı (Əsas bələdçilər üzrə axtarış və filtrləmə)
+  const topicsSearchInput = document.getElementById('topics-search-input') || document.getElementById('global-search-input');
+  const topicsSearchClear = document.getElementById('topics-search-clear') || document.getElementById('global-search-clear');
   const glossaryInput = document.getElementById('glossary-search');
   const glossaryItems = document.querySelectorAll('.glossary-item');
   const glossaryEmpty = document.getElementById('glossary-empty-msg');
@@ -482,28 +478,24 @@
   const topicsCountEl = document.querySelector('.topics-count');
   const initialTopicsCount = topicsCountEl ? topicsCountEl.textContent : '9 əsas mövzu';
 
-  function performGlobalSearch(rawQuery) {
+  function performSearch(rawQuery) {
     const q = (rawQuery || '').toLowerCase().trim();
 
-    // Sync input values across header, mobile drawer and glossary section
-    if (globalSearchInput && globalSearchInput.value !== rawQuery) {
-      globalSearchInput.value = rawQuery;
-    }
-    if (mobileSearchInput && mobileSearchInput.value !== rawQuery) {
-      mobileSearchInput.value = rawQuery;
+    // Sync input values
+    if (topicsSearchInput && topicsSearchInput.value !== rawQuery) {
+      topicsSearchInput.value = rawQuery;
     }
     if (glossaryInput && glossaryInput.value !== rawQuery) {
       glossaryInput.value = rawQuery;
     }
 
-    if (globalSearchClear) {
-      globalSearchClear.style.display = q ? 'flex' : 'none';
+    if (topicsSearchClear) {
+      topicsSearchClear.style.display = q ? 'flex' : 'none';
     }
 
     const matchedTopics = [];
-    const matchedGlossary = [];
 
-    // 1. "Əsas bələdçilər" Akkordeon Bölməsini Filtrlə
+    // "Əsas bələdçilər" Akkordeon Bölməsini Filtrlə
     topicRows.forEach((row, idx) => {
       const titleEl = row.querySelector('h3');
       const title = titleEl ? titleEl.textContent : '';
@@ -549,172 +541,50 @@
       }
     }
 
-    // 2. Lüğət Bölməsini Filtrlə
+    // Lüğət Bölməsini Filtrlə
+    let matchedGlossaryCount = 0;
     glossaryItems.forEach((item) => {
-      const termEl = item.querySelector('.glossary-item-term span:first-child');
-      const term = termEl ? termEl.textContent : '';
       const text = item.textContent.toLowerCase();
 
       if (!q) {
         item.style.display = '';
       } else if (text.includes(q)) {
         item.style.display = '';
-        matchedGlossary.push({ item, term });
+        matchedGlossaryCount++;
       } else {
         item.style.display = 'none';
       }
     });
 
     if (glossaryEmpty) {
-      glossaryEmpty.style.display = (q && matchedGlossary.length === 0) ? 'block' : 'none';
-    }
-
-    // 3. Yuxarı Dropdown Panelini Yenilə
-    if (headerSearchDropdown) {
-      if (!q) {
-        headerSearchDropdown.style.display = 'none';
-        headerSearchDropdown.innerHTML = '';
-      } else {
-        headerSearchDropdown.style.display = 'block';
-        const totalMatches = matchedTopics.length + matchedGlossary.length;
-
-        if (totalMatches === 0) {
-          headerSearchDropdown.innerHTML = `
-            <div class="search-no-results">
-              <div class="search-no-results-title">Heç bir nəticə tapılmadı</div>
-              <p class="search-no-results-desc">"${escapeHtml(q)}" sorğusuna uyğun bələdçi və ya lüğət termini yoxdur.</p>
-            </div>
-          `;
-        } else {
-          let html = '';
-
-          if (matchedTopics.length > 0) {
-            html += `<div class="search-dropdown-group">
-              <span class="search-dropdown-group-title">Bələdçilər (${matchedTopics.length})</span>`;
-            matchedTopics.slice(0, 5).forEach((t) => {
-              html += `<a href="#topics" class="search-dropdown-item" data-topic-idx="${t.idx}">
-                <strong>${escapeHtml(t.title)}</strong>
-              </a>`;
-            });
-            html += `</div>`;
-          }
-
-          if (matchedGlossary.length > 0) {
-            html += `<div class="search-dropdown-group">
-              <span class="search-dropdown-group-title">Lüğət Terminləri (${matchedGlossary.length})</span>`;
-            matchedGlossary.slice(0, 5).forEach((g) => {
-              html += `<a href="#glossary" class="search-dropdown-item" data-glossary-jump="true">
-                <strong>${escapeHtml(g.term)}</strong>
-              </a>`;
-            });
-            html += `</div>`;
-          }
-
-          html += `<div class="search-dropdown-footer">
-            <span>Cəmi ${totalMatches} nəticə</span>
-            <span>Bölməyə keçmək üçün klikləyin</span>
-          </div>`;
-
-          headerSearchDropdown.innerHTML = html;
-
-          headerSearchDropdown.querySelectorAll('.search-dropdown-item').forEach((link) => {
-            link.addEventListener('click', (e) => {
-              const topicIdx = link.getAttribute('data-topic-idx');
-              if (topicIdx !== null) {
-                const targetRow = topicRows[parseInt(topicIdx, 10)];
-                if (targetRow) {
-                  targetRow.classList.add('is-open');
-                  setTimeout(() => {
-                    targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                  }, 60);
-                }
-              }
-              headerSearchDropdown.style.display = 'none';
-            });
-          });
-        }
-      }
+      glossaryEmpty.style.display = (q && matchedGlossaryCount === 0) ? 'block' : 'none';
     }
   }
 
-  if (globalSearchInput) {
-    globalSearchInput.addEventListener('input', (e) => {
-      performGlobalSearch(e.target.value);
-    });
-
-    globalSearchInput.addEventListener('focus', () => {
-      if (globalSearchInput.value.trim() && headerSearchDropdown) {
-        headerSearchDropdown.style.display = 'block';
-      }
-    });
-  }
-
-  if (mobileSearchInput) {
-    mobileSearchInput.addEventListener('input', (e) => {
-      performGlobalSearch(e.target.value);
+  if (topicsSearchInput) {
+    topicsSearchInput.addEventListener('input', (e) => {
+      performSearch(e.target.value);
     });
   }
 
   if (glossaryInput) {
     glossaryInput.addEventListener('input', (e) => {
-      performGlobalSearch(e.target.value);
+      performSearch(e.target.value);
     });
   }
 
-  if (globalSearchClear) {
-    globalSearchClear.addEventListener('click', () => {
-      performGlobalSearch('');
-      if (globalSearchInput) globalSearchInput.focus();
+  if (topicsSearchClear) {
+    topicsSearchClear.addEventListener('click', () => {
+      performSearch('');
+      if (topicsSearchInput) topicsSearchInput.focus();
     });
   }
 
-  const headerSearchWrap = document.getElementById('header-search-wrap');
-  const searchToggleBtn = document.getElementById('header-search-toggle-btn');
-
-  if (searchToggleBtn && headerSearchWrap) {
-    searchToggleBtn.addEventListener('click', (e) => {
-      if (window.innerWidth >= 769 && window.innerWidth <= 1180) {
-        e.stopPropagation();
-        const expanded = headerSearchWrap.classList.toggle('is-expanded');
-        searchToggleBtn.setAttribute('aria-expanded', String(expanded));
-        if (expanded && globalSearchInput) {
-          globalSearchInput.focus();
-        } else {
-          if (headerSearchDropdown) headerSearchDropdown.style.display = 'none';
-        }
-      }
-    });
-  }
-
-  // Klik kənara edildikdə dropdown-u və genişlənmiş axtarışı bağla
-  document.addEventListener('click', (e) => {
-    const wrap = e.target.closest('.header-search-wrap');
-    if (!wrap) {
-      if (headerSearchDropdown) {
-        headerSearchDropdown.style.display = 'none';
-      }
-      if (headerSearchWrap && headerSearchWrap.classList.contains('is-expanded')) {
-        headerSearchWrap.classList.remove('is-expanded');
-        if (searchToggleBtn) searchToggleBtn.setAttribute('aria-expanded', 'false');
-      }
-    }
-  });
-
-  // Escape düyməsi ilə axtarışı və dropdown-u bağla
+  // Escape düyməsi ilə axtarışı təmizlə
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (headerSearchDropdown) {
-        headerSearchDropdown.style.display = 'none';
-      }
-      if (headerSearchWrap && headerSearchWrap.classList.contains('is-expanded')) {
-        headerSearchWrap.classList.remove('is-expanded');
-        if (searchToggleBtn) {
-          searchToggleBtn.setAttribute('aria-expanded', 'false');
-          searchToggleBtn.focus();
-        }
-      }
-      if (globalSearchInput && document.activeElement === globalSearchInput) {
-        globalSearchInput.blur();
+      if (topicsSearchInput && document.activeElement === topicsSearchInput && topicsSearchInput.value) {
+        performSearch('');
       }
     }
   });
