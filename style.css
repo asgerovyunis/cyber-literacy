@@ -86,6 +86,16 @@
   padding: 0;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img, svg, video, figure {
+  max-width: 100%;
+  height: auto;
+}
+
 html {
   font-family: var(--font-sans);
   font-size: 18px; /* Hər yaş üçün rahat və oxunaqlı şrift ölçüsü */
@@ -115,6 +125,11 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-page);
   transition: background-color var(--transition-fast), color var(--transition-fast);
+  overflow-wrap: anywhere;
+}
+
+p, a, h1, h2, h3, h4, h5, h6, span, li {
+  overflow-wrap: anywhere;
 }
 
 :focus-visible {
@@ -199,8 +214,15 @@ button {
   max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 @media (min-width: 900px) {
@@ -228,6 +250,8 @@ button {
   justify-content: space-between;
   height: 4.25rem;
   gap: 1rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .wordmark {
@@ -242,6 +266,7 @@ button {
   align-items: baseline;
   gap: 0.35rem;
   white-space: nowrap;
+  min-width: 0;
 }
 
 .wordmark-period {
@@ -502,7 +527,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  min-height: 40px;
+  min-height: 44px;
   white-space: nowrap;
 }
 
@@ -521,6 +546,7 @@ button {
   background: var(--bg-surface);
   min-width: 44px;
   min-height: 44px;
+  flex-shrink: 0;
 }
 
 @media (min-width: 960px) {
@@ -534,6 +560,8 @@ button {
   border-top: 1px solid var(--rule-subtle);
   padding: 1.25rem 1.5rem;
   background-color: var(--bg-page);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mobile-drawer.is-open {
@@ -544,16 +572,61 @@ button {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0;
+  width: 100%;
+}
+
+.mobile-links-list li {
+  width: 100%;
 }
 
 .mobile-links-list a {
-  display: block;
-  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.6rem 0;
   font-size: 1.05rem;
   color: var(--text-primary);
   text-decoration: none;
   border-bottom: 1px solid var(--rule-subtle);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .nav-row {
+    height: 4rem;
+    gap: 0.5rem;
+  }
+
+  .wordmark {
+    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header-search-wrap {
+    display: none !important;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .theme-button {
+    min-height: 44px;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    gap: 0.3rem;
+  }
+
+  .mobile-drawer {
+    padding: 1.25rem 1rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -596,21 +669,17 @@ button {
 }
 
 .section-editorial-title {
-  font-size: 2.15rem;
+  font-size: clamp(1.75rem, 4.5vw, 2.65rem);
   line-height: 1.22;
   margin-bottom: 0.85rem;
-}
-
-@media (min-width: 768px) {
-  .section-editorial-title {
-    font-size: 2.65rem;
-  }
+  overflow-wrap: anywhere;
 }
 
 .section-editorial-lede {
   font-size: 1.15rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 /* --------------------------------------------------------------------------
@@ -623,6 +692,8 @@ button {
   align-items: start;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 960px) {
@@ -642,18 +713,13 @@ button {
 }
 
 .hero-headline {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
   font-weight: 500;
   line-height: 1.12;
   letter-spacing: -0.025em;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
-}
-
-@media (min-width: 768px) {
-  .hero-headline {
-    font-size: 3.5rem;
-  }
+  overflow-wrap: anywhere;
 }
 
 .hero-lede {
@@ -662,12 +728,22 @@ button {
   color: var(--text-secondary);
   margin-bottom: 2.25rem;
   max-width: 36rem;
+  overflow-wrap: anywhere;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .btn {
@@ -711,8 +787,17 @@ button {
   background-color: var(--bg-phone);
   border: 1px solid var(--rule-subtle);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: 1.15rem 1rem;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .mockup-frame {
+    padding: 1.5rem;
+  }
 }
 
 .mockup-header {
@@ -794,19 +879,23 @@ button {
 }
 
 .matters-aside h3 {
-  font-size: 1.85rem;
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
   line-height: 1.25;
   margin-bottom: 1rem;
+  overflow-wrap: anywhere;
 }
 
 .matters-aside p {
   font-size: 1.05rem;
   color: var(--text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .matters-rows {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
 }
 
 .matter-row {
@@ -815,6 +904,8 @@ button {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 680px) {
@@ -835,12 +926,14 @@ button {
 .matter-heading {
   font-size: 1.3rem;
   font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
 .matter-text {
   font-size: 0.98rem;
   color: var(--text-secondary);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 /* --------------------------------------------------------------------------
@@ -1031,7 +1124,16 @@ button {
   border: 1px solid var(--rule-subtle);
   border-top: 3px solid var(--signal-warn-text);
   border-radius: var(--radius-md);
-  padding: 2rem 1.5rem;
+  padding: 1.25rem 1rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .emergency-wrapper {
+    padding: 2rem 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1047,6 +1149,8 @@ button {
   border-bottom: 1px solid var(--rule-subtle);
   padding-bottom: 1.5rem;
   margin-bottom: 2rem;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -1058,8 +1162,9 @@ button {
 }
 
 .emergency-header-row h3 {
-  font-size: 1.85rem;
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .checklist-counter-display {
@@ -1078,18 +1183,29 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .check-item {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1.15rem 1.25rem;
+  padding: 1rem 0.85rem;
   background-color: var(--bg-page);
   border: 1px solid var(--rule-subtle);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: border-color var(--transition-fast);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .check-item {
+    padding: 1.15rem 1.25rem;
+  }
 }
 
 .check-item:hover {
@@ -1172,11 +1288,14 @@ button {
    -------------------------------------------------------------------------- */
 .quiz-container {
   max-width: 44rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   margin: 0 auto;
   background-color: var(--bg-surface);
   border: 1px solid var(--rule-subtle);
   border-radius: var(--radius-lg);
-  padding: 2rem 1.5rem;
+  padding: 1.25rem 1rem;
 }
 
 @media (min-width: 640px) {
@@ -1197,6 +1316,8 @@ button {
   color: var(--text-muted);
   flex-wrap: wrap;
   gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .quiz-score-indicator {
@@ -1208,8 +1329,17 @@ button {
   background-color: var(--bg-phone);
   border: 1px solid var(--rule-subtle);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: 1rem;
   margin-bottom: 1.75rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .quiz-message-mockup {
+    padding: 1.25rem;
+  }
 }
 
 .quiz-channel-tag {
@@ -1226,6 +1356,7 @@ button {
   color: var(--text-primary);
   margin-bottom: 0.75rem;
   font-size: 1.05rem;
+  overflow-wrap: anywhere;
 }
 
 .quiz-simulated-text {
@@ -1236,14 +1367,19 @@ button {
   font-size: 0.875rem;
   color: var(--text-primary);
   line-height: 1.5;
+  overflow-wrap: anywhere;
   word-break: break-word;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .quiz-ask-heading {
   font-size: 1.25rem;
   font-weight: 500;
   margin-bottom: 1rem;
+  overflow-wrap: anywhere;
 }
 
 .quiz-answers-grid {
@@ -1251,23 +1387,36 @@ button {
   flex-direction: column;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .quiz-choice-btn {
   width: 100%;
-  padding: 1rem 1.25rem;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
   text-align: left;
   background-color: var(--bg-page);
   border: 1px solid var(--rule-subtle);
   border-radius: var(--radius-md);
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--text-primary);
   line-height: 1.45;
   transition: all var(--transition-fast);
   display: flex;
-  gap: 0.85rem;
+  gap: 0.75rem;
   align-items: flex-start;
   min-height: 52px;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 640px) {
+  .quiz-choice-btn {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    gap: 0.85rem;
+  }
 }
 
 .quiz-choice-btn:hover:not(:disabled) {
@@ -1309,6 +1458,10 @@ button {
   padding: 1.25rem;
   border-radius: var(--radius-md);
   margin-bottom: 1.5rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
 }
 
 .quiz-feedback-panel.show {
@@ -1329,6 +1482,7 @@ button {
   font-weight: 700;
   font-size: 1.05rem;
   margin-bottom: 0.35rem;
+  overflow-wrap: anywhere;
 }
 
 .quiz-feedback-panel.correct .feedback-lead {
@@ -1343,6 +1497,7 @@ button {
   font-size: 0.95rem;
   margin: 0;
   color: var(--text-primary);
+  overflow-wrap: anywhere;
 }
 
 .quiz-nav-row {
@@ -1384,11 +1539,15 @@ button {
    -------------------------------------------------------------------------- */
 .glossary-controls {
   max-width: 30rem;
+  width: 100%;
+  min-width: 0;
   margin-bottom: 2.5rem;
 }
 
 .glossary-input {
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 1px solid var(--rule-subtle);
@@ -1406,6 +1565,8 @@ button {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -1418,6 +1579,9 @@ button {
 .glossary-item {
   border-top: 1px solid var(--rule-subtle);
   padding-top: 1rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .glossary-item-term {
@@ -1428,6 +1592,14 @@ button {
   justify-content: space-between;
   align-items: baseline;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
+}
+
+.glossary-item-term span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .glossary-item-cat {
@@ -1436,6 +1608,7 @@ button {
   color: var(--text-muted);
   text-transform: uppercase;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .glossary-item-def {
@@ -1443,12 +1616,14 @@ button {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
 }
 
 .glossary-item-plain {
   font-size: 0.875rem;
   color: var(--accent);
   font-style: italic;
+  overflow-wrap: anywhere;
 }
 
 /* --------------------------------------------------------------------------
@@ -1458,6 +1633,8 @@ button {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -1470,13 +1647,24 @@ button {
 .resource-entry {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.25rem 1rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--rule-subtle);
   border-radius: var(--radius-sm);
   text-decoration: none;
   color: inherit;
   transition: border-color var(--transition-fast);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .resource-entry {
+    padding: 1.5rem;
+  }
 }
 
 .resource-entry:hover {
@@ -1489,6 +1677,7 @@ button {
   color: var(--text-muted);
   text-transform: uppercase;
   margin-bottom: 0.4rem;
+  overflow-wrap: anywhere;
 }
 
 .resource-headline {
@@ -1499,6 +1688,19 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.resource-headline span:first-child {
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.resource-headline span:last-child {
+  flex-shrink: 0;
 }
 
 .resource-desc {
@@ -1506,12 +1708,14 @@ button {
   color: var(--text-secondary);
   flex-grow: 1;
   margin-bottom: 1rem;
+  overflow-wrap: anywhere;
 }
 
 .resource-action-link {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--accent);
+  overflow-wrap: anywhere;
 }
 
 /* --------------------------------------------------------------------------
@@ -1522,6 +1726,9 @@ button {
   padding-bottom: 3.5rem;
   background-color: var(--bg-surface);
   border-top: 1px solid var(--rule-subtle);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .colophon-grid {
@@ -1529,6 +1736,8 @@ button {
   grid-template-columns: 1fr;
   gap: 2.5rem;
   margin-bottom: 2.5rem;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -1537,14 +1746,21 @@ button {
   }
 }
 
+.colophon-notice {
+  width: 100%;
+  min-width: 0;
+}
+
 .colophon-notice h4 {
   font-size: 1.1rem;
   margin-bottom: 0.45rem;
+  overflow-wrap: anywhere;
 }
 
 .colophon-notice p {
   font-size: 0.9rem;
   color: var(--text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .colophon-links-heading {
@@ -1560,12 +1776,15 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .colophon-nav a {
   font-size: 0.9rem;
   color: var(--text-secondary);
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .colophon-nav a:hover {
@@ -1582,6 +1801,9 @@ button {
   align-items: flex-start;
   font-size: 0.875rem;
   color: var(--text-muted);
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 @media (min-width: 640px) {
@@ -1603,6 +1825,8 @@ button {
   background-color: var(--accent);
   color: #ffffff;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 101;
@@ -1616,6 +1840,8 @@ button {
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
   min-height: 48px;
+  width: 100%;
+  min-width: 0;
 }
 
 .october-banner-text {
@@ -1626,6 +1852,7 @@ button {
   font-size: 0.925rem;
   line-height: 1.4;
   color: #ffffff;
+  min-width: 0;
 }
 
 .october-banner-title {
@@ -1685,6 +1912,56 @@ button {
   outline-offset: -2px;
 }
 
+@media (max-width: 768px) {
+  .october-banner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .october-banner-inner {
+    position: relative;
+    width: 100%;
+    padding-right: 52px;
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+    min-height: 48px;
+  }
+
+  .october-banner-text {
+    display: block;
+    width: 100%;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    padding-right: 0.5rem;
+    overflow-wrap: anywhere;
+  }
+
+  .october-banner-title {
+    display: inline;
+  }
+
+  .october-banner-sep {
+    display: inline;
+    margin: 0 0.3rem;
+  }
+
+  .october-banner-link {
+    display: inline;
+    white-space: nowrap;
+  }
+
+  .october-banner-close {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
 /* 2. Hero Xüsusi Bloku */
 .october-hero-block {
   margin-top: 2rem;
@@ -1727,6 +2004,9 @@ button {
 .october-challenge-section {
   background-color: var(--bg-surface);
   border-bottom: 1px solid var(--rule-subtle);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .october-challenge-header {
@@ -1736,6 +2016,8 @@ button {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--rule-subtle);
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 800px) {
@@ -1748,6 +2030,8 @@ button {
 
 .october-challenge-title-group {
   max-width: 42rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .october-progress-card {
@@ -1755,8 +2039,17 @@ button {
   border: 1px solid var(--rule-subtle);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
-  min-width: 240px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   flex-shrink: 0;
+}
+
+@media (min-width: 800px) {
+  .october-progress-card {
+    width: auto;
+    min-width: 240px;
+  }
 }
 
 .october-progress-header {
@@ -1798,11 +2091,13 @@ button {
 .october-challenge-list {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
 }
 
 .october-challenge-row {
   display: grid;
-  grid-template-columns: 44px auto;
+  grid-template-columns: 44px minmax(0, 1fr);
   grid-template-areas:
     "check num"
     "text  text"
@@ -1812,6 +2107,9 @@ button {
   padding: 1.35rem 0;
   border-bottom: 1px solid var(--rule-subtle);
   transition: background-color var(--transition-fast);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .october-challenge-row:last-child {
@@ -1903,6 +2201,8 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .october-week-badge {
@@ -1919,6 +2219,7 @@ button {
   color: var(--text-primary);
   line-height: 1.5;
   margin: 0;
+  overflow-wrap: anywhere;
   transition: opacity var(--transition-fast);
 }
 
@@ -1933,7 +2234,6 @@ button {
   font-weight: 500;
   color: var(--accent);
   text-decoration: none;
-  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 0.4rem 0.6rem;
@@ -1941,11 +2241,15 @@ button {
   transition: background-color var(--transition-fast), color var(--transition-fast);
   justify-self: start;
   margin-left: 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 @media (min-width: 768px) {
   .october-topic-link {
     justify-self: end;
+    white-space: nowrap;
   }
 }
 
@@ -1993,12 +2297,18 @@ button {
   border-bottom: 1px solid var(--rule-subtle);
   background-color: var(--bg-page);
   padding: 3rem 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .share-awareness-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 900px) {
@@ -2012,6 +2322,9 @@ button {
 .share-awareness-info {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .share-awareness-label {
@@ -2023,21 +2336,19 @@ button {
   color: var(--accent);
   display: block;
   margin-bottom: 0.75rem;
+  min-width: 0;
 }
 
 .share-awareness-title {
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 4.5vw + 0.5rem, 2.35rem);
   line-height: 1.22;
   font-weight: 500;
   color: var(--text-primary);
   margin-bottom: 1.25rem;
-}
-
-@media (min-width: 768px) {
-  .share-awareness-title {
-    font-size: 2.35rem;
-  }
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .share-awareness-desc {
@@ -2045,6 +2356,9 @@ button {
   line-height: 1.68;
   color: var(--text-secondary);
   margin-bottom: 2rem;
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .share-awareness-rule {
@@ -2055,6 +2369,9 @@ button {
   border-top: 1px solid var(--rule-subtle);
   border-right: 1px solid var(--rule-subtle);
   border-bottom: 1px solid var(--rule-subtle);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .share-rule-label {
@@ -2074,13 +2391,18 @@ button {
   color: var(--text-primary);
   margin: 0;
   font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
 .share-awareness-panel {
   border: 1px solid var(--rule-subtle);
   background-color: var(--bg-surface);
-  padding: 1.5rem 1.5rem 1.25rem 1.5rem;
+  padding: 1.25rem 1rem 1.25rem 1rem;
   border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
@@ -2091,11 +2413,14 @@ button {
 
 .share-panel-title {
   font-family: var(--font-sans);
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 2.5vw + 0.4rem, 1.15rem);
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 1.25rem;
   line-height: 1.4;
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .share-checklist {
@@ -2103,6 +2428,8 @@ button {
   flex-direction: column;
   gap: 0.35rem;
   margin-bottom: 1.25rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .share-check-item {
@@ -2115,6 +2442,9 @@ button {
   min-height: 44px;
   position: relative;
   transition: background-color var(--transition-fast);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .share-check-item:hover {
@@ -2169,12 +2499,18 @@ button {
   line-height: 1.45;
   color: var(--text-primary);
   user-select: none;
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
 }
 
 .share-result-box {
   border-top: 1px solid var(--rule-subtle);
   padding-top: 1.25rem;
   margin-top: 0.5rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .share-result-row {
@@ -2182,6 +2518,8 @@ button {
   flex-direction: column;
   gap: 0.75rem;
   align-items: flex-start;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 540px) {
@@ -2197,6 +2535,9 @@ button {
   font-weight: 500;
   line-height: 1.5;
   margin: 0;
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
   transition: color var(--transition-fast);
 }
 
@@ -2224,6 +2565,7 @@ button {
   padding: 0.35rem 0.6rem;
   border-radius: var(--radius-sm);
   transition: background-color var(--transition-fast), color var(--transition-fast);
+  max-width: 100%;
 }
 
 .share-action-link:hover {
@@ -2243,10 +2585,15 @@ button {
   border-radius: 6px;
   overflow: hidden;
   background-color: var(--bg-surface);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .share-figure img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
