@@ -103,12 +103,13 @@
 
     <!-- SHARE AWARENESS START -->
     <section id="share-awareness" class="editorial-section share-awareness-section" aria-labelledby="share-awareness-heading">
-      <div class="container">
-        <div class="share-awareness-grid">
-          <div class="share-awareness-info">
-            <figure class="share-figure">
-              <img src="images/boarding-pass-photo.webp" alt="Təyyarəyə minik talonu və rezervasiya barkodunun fotosu" width="2048" height="768" loading="lazy" decoding="async">
-            </figure>
+      <div class="container share-awareness-container">
+        <!-- Hissə 1 (Part 1: Şəkil və Mətn) -->
+        <div class="share-awareness-story">
+          <figure class="share-figure">
+            <img src="images/boarding-pass-photo.webp" alt="Təyyarəyə minik talonu və rezervasiya barkodunun fotosu" width="2048" height="768" loading="lazy" decoding="async">
+          </figure>
+          <div class="share-awareness-text">
             <span class="share-awareness-label">Paylaşmazdan əvvəl</span>
             <h2 id="share-awareness-heading" class="share-awareness-title">Siz paylaşırsınız, dələduz toplayır.</h2>
             <p class="share-awareness-desc">
@@ -119,52 +120,53 @@
               <p class="share-rule-text">Paylaşmazdan əvvəl 5 saniyə dayanın və soruşun: bunu yad adam bilsə, mənə zərər verə bilərmi?</p>
             </div>
           </div>
+        </div>
 
-          <div class="share-awareness-panel">
-            <h3 class="share-panel-title">Son 6 ayda bunlardan hansını paylaşmısınız?</h3>
-            <div class="share-checklist" role="group" aria-label="Sosial mediada paylaşılan məlumatlar">
-              <label class="share-check-item">
-                <input type="checkbox" class="share-checkbox" data-share-index="0">
-                <span class="share-custom-box" aria-hidden="true"></span>
-                <span class="share-check-text">Ev ünvanı və ya yaşadığınız yer (lokasiya, xəritə)</span>
-              </label>
+        <!-- Hissə 2 (Part 2: İnteraktiv Çeklist Paneli) -->
+        <div class="share-awareness-panel">
+          <h3 class="share-panel-title">Son 6 ayda bunlardan hansını paylaşmısınız?</h3>
+          <div class="share-checklist" role="group" aria-label="Sosial mediada paylaşılan məlumatlar">
+            <label class="share-check-item">
+              <input type="checkbox" class="share-checkbox" data-share-index="0">
+              <span class="share-custom-box" aria-hidden="true"></span>
+              <span class="share-check-text">Ev ünvanı və ya yaşadığınız yer (lokasiya, xəritə)</span>
+            </label>
 
-              <label class="share-check-item">
-                <input type="checkbox" class="share-checkbox" data-share-index="1">
-                <span class="share-custom-box" aria-hidden="true"></span>
-                <span class="share-check-text">Uşağın şəkli məktəb forması, nömrə və ya ünvanla</span>
-              </label>
+            <label class="share-check-item">
+              <input type="checkbox" class="share-checkbox" data-share-index="1">
+              <span class="share-custom-box" aria-hidden="true"></span>
+              <span class="share-check-text">Uşağın şəkli məktəb forması, nömrə və ya ünvanla</span>
+            </label>
 
-              <label class="share-check-item">
-                <input type="checkbox" class="share-checkbox" data-share-index="2">
-                <span class="share-custom-box" aria-hidden="true"></span>
-                <span class="share-check-text">Bilet, sənəd, kart və ya QR kodun şəkli</span>
-              </label>
+            <label class="share-check-item">
+              <input type="checkbox" class="share-checkbox" data-share-index="2">
+              <span class="share-custom-box" aria-hidden="true"></span>
+              <span class="share-check-text">Bilet, sənəd, kart və ya QR kodun şəkli</span>
+            </label>
 
-              <label class="share-check-item">
-                <input type="checkbox" class="share-checkbox" data-share-index="3">
-                <span class="share-custom-box" aria-hidden="true"></span>
-                <span class="share-check-text">"Tətildəyik" kimi səfər tarixləri (evdə olmadığınız vaxt)</span>
-              </label>
+            <label class="share-check-item">
+              <input type="checkbox" class="share-checkbox" data-share-index="3">
+              <span class="share-custom-box" aria-hidden="true"></span>
+              <span class="share-check-text">"Tətildəyik" kimi səfər tarixləri (evdə olmadığınız vaxt)</span>
+            </label>
 
-              <label class="share-check-item">
-                <input type="checkbox" class="share-checkbox" data-share-index="4">
-                <span class="share-custom-box" aria-hidden="true"></span>
-                <span class="share-check-text">Doğum tarixi, ana adı, ev heyvanının adı (parol və təhlükəsizlik sualları)</span>
-              </label>
+            <label class="share-check-item">
+              <input type="checkbox" class="share-checkbox" data-share-index="4">
+              <span class="share-custom-box" aria-hidden="true"></span>
+              <span class="share-check-text">Doğum tarixi, ana adı, ev heyvanının adı (parol və təhlükəsizlik sualları)</span>
+            </label>
 
-              <label class="share-check-item">
-                <input type="checkbox" class="share-checkbox" data-share-index="5">
-                <span class="share-custom-box" aria-hidden="true"></span>
-                <span class="share-check-text">İş yeri, vəzifə və iş yoldaşları</span>
-              </label>
-            </div>
+            <label class="share-check-item">
+              <input type="checkbox" class="share-checkbox" data-share-index="5">
+              <span class="share-custom-box" aria-hidden="true"></span>
+              <span class="share-check-text">İş yeri, vəzifə və iş yoldaşları</span>
+            </label>
+          </div>
 
-            <div class="share-result-box" id="share-result-box" data-level="safe" aria-live="polite">
-              <div class="share-result-row">
-                <p id="share-result-text" class="share-result-text">Heç birini seçməmisiniz. Əla, belə davam edin.</p>
-                <a href="#topics" class="share-action-link" id="share-action-link" data-target-topic="4">Nə etməli? →</a>
-              </div>
+          <div class="share-result-box" id="share-result-box" data-level="safe" aria-live="polite">
+            <div class="share-result-row">
+              <p id="share-result-text" class="share-result-text">Heç birini seçməmisiniz. Əla, belə davam edin.</p>
+              <a href="#topics" class="share-action-link" id="share-action-link" data-target-topic="4">Nə etməli? →</a>
             </div>
           </div>
         </div>
