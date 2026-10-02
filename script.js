@@ -726,4 +726,9 @@
   }
   /* SHARE AWARENESS END */
 
+  /* TOOLS START */
+  // Pulsuz yoxlama alətləri (Have I Been Pwned, ScamAdviser, TinEye):
+  // Xarici platformalara birbaşa və təhlükəsiz keçid üçün standart HTML linkləri kimi işləyir.
+  /* TOOLS END */
+
 })();
