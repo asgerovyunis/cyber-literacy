@@ -614,10 +614,28 @@
     });
   }
 
-  if (octoberBannerLink && octoberChallengeSection) {
+  function openTopicByIndex(idx) {
+    if (typeof idx === 'number' && !isNaN(idx) && allTopicRows[idx]) {
+      const row = allTopicRows[idx];
+      const trigger = row.querySelector('.topic-row-trigger');
+      const indicator = row.querySelector('.topic-indicator');
+      row.classList.add('is-open');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      if (indicator) indicator.textContent = '×';
+    }
+  }
+
+  if (octoberBannerLink) {
     octoberBannerLink.addEventListener('click', (e) => {
       e.preventDefault();
-      octoberChallengeSection.scrollIntoView({ behavior: 'smooth' });
+      const current = parseHashRoute();
+      if (current === '/') {
+        const target = document.getElementById('october-challenge');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        pendingNavigationAction = { scrollToId: 'october-challenge' };
+        window.location.hash = '#/';
+      }
     });
   }
 
@@ -656,16 +674,18 @@
 
   // 3. Əlaqədar Bələdçiyə Keçid və Akkordeonun Avtomatik Açılması
   octoberTopicLinks.forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
       const targetTopicIdx = parseInt(link.getAttribute('data-target-topic'), 10);
-      if (!isNaN(targetTopicIdx) && allTopicRows[targetTopicIdx]) {
-        const row = allTopicRows[targetTopicIdx];
-        const trigger = row.querySelector('.topic-row-trigger');
-        const indicator = row.querySelector('.topic-indicator');
-
-        row.classList.add('is-open');
-        if (trigger) trigger.setAttribute('aria-expanded', 'true');
-        if (indicator) indicator.textContent = '−';
+      const current = parseHashRoute();
+      pendingNavigationAction = {
+        openTopicIndex: targetTopicIdx,
+        scrollToId: 'topic-row-' + targetTopicIdx
+      };
+      if (current === '/beledciler') {
+        handleRouteChange();
+      } else {
+        window.location.hash = '#/beledciler';
       }
     });
   });
@@ -711,16 +731,18 @@
   });
 
   if (shareActionLink) {
-    shareActionLink.addEventListener('click', () => {
-      const targetTopicIdx = parseInt(shareActionLink.getAttribute('data-target-topic'), 10);
-      if (!isNaN(targetTopicIdx) && allTopicRows[targetTopicIdx]) {
-        const row = allTopicRows[targetTopicIdx];
-        const trigger = row.querySelector('.topic-row-trigger');
-        const indicator = row.querySelector('.topic-indicator');
-
-        row.classList.add('is-open');
-        if (trigger) trigger.setAttribute('aria-expanded', 'true');
-        if (indicator) indicator.textContent = '−';
+    shareActionLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetTopicIdx = parseInt(shareActionLink.getAttribute('data-target-topic'), 10) || 4;
+      const current = parseHashRoute();
+      pendingNavigationAction = {
+        openTopicIndex: targetTopicIdx,
+        scrollToId: 'topic-row-' + targetTopicIdx
+      };
+      if (current === '/beledciler') {
+        handleRouteChange();
+      } else {
+        window.location.hash = '#/beledciler';
       }
     });
   }
@@ -730,5 +752,145 @@
   // Pulsuz yoxlama alətləri (Have I Been Pwned, ScamAdviser, TinEye):
   // Xarici platformalara birbaşa və təhlükəsiz keçid üçün standart HTML linkləri kimi işləyir.
   /* TOOLS END */
+
+  // =========================================================================
+  // Multi-View Sayt və Hash Router İdarəetməsi
+  // =========================================================================
+  const ROUTES = {
+    '/': {
+      title: 'Ana səhifə | Kiber Savadlılıq',
+      headingId: 'hero-heading'
+    },
+    '/niye-vacibdir': {
+      title: 'Niyə vacibdir | Kiber Savadlılıq',
+      headingId: 'matters-heading'
+    },
+    '/beledciler': {
+      title: 'Əsas bələdçilər | Kiber Savadlılıq',
+      headingId: 'topics-heading'
+    },
+    '/tecili-addimlar': {
+      title: 'Təcili addımlar | Kiber Savadlılıq',
+      headingId: 'emergency-heading'
+    },
+    '/test': {
+      title: 'Dələduz testi | Kiber Savadlılıq',
+      headingId: 'quiz-heading'
+    },
+    '/lugat': {
+      title: 'Lüğət | Kiber Savadlılıq',
+      headingId: 'glossary-heading'
+    },
+    '/qurumlar': {
+      title: 'Rəsmi qurumlar | Kiber Savadlılıq',
+      headingId: 'resources-heading'
+    }
+  };
+
+  const ROUTE_ALIASES = {
+    '/': '/',
+    '': '/',
+    '/home': '/',
+    '/hero': '/',
+    '/share-awareness': '/',
+    '/october-challenge': '/',
+    '/matters': '/niye-vacibdir',
+    '/topics': '/beledciler',
+    '/emergency': '/tecili-addimlar',
+    '/quiz': '/test',
+    '/glossary': '/lugat',
+    '/resources': '/qurumlar'
+  };
+
+  let pendingNavigationAction = null;
+
+  function parseHashRoute() {
+    const raw = window.location.hash || '';
+    if (!raw || raw === '#' || raw === '#/') return '/';
+    let path = raw.replace(/^#/, '').trim();
+    if (!path.startsWith('/')) path = '/' + path;
+    if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1);
+    if (ROUTE_ALIASES[path]) return ROUTE_ALIASES[path];
+    if (ROUTES[path]) return path;
+    return '/'; // naməlum hash ana səhifəyə yönləndirilir
+  }
+
+  function handleRouteChange() {
+    const activeRoute = parseHashRoute();
+    const routeConfig = ROUTES[activeRoute] || ROUTES['/'];
+
+    // Başlığı yenilə
+    document.title = routeConfig.title;
+
+    // Yalnız aktiv səhifəni göstər, digərlərini gizlət
+    const allPages = document.querySelectorAll('section[data-page]');
+    allPages.forEach((page) => {
+      const pageRoute = page.getAttribute('data-page');
+      if (pageRoute === activeRoute) {
+        page.removeAttribute('hidden');
+        void page.offsetWidth; // animasiya üçün reflow
+      } else {
+        page.setAttribute('hidden', '');
+      }
+    });
+
+    // Naviqasiya linklərinin aktiv vəziyyəti (desktop + mobil + wordmark)
+    const allNavAnchors = document.querySelectorAll('.nav-link, .mobile-links-list a, .wordmark');
+    allNavAnchors.forEach((a) => {
+      const href = a.getAttribute('href');
+      let matches = false;
+      if (a.classList.contains('wordmark')) {
+        matches = (activeRoute === '/');
+      } else if (href === '#/' && activeRoute === '/') {
+        matches = true;
+      } else if (href === '#' + activeRoute) {
+        matches = true;
+      }
+      if (matches) {
+        a.setAttribute('aria-current', 'page');
+        a.classList.add('is-active');
+      } else {
+        a.removeAttribute('aria-current');
+        a.classList.remove('is-active');
+      }
+    });
+
+    // Əgər keçid üçün təyin edilmiş xüsusi tapşırıq varsa (akkordeon açmaq, elementə sürüşdürmək)
+    if (pendingNavigationAction) {
+      const action = pendingNavigationAction;
+      pendingNavigationAction = null;
+      if (typeof action.openTopicIndex === 'number') {
+        openTopicByIndex(action.openTopicIndex);
+      }
+      if (action.scrollToId) {
+        const el = document.getElementById(action.scrollToId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+      }
+    }
+
+    // Əks halda yuxarıya sürüşdür və səhifənin əsas başlığına fokus ver
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    const heading = document.getElementById(routeConfig.headingId);
+    if (heading) {
+      heading.focus({ preventScroll: true });
+    }
+  }
+
+  window.addEventListener('hashchange', handleRouteChange);
+
+  // Səhifə yüklənəndə cari marşrutu işə sal
+  handleRouteChange();
+
+  // Footer yuxarı qayıt düyməsi
+  const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
 })();

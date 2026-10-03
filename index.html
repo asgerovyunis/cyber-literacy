@@ -20,6 +20,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&subset=latin,latin-ext&display=swap" rel="stylesheet">
 
+    <noscript>
+    <style>
+      .view-page[hidden],
+      section[data-page][hidden] {
+        display: block !important;
+      }
+      .next-page-rule-container {
+        display: none !important;
+      }
+    </style>
+  </noscript>
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./script.js"></script>
 </head>
@@ -48,18 +59,18 @@
   <!-- Yuxarı Naviqasiya Paneli -->
   <header class="site-header" role="banner">
     <div class="container nav-row">
-      <a href="#hero" class="wordmark" aria-label="Kiber Savadlılıq ana səhifə">
+      <a href="#/" class="wordmark" aria-label="Kiber Savadlılıq ana səhifə">
         Kiber Savadlılıq<span class="wordmark-period">.</span>
       </a>
 
       <nav aria-label="Əsas naviqasiya">
         <ul class="nav-links">
-          <li><a href="#matters" class="nav-link">Niyə vacibdir</a></li>
-          <li><a href="#topics" class="nav-link">Əsas bələdçilər</a></li>
-          <li><a href="#emergency" class="nav-link">Təcili addımlar</a></li>
-          <li><a href="#quiz" class="nav-link">Dələduz testi</a></li>
-          <li><a href="#glossary" class="nav-link">Lüğət</a></li>
-          <li><a href="#resources" class="nav-link">Rəsmi qurumlar</a></li>
+          <li><a href="#/niye-vacibdir" class="nav-link">Niyə vacibdir</a></li>
+          <li><a href="#/beledciler" class="nav-link">Əsas bələdçilər</a></li>
+          <li><a href="#/tecili-addimlar" class="nav-link">Təcili addımlar</a></li>
+          <li><a href="#/test" class="nav-link">Dələduz testi</a></li>
+          <li><a href="#/lugat" class="nav-link">Lüğət</a></li>
+          <li><a href="#/qurumlar" class="nav-link">Rəsmi qurumlar</a></li>
         </ul>
       </nav>
 
@@ -88,21 +99,73 @@
     <!-- Mobil Menyu -->
     <div id="mobile-drawer" class="mobile-drawer">
       <ul class="mobile-links-list">
-        <li><a href="#matters">Niyə ehtiyatlı olmaq vacibdir</a></li>
-        <li><a href="#topics">Əsas təhlükəsizlik bələdçiləri</a></li>
-        <li><a href="#emergency">Hesab oğurlandıqda təcili addımlar</a></li>
-        <li><a href="#quiz">Dələduz yoxlama testi</a></li>
-        <li><a href="#glossary">Sadə dildə kiber lüğət</a></li>
-        <li><a href="#resources">Rəsmi müraciət qurumları</a></li>
+        <li><a href="#/">Ana səhifə</a></li>
+        <li><a href="#/niye-vacibdir">Niyə ehtiyatlı olmaq vacibdir</a></li>
+        <li><a href="#/beledciler">Əsas təhlükəsizlik bələdçiləri</a></li>
+        <li><a href="#/tecili-addimlar">Hesab oğurlandıqda təcili addımlar</a></li>
+        <li><a href="#/test">Dələduz yoxlama testi</a></li>
+        <li><a href="#/lugat">Sadə dildə kiber lüğət</a></li>
+        <li><a href="#/qurumlar">Rəsmi müraciət qurumları</a></li>
       </ul>
     </div>
   </header>
 
   <!-- Əsas Məzmun -->
   <main id="main-content">
+    <!-- SƏHİFƏ 01: Ana səhifə (#/) -->
+    <section data-page="/" class="view-page" id="view-home" aria-labelledby="hero-heading">
+<div id="hero" class="editorial-section" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-text-col">
+          <span class="hero-index">00 / Rəqəmsal Müdafiə Bələdçisi</span>
+          <h1 id="hero-heading" class="hero-headline" tabindex="-1">Dələduz sizin tələsməyinizi gözləyir. Dayanın və yoxlayın.</h1>
+          <p class="hero-lede">
+            Şəxsi məlumatlarınızı və vəsaitinizi qorumaq üçün İT mütəxəssisi olmağa ehtiyac yoxdur. Əsas qayda sadədir: kimsə sizdən tələsik SMS kod, bank kartı məlumatı və ya pul istəyirsə, 5 dəqiqə fasilə verib məlumatı rəsmi mənbədən dəqiqləşdirin.
+          </p>
+          <div class="hero-actions">
+            <a href="#/beledciler" class="btn btn-solid">Bələdçiləri oxuyun ↓</a>
+            <a href="#/test" class="btn btn-outline">10 real vəziyyətlə yoxlayın →</a>
+          </div>
 
-    <!-- SHARE AWARENESS START -->
-    <section id="share-awareness" class="editorial-section share-awareness-section" aria-labelledby="share-awareness-heading">
+          <!-- OCTOBER CAMPAIGN START -->
+          <div class="october-hero-block" role="region" aria-labelledby="october-hero-heading">
+            <span class="october-hero-tag">Oktyabr 2026</span>
+            <h2 id="october-hero-heading" class="october-hero-title">Oktyabr Kibertəhlükəsizlik üzrə Maarifləndirmə Ayıdır</h2>
+            <p class="october-hero-desc">Hər ilin oktyabr ayında bütün dünyada insanlar rəqəmsal mühitdə təhlükəsiz qalmaq üçün vacib vərdişlərə diqqət yetirir. Bu bələdçi şəxsi hesablarınızı və məlumatlarınızı qorumağa başlamaq üçün ən münasib yerdir.</p>
+          </div>
+          <!-- OCTOBER CAMPAIGN END -->
+        </div>
+
+        <div class="hero-visual-col">
+          <div class="mockup-frame">
+            <div class="mockup-header">
+              <span class="mockup-sender">+994 50 211 48 92</span>
+              <span>10:42</span>
+            </div>
+            <div class="sms-bubble">
+              Azərpoçt bildirişi: Xaricdən gələn AZ928471 bağlamanızın çatdırılma ünvanı natamamdır. Bağlamanın geri qayıtmaması üçün 12 saat ərzində ünvanı təsdiqləyin və 2.30 AZN kuryer rüsumunu ödəyin:
+              <span class="sms-bubble-link">http://azerpoct-kuryer-catdirilma.info/ode</span>
+            </div>
+            <ul class="mockup-annotations" aria-label="Dələduz mesajının təhlili">
+              <li class="mockup-note">
+                <span class="mockup-bullet">01</span>
+                <span><strong>Süni tələskənlik:</strong> "12 saat ərzində" deyərək həyəcan yaradır və düşünmədən linkə keçməyə məcbur edirlər.</span>
+              </li>
+              <li class="mockup-note">
+                <span class="mockup-bullet">02</span>
+                <span><strong>Cüzi məbləğ tələsi:</strong> 2.30 AZN xırda görünür, lakin açılan saxta səhifə kart nömrənizi və CVV kodunuzu oğurlayır.</span>
+              </li>
+              <li class="mockup-note">
+                <span class="mockup-bullet">03</span>
+                <span><strong>Saxta sayt ünvanı:</strong> "Azərpoçt"un rəsmi portalı <code>azerpost.az</code>-dır; dövlət poçtu heç vaxt naməlum <code>.info</code> domenindən SMS göndərmir.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div id="share-awareness" class="editorial-section share-awareness-section" aria-labelledby="share-awareness-heading">
       <div class="container share-awareness-container">
         <!-- Hissə 1 (Part 1: Şəkil və Mətn) -->
         <div class="share-awareness-story">
@@ -166,7 +229,7 @@
           <div class="share-result-box" id="share-result-box" data-level="safe" aria-live="polite">
             <div class="share-result-row">
               <p id="share-result-text" class="share-result-text">Heç birini seçməmisiniz. Əla, belə davam edin.</p>
-              <a href="#topics" class="share-action-link" id="share-action-link" data-target-topic="4">Nə etməli? →</a>
+              <a href="#/beledciler" class="share-action-link" id="share-action-link" data-target-topic="4">Nə etməli? →</a>
             </div>
           </div>
         </div>
@@ -217,63 +280,9 @@
         </div>
         <!-- TOOLS END -->
       </div>
-    </section>
-    <!-- SHARE AWARENESS END -->
+    </div>
 
-    <!-- Əsas Giriş Bölməsi (Hero) -->
-    <section id="hero" class="editorial-section" aria-labelledby="hero-heading">
-      <div class="container hero-grid">
-        <div class="hero-text-col">
-          <span class="hero-index">00 / Rəqəmsal Müdafiə Bələdçisi</span>
-          <h1 id="hero-heading" class="hero-headline">Dələduz sizin tələsməyinizi gözləyir. Dayanın və yoxlayın.</h1>
-          <p class="hero-lede">
-            Şəxsi məlumatlarınızı və vəsaitinizi qorumaq üçün İT mütəxəssisi olmağa ehtiyac yoxdur. Əsas qayda sadədir: kimsə sizdən tələsik SMS kod, bank kartı məlumatı və ya pul istəyirsə, 5 dəqiqə fasilə verib məlumatı rəsmi mənbədən dəqiqləşdirin.
-          </p>
-          <div class="hero-actions">
-            <a href="#topics" class="btn btn-solid">Bələdçiləri oxuyun ↓</a>
-            <a href="#quiz" class="btn btn-outline">10 real vəziyyətlə yoxlayın →</a>
-          </div>
-
-          <!-- OCTOBER CAMPAIGN START -->
-          <div class="october-hero-block" role="region" aria-labelledby="october-hero-heading">
-            <span class="october-hero-tag">Oktyabr 2026</span>
-            <h2 id="october-hero-heading" class="october-hero-title">Oktyabr Kibertəhlükəsizlik üzrə Maarifləndirmə Ayıdır</h2>
-            <p class="october-hero-desc">Hər ilin oktyabr ayında bütün dünyada insanlar rəqəmsal mühitdə təhlükəsiz qalmaq üçün vacib vərdişlərə diqqət yetirir. Bu bələdçi şəxsi hesablarınızı və məlumatlarınızı qorumağa başlamaq üçün ən münasib yerdir.</p>
-          </div>
-          <!-- OCTOBER CAMPAIGN END -->
-        </div>
-
-        <div class="hero-visual-col">
-          <div class="mockup-frame">
-            <div class="mockup-header">
-              <span class="mockup-sender">+994 50 211 48 92</span>
-              <span>10:42</span>
-            </div>
-            <div class="sms-bubble">
-              Azərpoçt bildirişi: Xaricdən gələn AZ928471 bağlamanızın çatdırılma ünvanı natamamdır. Bağlamanın geri qayıtmaması üçün 12 saat ərzində ünvanı təsdiqləyin və 2.30 AZN kuryer rüsumunu ödəyin:
-              <span class="sms-bubble-link">http://azerpoct-kuryer-catdirilma.info/ode</span>
-            </div>
-            <ul class="mockup-annotations" aria-label="Dələduz mesajının təhlili">
-              <li class="mockup-note">
-                <span class="mockup-bullet">01</span>
-                <span><strong>Süni tələskənlik:</strong> "12 saat ərzində" deyərək həyəcan yaradır və düşünmədən linkə keçməyə məcbur edirlər.</span>
-              </li>
-              <li class="mockup-note">
-                <span class="mockup-bullet">02</span>
-                <span><strong>Cüzi məbləğ tələsi:</strong> 2.30 AZN xırda görünür, lakin açılan saxta səhifə kart nömrənizi və CVV kodunuzu oğurlayır.</span>
-              </li>
-              <li class="mockup-note">
-                <span class="mockup-bullet">03</span>
-                <span><strong>Saxta sayt ünvanı:</strong> "Azərpoçt"un rəsmi portalı <code>azerpost.az</code>-dır; dövlət poçtu heç vaxt naməlum <code>.info</code> domenindən SMS göndərmir.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- OCTOBER CAMPAIGN START -->
-    <section id="october-challenge" class="editorial-section october-challenge-section" aria-labelledby="october-challenge-heading">
+<div id="october-challenge" class="editorial-section october-challenge-section" aria-labelledby="october-challenge-heading">
       <div class="container">
         <div class="section-eyebrow-row">
           <span class="section-index">★</span>
@@ -309,7 +318,7 @@
               <span class="october-week-badge">1-ci həftə</span>
               <p class="october-task-text">E-poçtunuzda və bank tətbiqlərində iki mərhələli doğrulamanı aktivləşdirin</p>
             </div>
-            <a href="#topics" class="october-topic-link" data-target-topic="2">Müvafiq bələdçi: 2FA →</a>
+            <a href="#/beledciler" class="october-topic-link" data-target-topic="2">Müvafiq bələdçi: 2FA →</a>
           </article>
 
           <article class="october-challenge-row" role="listitem">
@@ -323,7 +332,7 @@
               <span class="october-week-badge">2-ci həftə</span>
               <p class="october-task-text">Parol menecerini qurun və ən vacib 3 parolunuzu dəyişin</p>
             </div>
-            <a href="#topics" class="october-topic-link" data-target-topic="1">Müvafiq bələdçi: Parollar →</a>
+            <a href="#/beledciler" class="october-topic-link" data-target-topic="1">Müvafiq bələdçi: Parollar →</a>
           </article>
 
           <article class="october-challenge-row" role="listitem">
@@ -337,7 +346,7 @@
               <span class="october-week-badge">3-cü həftə</span>
               <p class="october-task-text">Telefon və kompüterinizi yeniləyin, ehtiyat nüsxələrinizi yoxlayın</p>
             </div>
-            <a href="#topics" class="october-topic-link" data-target-topic="7">Müvafiq bələdçi: Yenilənmələr →</a>
+            <a href="#/beledciler" class="october-topic-link" data-target-topic="7">Müvafiq bələdçi: Yenilənmələr →</a>
           </article>
 
           <article class="october-challenge-row" role="listitem">
@@ -351,15 +360,24 @@
               <span class="october-week-badge">4-cü həftə</span>
               <p class="october-task-text">Valideyn, nənə-baba və ya uşaqla yayılmış dələduzluq üsulları haqqında danışın</p>
             </div>
-            <a href="#topics" class="october-topic-link" data-target-topic="8">Müvafiq bələdçi: Ailə təhlükəsizliyi →</a>
+            <a href="#/beledciler" class="october-topic-link" data-target-topic="8">Müvafiq bələdçi: Ailə təhlükəsizliyi →</a>
           </article>
         </div>
       </div>
-    </section>
-    <!-- OCTOBER CAMPAIGN END -->
+    </div>
 
-    <!-- Bölmə 01: Niyə Vacibdir -->
-    <section id="matters" class="editorial-section" aria-labelledby="matters-heading">
+      <!-- Növbəti Səhifə Keçidi -->
+      <div class="container next-page-rule-container">
+        <a href="#/niye-vacibdir" class="next-page-rule-block">
+          <span class="next-page-rule-label">Növbəti bölmə</span>
+          <p class="next-page-rule-text">Növbəti: Niyə vacibdir →</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- SƏHİFƏ 02: Niyə vacibdir (#/niye-vacibdir) -->
+    <section data-page="/niye-vacibdir" class="view-page" id="view-matters" hidden aria-labelledby="matters-heading">
+<div id="matters" class="editorial-section" aria-labelledby="matters-heading">
       <div class="container">
         <div class="section-eyebrow-row">
           <span class="section-index">01</span>
@@ -368,7 +386,7 @@
 
         <div class="matters-layout">
           <div class="matters-aside">
-            <h2 id="matters-heading" class="section-editorial-title">Bir neçə sakit vərdiş hər şeyinizi necə qoruyur</h2>
+            <h2 id="matters-heading" class="section-editorial-title" tabindex="-1">Bir neçə sakit vərdiş hər şeyinizi necə qoruyur</h2>
             <p>Kiber cinayətlərin böyük əksəriyyəti kompüterləri qırmaqla yox, insan psixologiyasındakı tələskənlik və narahatlıq hisslərindən sui-istifadə etməklə törədilir.</p>
           </div>
 
@@ -393,10 +411,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+      <!-- Növbəti Səhifə Keçidi -->
+      <div class="container next-page-rule-container">
+        <a href="#/beledciler" class="next-page-rule-block">
+          <span class="next-page-rule-label">Növbəti bölmə</span>
+          <p class="next-page-rule-text">Növbəti: Əsas bələdçilər →</p>
+        </a>
+      </div>
     </section>
 
-    <!-- Bölmə 02: Əsas Mövzular (Akkordeon) -->
-    <section id="topics" class="editorial-section" aria-labelledby="topics-heading">
+    <!-- SƏHİFƏ 03: Əsas bələdçilər (#/beledciler) -->
+    <section data-page="/beledciler" class="view-page" id="view-topics" hidden aria-labelledby="topics-heading">
+<div id="topics" class="editorial-section" aria-labelledby="topics-heading">
       <div class="container">
         <div class="section-eyebrow-row">
           <span class="section-index">02</span>
@@ -404,7 +432,7 @@
         </div>
 
         <div class="section-editorial-header">
-          <h2 id="topics-heading" class="section-editorial-title">Doqquz əsas təhlükəsizlik ssenarisi</h2>
+          <h2 id="topics-heading" class="section-editorial-title" tabindex="-1">Doqquz əsas təhlükəsizlik ssenarisi</h2>
           <p class="section-editorial-lede">Hər bir mövzunu açaraq hadisənin mahiyyəti, əsas əlamətləri və dərhal görülməli addımlarla tanış olun.</p>
         </div>
 
@@ -437,7 +465,7 @@
         <div class="topics-accordion" role="region" aria-label="Təhlükəsizlik bələdçiləri">
 
           <!-- Mövzu 1: Fişinq -->
-          <div class="topic-row is-open">
+          <div id="topic-row-0" class="topic-row is-open">
             <button class="topic-row-trigger" type="button" aria-expanded="true">
               <span class="topic-num">01</span>
               <div class="topic-header-text">
@@ -476,7 +504,7 @@
           </div>
 
           <!-- Mövzu 2: Güclü Şifrələr -->
-          <div class="topic-row">
+          <div id="topic-row-1" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">02</span>
               <div class="topic-header-text">
@@ -515,7 +543,7 @@
           </div>
 
           <!-- Mövzu 3: İki Mərhələli Təsdiqləmə (2FA) -->
-          <div class="topic-row">
+          <div id="topic-row-2" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">03</span>
               <div class="topic-header-text">
@@ -554,7 +582,7 @@
           </div>
 
           <!-- Mövzu 4: Sosial Mühəndislik və Zənglər -->
-          <div class="topic-row">
+          <div id="topic-row-3" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">04</span>
               <div class="topic-header-text">
@@ -593,7 +621,7 @@
           </div>
 
           <!-- Mövzu 5: WhatsApp və Sosial Şəbəkələr -->
-          <div class="topic-row">
+          <div id="topic-row-4" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">05</span>
               <div class="topic-header-text">
@@ -632,7 +660,7 @@
           </div>
 
           <!-- Mövzu 6: İctimai Wi-Fi -->
-          <div class="topic-row">
+          <div id="topic-row-5" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">06</span>
               <div class="topic-header-text">
@@ -670,7 +698,7 @@
           </div>
 
           <!-- Mövzu 7: Onlayn Alış-veriş və Kartlar -->
-          <div class="topic-row">
+          <div id="topic-row-6" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">07</span>
               <div class="topic-header-text">
@@ -709,7 +737,7 @@
           </div>
 
           <!-- Mövzu 8: Yenilənmələr və Nüsxələmə -->
-          <div class="topic-row">
+          <div id="topic-row-7" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">08</span>
               <div class="topic-header-text">
@@ -748,7 +776,7 @@
           </div>
 
           <!-- Mövzu 9: Uşaqlar və Yaşlı Qohumlar -->
-          <div class="topic-row">
+          <div id="topic-row-8" class="topic-row">
             <button class="topic-row-trigger" type="button" aria-expanded="false">
               <span class="topic-num">09</span>
               <div class="topic-header-text">
@@ -793,10 +821,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+      <!-- Növbəti Səhifə Keçidi -->
+      <div class="container next-page-rule-container">
+        <a href="#/tecili-addimlar" class="next-page-rule-block">
+          <span class="next-page-rule-label">Növbəti bölmə</span>
+          <p class="next-page-rule-text">Növbəti: Təcili addımlar →</p>
+        </a>
+      </div>
     </section>
 
-    <!-- Bölmə 03: Təcili Addımlar Siyahısı -->
-    <section id="emergency" class="editorial-section" aria-labelledby="emergency-heading">
+    <!-- SƏHİFƏ 04: Təcili addımlar (#/tecili-addimlar) -->
+    <section data-page="/tecili-addimlar" class="view-page" id="view-emergency" hidden aria-labelledby="emergency-heading">
+<div id="emergency" class="editorial-section" aria-labelledby="emergency-heading">
       <div class="container">
         <div class="section-eyebrow-row">
           <span class="section-index">03</span>
@@ -894,10 +932,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+      <!-- Növbəti Səhifə Keçidi -->
+      <div class="container next-page-rule-container">
+        <a href="#/test" class="next-page-rule-block">
+          <span class="next-page-rule-label">Növbəti bölmə</span>
+          <p class="next-page-rule-text">Növbəti: Dələduz testi →</p>
+        </a>
+      </div>
     </section>
 
-    <!-- Bölmə 04: Dələduzu Tanı (Test) -->
-    <section id="quiz" class="editorial-section" aria-labelledby="quiz-heading">
+    <!-- SƏHİFƏ 05: Dələduz testi (#/test) -->
+    <section data-page="/test" class="view-page" id="view-quiz" hidden aria-labelledby="quiz-heading">
+<div id="quiz" class="editorial-section" aria-labelledby="quiz-heading">
       <div class="container">
         <div class="section-eyebrow-row">
           <span class="section-index">04</span>
@@ -905,7 +953,7 @@
         </div>
 
         <div class="section-editorial-header">
-          <h2 id="quiz-heading" class="section-editorial-title">Dələduzu tanı: 10 real həyati vəziyyət</h2>
+          <h2 id="quiz-heading" class="section-editorial-title" tabindex="-1">Dələduzu tanı: 10 real həyati vəziyyət</h2>
           <p class="section-editorial-lede">Ekranda qarşınıza çıxa biləcək real mesaj və zəngləri oxuyun, ən təhlükəsiz reaksiyanı seçin.</p>
         </div>
 
@@ -948,10 +996,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+      <!-- Növbəti Səhifə Keçidi -->
+      <div class="container next-page-rule-container">
+        <a href="#/lugat" class="next-page-rule-block">
+          <span class="next-page-rule-label">Növbəti bölmə</span>
+          <p class="next-page-rule-text">Növbəti: Lüğət →</p>
+        </a>
+      </div>
     </section>
 
-    <!-- Bölmə 05: Lüğət -->
-    <section id="glossary" class="editorial-section" aria-labelledby="glossary-heading">
+    <!-- SƏHİFƏ 06: Lüğət (#/lugat) -->
+    <section data-page="/lugat" class="view-page" id="view-glossary" hidden aria-labelledby="glossary-heading">
+<div id="glossary" class="editorial-section" aria-labelledby="glossary-heading">
       <div class="container">
         <div class="section-eyebrow-row">
           <span class="section-index">05</span>
@@ -959,7 +1017,7 @@
         </div>
 
         <div class="section-editorial-header">
-          <h2 id="glossary-heading" class="section-editorial-title">Sadə dildə kiber təhlükəsizlik lüğəti</h2>
+          <h2 id="glossary-heading" class="section-editorial-title" tabindex="-1">Sadə dildə kiber təhlükəsizlik lüğəti</h2>
           <p class="section-editorial-lede">Qəliz texniki terminlərin adi insan dilinə tərcüməsi.</p>
         </div>
 
@@ -1082,10 +1140,20 @@
           <p class="search-empty-hint">Lüğətdə bu sözə uyğun termin yoxdur. "Fişinq", "2FA" və ya "VPN" sözlərini yoxlayın.</p>
         </div>
       </div>
+    </div>
+
+      <!-- Növbəti Səhifə Keçidi -->
+      <div class="container next-page-rule-container">
+        <a href="#/qurumlar" class="next-page-rule-block">
+          <span class="next-page-rule-label">Növbəti bölmə</span>
+          <p class="next-page-rule-text">Növbəti: Rəsmi qurumlar →</p>
+        </a>
+      </div>
     </section>
 
-    <!-- Bölmə 06: Rəsmi Qurumlar -->
-    <section id="resources" class="editorial-section" aria-labelledby="resources-heading">
+    <!-- SƏHİFƏ 07: Rəsmi qurumlar (#/qurumlar) -->
+    <section data-page="/qurumlar" class="view-page" id="view-resources" hidden aria-labelledby="resources-heading">
+<div id="resources" class="editorial-section" aria-labelledby="resources-heading">
       <div class="container">
         <div class="section-eyebrow-row">
           <span class="section-index">06</span>
@@ -1093,7 +1161,7 @@
         </div>
 
         <div class="section-editorial-header">
-          <h2 id="resources-heading" class="section-editorial-title">Rəsmi müraciət və yoxlama orqanları</h2>
+          <h2 id="resources-heading" class="section-editorial-title" tabindex="-1">Rəsmi müraciət və yoxlama orqanları</h2>
           <p class="section-editorial-lede">Azərbaycan Respublikasında kiber insidentlərin bildirilməsi və təhlükəsizlik yoxlamaları üçün rəsmi resurslar.</p>
         </div>
 
@@ -1129,8 +1197,16 @@
           </a>
         </div>
       </div>
-    </section>
+    </div>
 
+      <!-- Növbəti Səhifə Keçidi -->
+      <div class="container next-page-rule-container">
+        <a href="#/" class="next-page-rule-block">
+          <span class="next-page-rule-label">Növbəti bölmə</span>
+          <p class="next-page-rule-text">Növbəti: Ana səhifə →</p>
+        </a>
+      </div>
+    </section>
   </main>
 
   <!-- Saytın Altlığı (Kolofon) -->
@@ -1145,18 +1221,19 @@
         <div>
           <h5 class="colophon-links-heading">Bölmələr</h5>
           <ul class="colophon-nav">
-            <li><a href="#matters">Niyə ehtiyatlı olmaq vacibdir</a></li>
-            <li><a href="#topics">Əsas təhlükəsizlik bələdçiləri</a></li>
-            <li><a href="#emergency">Təcili addımlar siyahısı</a></li>
-            <li><a href="#quiz">Dələduz yoxlama testi</a></li>
-            <li><a href="#glossary">Sadə dildə kiber lüğət</a></li>
+            <li><a href="#/niye-vacibdir">Niyə ehtiyatlı olmaq vacibdir</a></li>
+            <li><a href="#/beledciler">Əsas təhlükəsizlik bələdçiləri</a></li>
+            <li><a href="#/tecili-addimlar">Təcili addımlar siyahısı</a></li>
+            <li><a href="#/test">Dələduz yoxlama testi</a></li>
+            <li><a href="#/lugat">Sadə dildə kiber lüğət</a></li>
+            <li><a href="#/qurumlar">Rəsmi müraciət qurumları</a></li>
           </ul>
         </div>
       </div>
 
       <div class="colophon-bottom-row">
         <span>© <span id="copyright-year">2026</span> Kiber Savadlılıq Layihəsi. Vətəndaşların rəqəmsal təhlükəsizliyi üçün hazırlanmışdır.</span>
-        <a href="#hero" style="color: var(--text-secondary); text-decoration: none;">Yuxarı qayıt ↑</a>
+        <a href="#top" id="scroll-to-top-btn" style="color: var(--text-secondary); text-decoration: none;">Yuxarı qayıt ↑</a>
       </div>
     </div>
   </footer>
