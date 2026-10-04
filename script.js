@@ -41,22 +41,46 @@
   const mobileDrawer = document.getElementById('mobile-drawer');
 
   if (mobileToggle && mobileDrawer) {
-    mobileToggle.addEventListener('click', () => {
-      const open = mobileDrawer.classList.toggle('is-open');
-      mobileToggle.setAttribute('aria-expanded', String(open));
+    const hamburgerIcon = mobileToggle.querySelector('.hamburger-icon');
+    const closeIcon = mobileToggle.querySelector('.close-icon');
+
+    function setDrawerOpen(isOpen) {
+      if (isOpen) {
+        mobileDrawer.classList.add('is-open');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        if (hamburgerIcon) hamburgerIcon.style.display = 'none';
+        if (closeIcon) closeIcon.style.display = 'block';
+      } else {
+        mobileDrawer.classList.remove('is-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+        if (closeIcon) closeIcon.style.display = 'none';
+      }
+    }
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = mobileDrawer.classList.contains('is-open');
+      setDrawerOpen(!open);
     });
 
     mobileDrawer.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        mobileDrawer.classList.remove('is-open');
-        mobileToggle.setAttribute('aria-expanded', 'false');
+        setDrawerOpen(false);
       });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (mobileDrawer.classList.contains('is-open')) {
+        if (!mobileDrawer.contains(e.target) && !mobileToggle.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      }
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileDrawer.classList.contains('is-open')) {
-        mobileDrawer.classList.remove('is-open');
-        mobileToggle.setAttribute('aria-expanded', 'false');
+        setDrawerOpen(false);
         mobileToggle.focus();
       }
     });

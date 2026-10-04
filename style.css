@@ -163,6 +163,8 @@ img, svg, video, figure {
 }
 
 html {
+  overflow-x: hidden;
+  max-width: 100vw;
   font-family: var(--font-sans);
   font-size: 17px;
   line-height: 1.7;
@@ -185,6 +187,8 @@ html {
 }
 
 body {
+  overflow-x: hidden;
+  max-width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -988,34 +992,137 @@ button {
   width: 100%;
 }
 
-@media (max-width: 768px) {
-
+@media (max-width: 1023px) {
+  .site-header nav {
+    display: none !important;
+  }
+  .nav-actions .nav-cta-btn {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+  .site-header {
+    overflow: hidden;
+    max-width: 100vw;
+  }
   .nav-row {
-    height: 4rem;
-    min-height: 4rem;
-    gap: 0.5rem;
+    height: 64px !important;
+    min-height: 64px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
   }
-
-  .wordmark, .wordmark-text, .wordmark-dot { font-size: 22px; }
-
+  .wordmark, .wordmark-text, .wordmark-dot {
+    font-size: 22px !important;
+    white-space: nowrap !important;
+    margin-right: 0 !important;
+  }
   .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
   }
-
-  .theme-toggle-btn,
-  .theme-button {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
-    padding: 0;
+  .theme-toggle-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+  }
+  .mobile-menu-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--rule-subtle) !important;
+    background-color: var(--bg-surface) !important;
+    color: var(--text-secondary) !important;
   }
 
   .mobile-drawer {
-    padding: 1.25rem 1rem;
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100vw;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--rule-subtle);
+    box-shadow: var(--shadow-md);
+    padding: 16px;
+    box-sizing: border-box;
+    z-index: 99;
+  }
+  .mobile-drawer.is-open {
+    display: block !important;
+  }
+  .mobile-links-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .mobile-links-list li {
+    width: 100%;
+    border-bottom: 1px solid var(--rule-subtle);
+  }
+  .mobile-links-list li:last-child {
+    border-bottom: none;
+  }
+  .mobile-links-list a {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    min-height: 52px;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0 12px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+  }
+  .mobile-links-list a:hover {
+    color: var(--accent);
+    background-color: var(--bg-surface-hover);
+  }
+  .mobile-drawer-cta {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule-subtle);
+    width: 100%;
+  }
+  .mobile-drawer-cta .btn-primary {
+    width: 100% !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    justify-content: center !important;
+    font-size: 17px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  .mobile-drawer {
+    display: none !important;
   }
 }
 
@@ -2590,15 +2697,20 @@ h1,
 
 .october-progress-track {
   width: 100%;
-  height: 6px;
-  background-color: var(--bg-surface-hover);
-  border-radius: 3px;
+  height: 8px;
+  background-color: #DDE3EA;
+  border-radius: 999px;
   overflow: hidden;
+}
+
+[data-theme="dark"] .october-progress-track {
+  background-color: #232B36;
 }
 
 .october-progress-bar {
   height: 100%;
   background-color: var(--accent);
+  border-radius: 999px;
   transition: width 0.25s ease;
 }
 
