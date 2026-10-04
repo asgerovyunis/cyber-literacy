@@ -759,7 +759,7 @@
   const ROUTES = {
     '/': {
       title: 'Ana səhifə | Kiber Savadlılıq',
-      headingId: 'hero-heading'
+      headingId: 'share-awareness-heading'
     },
     '/niye-vacibdir': {
       title: 'Niyə vacibdir | Kiber Savadlılıq',
@@ -883,6 +883,17 @@
 
   // Səhifə yüklənəndə cari marşrutu işə sal
   handleRouteChange();
+
+  // Wordmark linki ana səhifədə olanda yuxarıya sürüşdürsün
+  const wordmarkLink = document.querySelector('.wordmark');
+  if (wordmarkLink) {
+    wordmarkLink.addEventListener('click', (e) => {
+      const current = parseHashRoute();
+      if (current === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
 
   // Footer yuxarı qayıt düyməsi
   const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
