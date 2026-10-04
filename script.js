@@ -12,17 +12,15 @@
 
   function getStoredTheme() {
     const saved = localStorage.getItem(THEME_KEY);
-    if (saved) return saved;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    return saved === 'dark' ? 'dark' : 'light';
   }
 
   function applyTheme(theme) {
     const isDark = theme === 'dark';
     document.documentElement.setAttribute('data-theme', theme);
     if (themeToggleBtn) {
-      themeToggleBtn.setAttribute('aria-label', isDark ? 'İşıqlı rejimə keç' : 'Qaranlıq rejimə keç');
+      themeToggleBtn.setAttribute('aria-label', 'Mövzunu dəyiş');
+      themeToggleBtn.setAttribute('title', isDark ? 'İşıqlı rejimə keç' : 'Qaranlıq rejimə keç');
       themeToggleBtn.setAttribute('aria-pressed', String(isDark));
     }
   }
@@ -35,14 +33,6 @@
       const target = current === 'dark' ? 'light' : 'dark';
       localStorage.setItem(THEME_KEY, target);
       applyTheme(target);
-    });
-  }
-
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (!localStorage.getItem(THEME_KEY)) {
-        applyTheme(e.matches ? 'dark' : 'light');
-      }
     });
   }
 
@@ -72,104 +62,132 @@
     });
   }
 
-  // 3. Əsas Mövzular Akkordeon Sistemi
-  const topicRows = document.querySelectorAll('.topic-row');
-  const btnExpandAll = document.getElementById('btn-expand-all');
-  const btnCollapseAll = document.getElementById('btn-collapse-all');
+  // 3. Əsas Bələdçilər: Kart Sistemi, Kateqoriya Filtrləri və Detallar
+  const topicCards = document.querySelectorAll('.topic-card');
+  const topicFilterTabs = document.querySelectorAll('.topics-filter-tabs .tab');
+  let currentTopicCategory = 'all';
 
-  topicRows.forEach((row) => {
-    const trigger = row.querySelector('.topic-row-trigger');
-    if (!trigger) return;
+  function filterTopicCards() {
+    const q = (topicsSearchInput ? topicsSearchInput.value : '').toLowerCase().trim();
+    let visibleCount = 0;
 
-    trigger.addEventListener('click', () => {
-      const isOpen = row.classList.contains('is-open');
-      row.classList.toggle('is-open', !isOpen);
-      trigger.setAttribute('aria-expanded', String(!isOpen));
-      const ind = row.querySelector('.topic-indicator');
-      if (ind) ind.textContent = isOpen ? '+' : '×';
+    topicCards.forEach((card) => {
+      const cat = card.getAttribute('data-category') || 'all';
+      const matchesCategory = (currentTopicCategory === 'all' || cat === currentTopicCategory);
+      const text = card.textContent.toLowerCase();
+      const matchesSearch = (!q || text.includes(q));
+
+      if (matchesCategory && matchesSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (topicsEmptyMsg) {
+      topicsEmptyMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+  }
+
+  // Pill tabs üzrə kateqoriya filtrləməsi
+  topicFilterTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      topicFilterTabs.forEach((t) => {
+        t.classList.remove('tab-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('tab-active');
+      tab.setAttribute('aria-selected', 'true');
+      currentTopicCategory = tab.getAttribute('data-filter') || 'all';
+      filterTopicCards();
     });
   });
 
-  if (btnExpandAll) {
-    btnExpandAll.addEventListener('click', () => {
-      topicRows.forEach((row) => {
-        row.classList.add('is-open');
-        const trigger = row.querySelector('.topic-row-trigger');
-        if (trigger) trigger.setAttribute('aria-expanded', 'true');
-        const ind = row.querySelector('.topic-indicator');
-        if (ind) ind.textContent = '×';
-      });
-    });
-  }
+  // Kartın "Ətraflı oxuyun" düyməsi ilə açılıb-bağlanması
+  topicCards.forEach((card) => {
+    const trigger = card.querySelector('.topic-row-trigger');
+    const drawer = card.querySelector('.topic-details-drawer');
+    const linkText = card.querySelector('.topic-link-text');
+    if (!trigger || !drawer) return;
 
-  if (btnCollapseAll) {
-    btnCollapseAll.addEventListener('click', () => {
-      topicRows.forEach((row) => {
-        row.classList.remove('is-open');
-        const trigger = row.querySelector('.topic-row-trigger');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-        const ind = row.querySelector('.topic-indicator');
-        if (ind) ind.textContent = '+';
-      });
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = card.classList.contains('is-expanded');
+      const newState = !isOpen;
+      card.classList.toggle('is-expanded', newState);
+      drawer.hidden = !newState;
+      trigger.setAttribute('aria-expanded', String(newState));
+      if (linkText) {
+        linkText.textContent = newState ? 'Təlimatı bağla' : 'Ətraflı oxuyun';
+      }
     });
-  }
+  });
 
-  // 4. Hesab Oğurlandıqda Təcili Addımlar Siyahısı
+  // 4. Hesab Oğurlandıqda Təcili Addımlar: Proqres Xətti və Status Nişanları
   const CHECKLIST_STORAGE = 'kiber-savadliliq-yoxlama-az';
-  const checkboxes = document.querySelectorAll('.check-input');
-  const progressText = document.getElementById('checklist-progress-text');
+  const emergencyCheckboxes = document.querySelectorAll('.steps-list .check-input');
+  const emergencyProgressText = document.getElementById('checklist-progress-text');
   const resetChecklistBtn = document.getElementById('btn-reset-checklist');
+  const stepsProgressFill = document.getElementById('steps-progress-fill');
 
   function updateChecklist() {
     let checkedCount = 0;
-    checkboxes.forEach((cb) => {
-      if (cb.checked) checkedCount++;
+    emergencyCheckboxes.forEach((cb) => {
+      const card = cb.closest('.step-card');
+      const badge = card ? card.querySelector('.step-status-badge') : null;
+      if (cb.checked) {
+        checkedCount++;
+        if (card) card.classList.add('is-completed');
+        if (badge) {
+          badge.className = 'badge badge-success step-status-badge';
+          badge.textContent = 'Tamamlandı';
+        }
+      } else {
+        if (card) card.classList.remove('is-completed');
+        if (badge) {
+          badge.className = 'badge badge-neutral step-status-badge';
+          badge.textContent = 'Gözləyir';
+        }
+      }
     });
 
-    if (progressText) {
-      progressText.textContent = `${checkedCount} / ${checkboxes.length} addım tamamlandı`;
+    if (emergencyProgressText) {
+      emergencyProgressText.textContent = `${checkedCount} / ${emergencyCheckboxes.length} addım tamamlandı`;
+    }
+
+    if (stepsProgressFill && emergencyCheckboxes.length > 0) {
+      const pct = (checkedCount / emergencyCheckboxes.length) * 100;
+      stepsProgressFill.style.height = `${pct}%`;
     }
 
     const indices = [];
-    checkboxes.forEach((cb, idx) => {
+    emergencyCheckboxes.forEach((cb, idx) => {
       if (cb.checked) indices.push(idx);
     });
     try {
       localStorage.setItem(CHECKLIST_STORAGE, JSON.stringify(indices));
-    } catch {
-      // Brauzer yaddaşı xətası halında
-    }
+    } catch {}
   }
 
   function loadChecklist() {
     try {
       const saved = JSON.parse(localStorage.getItem(CHECKLIST_STORAGE) || '[]');
-      checkboxes.forEach((cb, idx) => {
-        const isDone = saved.includes(idx);
-        cb.checked = isDone;
-        const parent = cb.closest('.check-item');
-        if (parent) parent.classList.toggle('is-completed', isDone);
+      emergencyCheckboxes.forEach((cb, idx) => {
+        cb.checked = saved.includes(idx);
       });
-    } catch {
-      // Ehtiyat
-    }
+    } catch {}
     updateChecklist();
   }
 
-  checkboxes.forEach((cb) => {
-    cb.addEventListener('change', () => {
-      const parent = cb.closest('.check-item');
-      if (parent) parent.classList.toggle('is-completed', cb.checked);
-      updateChecklist();
-    });
+  emergencyCheckboxes.forEach((cb) => {
+    cb.addEventListener('change', updateChecklist);
   });
 
   if (resetChecklistBtn) {
     resetChecklistBtn.addEventListener('click', () => {
-      checkboxes.forEach((cb) => {
+      emergencyCheckboxes.forEach((cb) => {
         cb.checked = false;
-        const parent = cb.closest('.check-item');
-        if (parent) parent.classList.remove('is-completed');
       });
       localStorage.removeItem(CHECKLIST_STORAGE);
       updateChecklist();
@@ -350,8 +368,15 @@
 
     const item = scenarios[idx];
 
-    if (quizCounter) quizCounter.textContent = `Vəziyyət ${idx + 1} / ${scenarios.length}`;
-    if (quizScoreBadge) quizScoreBadge.textContent = `Nəticə: ${score} / ${idx}`;
+    // Card top progress bar
+    const topBar = document.getElementById('quiz-top-progress-bar');
+    if (topBar) {
+      const pct = ((idx + 1) / scenarios.length) * 100;
+      topBar.style.width = `${pct}%`;
+    }
+
+    if (quizCounter) quizCounter.textContent = `Sual ${idx + 1} / ${scenarios.length}`;
+    if (quizScoreBadge) quizScoreBadge.textContent = `Doğru: ${score} / ${idx}`;
 
     if (quizChannelTag) quizChannelTag.textContent = item.channel;
     if (quizSituation) quizSituation.textContent = item.situation;
@@ -361,10 +386,13 @@
     }
     if (quizPrompt) quizPrompt.textContent = item.prompt;
 
-    if (quizFeedback) quizFeedback.className = 'quiz-feedback-panel';
+    if (quizFeedback) quizFeedback.className = 'quiz-feedback-box';
     if (quizNextBtn) {
       quizNextBtn.style.display = 'none';
-      quizNextBtn.textContent = idx === scenarios.length - 1 ? 'Yekun nəticəyə bax →' : 'Növbəti vəziyyət →';
+      const btnSpan = quizNextBtn.querySelector('span');
+      if (btnSpan) {
+        btnSpan.textContent = idx === scenarios.length - 1 ? 'Nəticəyə bax' : 'Növbəti sual';
+      }
     }
 
     if (quizOptionsBox) {
@@ -372,15 +400,15 @@
       const letters = ['A', 'B', 'C', 'D'];
 
       item.options.forEach((opt, optIndex) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'quiz-choice-btn';
-        btn.innerHTML = `
-          <span class="quiz-choice-marker">${letters[optIndex]}</span>
-          <span>${escapeHtml(opt)}</span>
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'quiz-option-card';
+        card.innerHTML = `
+          <span class="quiz-option-marker">${letters[optIndex]}</span>
+          <span class="quiz-option-text">${escapeHtml(opt)}</span>
         `;
-        btn.addEventListener('click', () => chooseAnswer(optIndex));
-        quizOptionsBox.appendChild(btn);
+        card.addEventListener('click', () => chooseAnswer(optIndex));
+        quizOptionsBox.appendChild(card);
       });
     }
   }
@@ -391,24 +419,32 @@
 
     if (isCorrect) score++;
 
-    if (quizScoreBadge) quizScoreBadge.textContent = `Nəticə: ${score} / ${currentIdx + 1}`;
+    if (quizScoreBadge) quizScoreBadge.textContent = `Doğru: ${score} / ${currentIdx + 1}`;
 
-    const btns = quizOptionsBox.querySelectorAll('.quiz-choice-btn');
-    btns.forEach((btn, i) => {
-      btn.disabled = true;
+    const cards = quizOptionsBox.querySelectorAll('.quiz-option-card');
+    cards.forEach((card, i) => {
+      card.disabled = true;
+      if (i === selected) {
+        card.classList.add('is-selected');
+      }
       if (i === item.correct) {
-        btn.classList.add('is-correct');
+        card.classList.add('is-correct');
       } else if (i === selected && !isCorrect) {
-        btn.classList.add('is-wrong');
+        card.classList.add('is-wrong');
       }
     });
 
     if (quizFeedback) {
-      quizFeedback.className = `quiz-feedback-panel show ${isCorrect ? 'correct' : 'wrong'}`;
+      quizFeedback.className = `quiz-feedback-box show ${isCorrect ? 'correct' : 'wrong'}`;
+      const badge = document.getElementById('feedback-badge');
+      if (badge) {
+        badge.className = isCorrect ? 'badge badge-success' : 'badge badge-danger';
+        badge.textContent = isCorrect ? '✓ Düzgün reaksiya' : '✗ Təhlükəli addım';
+      }
       if (feedbackHeadline) {
         feedbackHeadline.textContent = isCorrect
-          ? '✓ Düzgün və təhlükəsiz reaksiya'
-          : '✗ Çox təhlükəli addım!';
+          ? 'Təhlükəsiz və düzgün seçim!'
+          : 'Diqqət: bu tələyə düşmək olmaz!';
       }
       if (feedbackText) {
         feedbackText.textContent = item.explanation;
@@ -430,19 +466,72 @@
 
   function showResults() {
     if (quizCardView) quizCardView.style.display = 'none';
-    if (quizResultView) quizResultView.classList.add('show');
-
-    if (resultScoreText) {
-      resultScoreText.textContent = `${scenarios.length} sualdan ${score} düzgün cavab`;
+    if (quizResultView) {
+      quizResultView.style.display = 'flex';
+      quizResultView.classList.add('show');
     }
 
-    if (resultMessage) {
-      if (score === scenarios.length) {
-        resultMessage.textContent = 'Mükəmməl instinkt! Əksər insanları aldadan süni tələskənliyi, saxta nömrələri və şübhəli keçidləri dərhal ayırd edirsiniz. Bu bilikləri ailənizlə də bölüşün.';
-      } else if (score >= 7) {
-        resultMessage.textContent = 'Yaxşı nəticə! Əsas dələduzluq üsullarını yaxşı tanıyırsınız. Tam təhlükəsiz olmaq üçün səhv etdiyiniz ssenarilərin izahını bir daha gözdən keçirin.';
-      } else {
-        resultMessage.textContent = 'Faydalı məşq oldu. Dələduzlar bu tələləri xüsusi olaraq düşünmədən reaksiya verməyiniz üçün qururlar. Yuxarıdakı doqquz əsas bələdçini oxumaq üçün bir neçə dəqiqə ayırın.';
+    const points = Math.round((score / scenarios.length) * 100);
+
+    const score100El = document.getElementById('result-score-100');
+    if (score100El) score100El.textContent = String(points);
+
+    const scorePercentEl = document.getElementById('result-score-percent');
+    if (scorePercentEl) scorePercentEl.textContent = `${points}%`;
+
+    if (resultScoreText) {
+      resultScoreText.textContent = `${score} / ${scenarios.length}`;
+    }
+
+    // Circular gauge animation (Circumference = 2 * PI * 56 = 351.86)
+    const circleBar = document.getElementById('score-circle-bar');
+    const circumference = 351.86;
+    const offset = circumference * (1 - points / 100);
+    if (circleBar) {
+      circleBar.style.strokeDashoffset = `${offset}`;
+    }
+
+    const resultBar = document.getElementById('result-score-bar');
+    if (resultBar) {
+      resultBar.style.width = `${points}%`;
+    }
+
+    // Colored badge (Təhlükəsiz / Diqqətli ol / Risk yüksək)
+    const statusBadge = document.getElementById('result-status-badge');
+    const levelText = document.getElementById('result-level-text');
+
+    if (points >= 80) {
+      if (statusBadge) {
+        statusBadge.className = 'badge badge-success';
+        statusBadge.textContent = 'Təhlükəsiz';
+      }
+      if (levelText) levelText.textContent = 'Yüksək müdafiə';
+      if (circleBar) circleBar.style.stroke = 'var(--color-success)';
+      if (resultBar) resultBar.style.backgroundColor = 'var(--color-success)';
+      if (resultMessage) {
+        resultMessage.textContent = 'Mükəmməl instinkt! Əksər insanları aldadan süni tələskənliyi, saxta nömrələri və şübhəli keçidləri dərhal ayırd edirsiniz. Rəqəmsal müdafiə vərdişləriniz olduqca etibarlıdır.';
+      }
+    } else if (points >= 50) {
+      if (statusBadge) {
+        statusBadge.className = 'badge badge-warning';
+        statusBadge.textContent = 'Diqqətli ol';
+      }
+      if (levelText) levelText.textContent = 'Orta müdafiə';
+      if (circleBar) circleBar.style.stroke = 'var(--color-warning)';
+      if (resultBar) resultBar.style.backgroundColor = 'var(--color-warning)';
+      if (resultMessage) {
+        resultMessage.textContent = 'Yaxşı nəticə! Əsas dələduzluq üsullarını tanıyırsınız. Tam təhlükəsiz olmaq və riskləri minimuma endirmək üçün səhv etdiyiniz vəziyyətlərin izahını və əsas bələdçiləri bir daha nəzərdən keçirin.';
+      }
+    } else {
+      if (statusBadge) {
+        statusBadge.className = 'badge badge-danger';
+        statusBadge.textContent = 'Risk yüksək';
+      }
+      if (levelText) levelText.textContent = 'Kritik risk';
+      if (circleBar) circleBar.style.stroke = 'var(--color-danger)';
+      if (resultBar) resultBar.style.backgroundColor = 'var(--color-danger)';
+      if (resultMessage) {
+        resultMessage.textContent = 'Yüksək risk aşkarlandı! Dələduzlar adətən bu cür tələlərdən istifadə edərək vəsaitləri ələ keçirirlər. Şəxsi təhlükəsizliyinizi təmin etmək üçün saytdakı doqquz əsas bələdçini və təcili addımları mütləq oxuyun.';
       }
     }
   }
@@ -451,9 +540,14 @@
     quizRestartBtn.addEventListener('click', () => {
       currentIdx = 0;
       score = 0;
-      if (quizResultView) quizResultView.classList.remove('show');
+      if (quizResultView) {
+        quizResultView.style.display = 'none';
+        quizResultView.classList.remove('show');
+      }
       if (quizCardView) quizCardView.style.display = 'block';
       renderScenario(0);
+      const quizSection = document.getElementById('view-quiz');
+      if (quizSection) quizSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 
@@ -468,125 +562,97 @@
       .replace(/'/g, '&#039;');
   }
 
-  // 6. Mövzu Axtarışı (Əsas bələdçilər üzrə axtarış və filtrləmə)
-  const topicsSearchInput = document.getElementById('topics-search-input') || document.getElementById('global-search-input');
-  const topicsSearchClear = document.getElementById('topics-search-clear') || document.getElementById('global-search-clear');
-  const glossaryInput = document.getElementById('glossary-search');
-  const glossaryItems = document.querySelectorAll('.glossary-item');
-  const glossaryEmpty = document.getElementById('glossary-empty-msg');
+  // 6. Mövzu və Lüğət Axtarışı
+  const topicsSearchInput = document.getElementById('topics-search-input');
+  const topicsSearchClear = document.getElementById('topics-search-clear');
   const topicsEmptyMsg = document.getElementById('topics-empty-msg');
-  const topicsCountEl = document.querySelector('.topics-count');
-  const initialTopicsCount = topicsCountEl ? topicsCountEl.textContent : '9 əsas mövzu';
-
-  function performSearch(rawQuery) {
-    const q = (rawQuery || '').toLowerCase().trim();
-
-    // Sync input values
-    if (topicsSearchInput && topicsSearchInput.value !== rawQuery) {
-      topicsSearchInput.value = rawQuery;
-    }
-    if (glossaryInput && glossaryInput.value !== rawQuery) {
-      glossaryInput.value = rawQuery;
-    }
-
-    if (topicsSearchClear) {
-      topicsSearchClear.style.display = q ? 'flex' : 'none';
-    }
-
-    const matchedTopics = [];
-
-    // "Əsas bələdçilər" Akkordeon Bölməsini Filtrlə
-    topicRows.forEach((row, idx) => {
-      const titleEl = row.querySelector('h3');
-      const title = titleEl ? titleEl.textContent : '';
-      const text = row.textContent.toLowerCase();
-
-      if (!q) {
-        row.style.display = '';
-        // Sıfırlandıqda ilkin vəziyyətə qaytar: 1-ci mövzu açıq, qalanları bağlı
-        if (idx === 0) {
-          row.classList.add('is-open');
-          const trigger = row.querySelector('.topic-row-trigger');
-          const ind = row.querySelector('.topic-indicator');
-          if (trigger) trigger.setAttribute('aria-expanded', 'true');
-          if (ind) ind.textContent = '×';
-        } else {
-          row.classList.remove('is-open');
-          const trigger = row.querySelector('.topic-row-trigger');
-          const ind = row.querySelector('.topic-indicator');
-          if (trigger) trigger.setAttribute('aria-expanded', 'false');
-          if (ind) ind.textContent = '+';
-        }
-      } else if (text.includes(q)) {
-        row.style.display = '';
-        row.classList.add('is-open');
-        const trigger = row.querySelector('.topic-row-trigger');
-        const ind = row.querySelector('.topic-indicator');
-        if (trigger) trigger.setAttribute('aria-expanded', 'true');
-        if (ind) ind.textContent = '×';
-        matchedTopics.push({ row, title, idx });
-      } else {
-        row.style.display = 'none';
-      }
-    });
-
-    if (topicsEmptyMsg) {
-      topicsEmptyMsg.style.display = (q && matchedTopics.length === 0) ? 'block' : 'none';
-    }
-    if (topicsCountEl) {
-      if (!q) {
-        topicsCountEl.textContent = initialTopicsCount;
-      } else {
-        topicsCountEl.textContent = `${matchedTopics.length} nəticə tapıldı`;
-      }
-    }
-
-    // Lüğət Bölməsini Filtrlə
-    let matchedGlossaryCount = 0;
-    glossaryItems.forEach((item) => {
-      const text = item.textContent.toLowerCase();
-
-      if (!q) {
-        item.style.display = '';
-      } else if (text.includes(q)) {
-        item.style.display = '';
-        matchedGlossaryCount++;
-      } else {
-        item.style.display = 'none';
-      }
-    });
-
-    if (glossaryEmpty) {
-      glossaryEmpty.style.display = (q && matchedGlossaryCount === 0) ? 'block' : 'none';
-    }
-  }
 
   if (topicsSearchInput) {
-    topicsSearchInput.addEventListener('input', (e) => {
-      performSearch(e.target.value);
-    });
-  }
-
-  if (glossaryInput) {
-    glossaryInput.addEventListener('input', (e) => {
-      performSearch(e.target.value);
+    topicsSearchInput.addEventListener('input', () => {
+      if (topicsSearchClear) {
+        topicsSearchClear.style.display = topicsSearchInput.value ? 'flex' : 'none';
+      }
+      filterTopicCards();
     });
   }
 
   if (topicsSearchClear) {
     topicsSearchClear.addEventListener('click', () => {
-      performSearch('');
-      if (topicsSearchInput) topicsSearchInput.focus();
+      if (topicsSearchInput) {
+        topicsSearchInput.value = '';
+        topicsSearchInput.focus();
+      }
+      topicsSearchClear.style.display = 'none';
+      filterTopicCards();
     });
   }
 
-  // Escape düyməsi ilə axtarışı təmizlə
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (topicsSearchInput && document.activeElement === topicsSearchInput && topicsSearchInput.value) {
-        performSearch('');
+  // Lüğət üçün axtarış
+  const glossaryInput = document.getElementById('glossary-search');
+  const glossaryCards = document.querySelectorAll('.glossary-card-row');
+  const glossaryEmptyMsg = document.getElementById('glossary-empty-msg');
+  const glossaryCountEl = document.getElementById('glossary-count');
+  const totalGlossaryTerms = glossaryCards.length;
+
+  if (glossaryInput) {
+    glossaryInput.addEventListener('input', (e) => {
+      const q = (e.target.value || '').toLowerCase().trim();
+      let matchCount = 0;
+
+      glossaryCards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'flex';
+          matchCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (glossaryEmptyMsg) {
+        glossaryEmptyMsg.style.display = (q && matchCount === 0) ? 'block' : 'none';
       }
-    }
+
+      if (glossaryCountEl) {
+        glossaryCountEl.textContent = q ? `${matchCount} termin tapıldı` : `${totalGlossaryTerms} termin`;
+      }
+    });
+  }
+
+  // Rəsmi Qurumlar: Nömrəni Kopyalama Düymələri (Copy to Clipboard)
+  const copyPhoneBtns = document.querySelectorAll('.copy-phone-btn');
+  copyPhoneBtns.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const phone = btn.getAttribute('data-phone');
+      if (!phone) return;
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(phone);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = phone;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+
+        const textEl = btn.querySelector('.copy-btn-text');
+        const origText = textEl ? textEl.textContent : 'Kopyala';
+        btn.classList.add('is-copied');
+        if (textEl) textEl.textContent = 'Kopyalandı! ✓';
+
+        setTimeout(() => {
+          btn.classList.remove('is-copied');
+          if (textEl) textEl.textContent = origText;
+        }, 2000);
+      } catch (err) {
+        console.error('Kopyalama xətası:', err);
+      }
+    });
   });
 
   // 7. Avtomatik Yenilənən Müəlliflik Hüququ İli
@@ -615,13 +681,29 @@
   }
 
   function openTopicByIndex(idx) {
-    if (typeof idx === 'number' && !isNaN(idx) && allTopicRows[idx]) {
-      const row = allTopicRows[idx];
-      const trigger = row.querySelector('.topic-row-trigger');
-      const indicator = row.querySelector('.topic-indicator');
-      row.classList.add('is-open');
-      if (trigger) trigger.setAttribute('aria-expanded', 'true');
-      if (indicator) indicator.textContent = '×';
+    if (typeof idx === 'number' && !isNaN(idx)) {
+      const card = document.getElementById('topic-row-' + idx);
+      if (card) {
+        // Filtrləməni 'all' rejiminə qaytar ki, kart mütləq görünsün
+        if (currentTopicCategory !== 'all') {
+          currentTopicCategory = 'all';
+          topicFilterTabs.forEach((t) => {
+            const isAll = (t.getAttribute('data-filter') === 'all');
+            t.classList.toggle('tab-active', isAll);
+            t.setAttribute('aria-selected', String(isAll));
+          });
+          filterTopicCards();
+        }
+
+        const trigger = card.querySelector('.topic-row-trigger');
+        const drawer = card.querySelector('.topic-details-drawer');
+        const linkText = card.querySelector('.topic-link-text');
+        card.classList.add('is-expanded');
+        if (drawer) drawer.hidden = false;
+        if (trigger) trigger.setAttribute('aria-expanded', 'true');
+        if (linkText) linkText.textContent = 'Təlimatı bağla';
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   }
 
@@ -905,3 +987,60 @@
   }
 
 })();
+
+  // =========================================================================
+  // Subtle Fade-in on Scroll for Sections Only
+  // =========================================================================
+  function initSectionScrollAnimations() {
+    const sections = document.querySelectorAll('.fade-in-section, .editorial-section, .hero-section');
+    if (!sections.length) return;
+
+    // Check reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      sections.forEach((sec) => sec.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -20px 0px'
+      }
+    );
+
+    sections.forEach((sec) => {
+      sec.classList.add('fade-in-section');
+      // If already in viewport on load, show immediately
+      const rect = sec.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        sec.classList.add('is-visible');
+      }
+      observer.observe(sec);
+    });
+
+    // When route changes, ensure sections in newly active view are observed & revealed
+    window.addEventListener('hashchange', () => {
+      setTimeout(() => {
+        const activeView = document.querySelector('section[data-page]:not([hidden])');
+        if (activeView) {
+          const viewSections = activeView.querySelectorAll('.fade-in-section, .editorial-section');
+          viewSections.forEach((s) => {
+            const rect = s.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              s.classList.add('is-visible');
+            }
+          });
+        }
+      }, 50);
+    });
+  }
+
+  initSectionScrollAnimations();

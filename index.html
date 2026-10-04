@@ -15,11 +15,10 @@
   <meta name="twitter:title" content="Kiber Savadlılıq — Hər kəs üçün rəqəmsal təhlükəsizlik bələdçisi">
   <meta name="twitter:description" content="Sadə dildə rəqəmsal təhlükəsizlik, dələduzluq üsulları və hesabların qorunması üzrə praktiki bələdçi.">
 
-  <!-- Google Fonts: Newsreader (Azərbaycan ə, ı, ğ, ş, ç, ö, ü hərfləri dəstəyi ilə) -->
+  <!-- Google Fonts: Manrope (Azərbaycan ə, ı, ğ, ş, ç, ö, ü hərfləri dəstəyi ilə) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&subset=latin,latin-ext&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&subset=latin,latin-ext&display=swap" rel="stylesheet">
 
 
     <noscript>
@@ -33,6 +32,16 @@
       }
     </style>
   </noscript>
+    <!-- Avoid theme flash before stylesheet renders (Light mode default for first-time visitors) -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('kiber-savadliliq-tema');
+        var theme = saved === 'dark' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./script.js"></script>
 </head>
@@ -62,7 +71,7 @@
   <header class="site-header" role="banner">
     <div class="container nav-row">
       <a href="#/" class="wordmark" aria-label="Kiber Savadlılıq ana səhifə">
-        Kiber Savadlılıq<span class="wordmark-period">.</span>
+        <span class="wordmark-text">Kiber Savadlılıq</span><span class="wordmark-dot" aria-hidden="true">.</span>
       </a>
 
       <nav aria-label="Əsas naviqasiya">
@@ -77,6 +86,30 @@
       </nav>
 
       <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Mövzunu dəyiş">
+          <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <a href="#/test" class="btn btn-primary nav-cta-btn">
+          Testə başla
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
 
         <button id="mobile-toggle" class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Naviqasiya menyusunu aç">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -98,6 +131,9 @@
         <li><a href="#/lugat">Sadə dildə kiber lüğət</a></li>
         <li><a href="#/qurumlar">Rəsmi müraciət qurumları</a></li>
       </ul>
+      <div class="mobile-drawer-cta" style="margin-top: 1rem;">
+        <a href="#/test" class="btn btn-primary" style="width: 100%; justify-content: center;">Testə başla →</a>
+      </div>
     </div>
   </header>
 
@@ -222,17 +258,34 @@
       </div>
     </div>
 
-<div id="hero" class="editorial-section" aria-labelledby="hero-heading">
+<div id="hero" class="editorial-section hero-section" aria-labelledby="hero-heading">
       <div class="container hero-grid">
         <div class="hero-text-col">
-          <span class="hero-index">Rəqəmsal Müdafiə Bələdçisi</span>
+          <div class="hero-badge-wrap">
+            <span class="badge badge-neutral hero-badge">
+              <span class="badge-dot" aria-hidden="true"></span>
+              Rəqəmsal Müdafiə Bələdçisi
+            </span>
+          </div>
           <h1 id="hero-heading" class="hero-headline" tabindex="-1">Dələduz sizin tələsməyinizi gözləyir. Dayanın və yoxlayın.</h1>
           <p class="hero-lede">
             Şəxsi məlumatlarınızı və vəsaitinizi qorumaq üçün İT mütəxəssisi olmağa ehtiyac yoxdur. Əsas qayda sadədir: kimsə sizdən tələsik SMS kod, bank kartı məlumatı və ya pul istəyirsə, 5 dəqiqə fasilə verib məlumatı rəsmi mənbədən dəqiqləşdirin.
           </p>
           <div class="hero-actions">
-            <a href="#/beledciler" class="btn btn-solid">Bələdçiləri oxuyun ↓</a>
-            <a href="#/test" class="btn btn-outline">10 real vəziyyətlə yoxlayın →</a>
+            <a href="#/beledciler" class="btn btn-primary">
+              Bələdçiləri oxuyun
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </a>
+            <a href="#/test" class="btn btn-secondary">
+              10 real vəziyyətlə yoxlayın
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
 
           <!-- OCTOBER CAMPAIGN START -->
@@ -245,24 +298,80 @@
         </div>
 
         <div class="hero-visual-col">
-          <div class="mockup-frame">
-            <div class="mockup-header">
-              <span class="mockup-sender">+994 50 211 48 92</span>
-              <span>10:42</span>
+          <div class="sms-card card">
+            <!-- Göndərən məlumatı (Sender row) -->
+            <div class="sms-card-header">
+              <div class="sms-sender-info">
+                <div class="icon-box icon-box-neutral sms-sender-avatar" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="sms-sender-name">+994 50 211 48 92</div>
+                  <div class="sms-sender-meta">Gələn SMS Bildirişi • 10:42</div>
+                </div>
+              </div>
+              <span class="badge badge-danger">
+                <span class="badge-dot badge-dot-danger" aria-hidden="true"></span>
+                Şübhəli
+              </span>
             </div>
+
+            <!-- Mesaj köpüyü (Message bubble) -->
             <div class="sms-bubble">
               Azərpoçt bildirişi: Xaricdən gələn AZ928471 bağlamanızın çatdırılma ünvanı natamamdır. Bağlamanın geri qayıtmaması üçün 12 saat ərzində ünvanı təsdiqləyin və 2.30 AZN kuryer rüsumunu ödəyin:
               <span class="sms-bubble-link">http://azerpoct-kuryer-catdirilma.info/ode</span>
             </div>
-            <ul class="mockup-annotations" aria-label="Dələduz mesajının təhlili">
-              <li class="mockup-note">
-                <span><strong>Süni tələskənlik:</strong> "12 saat ərzində" deyərək həyəcan yaradır və düşünmədən linkə keçməyə məcbur edirlər.</span>
+
+            <!-- Təhlükə / Risk metri (Risk meter progress bar) -->
+            <div class="sms-risk-meter">
+              <div class="sms-risk-header">
+                <span class="sms-risk-label">Təhlükə dərəcəsi</span>
+                <span class="sms-risk-value">Yüksək Risk (94%)</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100" aria-label="Təhlükə dərəcəsi">
+                <div class="progress-bar progress-bar-danger" style="width: 94%;"></div>
+              </div>
+            </div>
+
+            <!-- 3 Flagged Items with Icon-Box Icons -->
+            <ul class="sms-flagged-list" aria-label="Dələduz mesajının təhlili">
+              <li class="sms-flagged-item">
+                <div class="icon-box icon-box-danger sms-flag-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="sms-flagged-text">
+                  <strong>Süni tələskənlik:</strong> "12 saat ərzində" deyərək həyəcan yaradır və düşünmədən linkə keçməyə məcbur edirlər.
+                </div>
               </li>
-              <li class="mockup-note">
-                <span><strong>Cüzi məbləğ tələsi:</strong> 2.30 AZN xırda görünür, lakin açılan saxta səhifə kart nömrənizi və CVV kodunuzu oğurlayır.</span>
+
+              <li class="sms-flagged-item">
+                <div class="icon-box icon-box-danger sms-flag-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                  </svg>
+                </div>
+                <div class="sms-flagged-text">
+                  <strong>Cüzi məbləğ tələsi:</strong> 2.30 AZN xırda görünür, lakin açılan saxta səhifə kart nömrənizi və CVV kodunuzu oğurlayır.
+                </div>
               </li>
-              <li class="mockup-note">
-                <span><strong>Saxta sayt ünvanı:</strong> "Azərpoçt"un rəsmi portalı <code>azerpost.az</code>-dır; dövlət poçtu heç vaxt naməlum <code>.info</code> domenindən SMS göndərmir.</span>
+
+              <li class="sms-flagged-item">
+                <div class="icon-box icon-box-danger sms-flag-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                </div>
+                <div class="sms-flagged-text">
+                  <strong>Saxta sayt ünvanı:</strong> "Azərpoçt"un rəsmi portalı <code>azerpost.az</code>-dır; dövlət poçtu heç vaxt naməlum <code>.info</code> domenindən SMS göndərmir.
+                </div>
               </li>
             </ul>
           </div>
@@ -358,39 +467,92 @@
       </div>
     </section>
 
-    <!-- Səhifə: Niyə vacibdir (#/niye-vacibdir) -->
+        <!-- Səhifə: Niyə vacibdir (#/niye-vacibdir) -->
     <section data-page="/niye-vacibdir" class="view-page" id="view-matters" hidden aria-labelledby="matters-heading">
-<div id="matters" class="editorial-section" aria-labelledby="matters-heading">
-      <div class="container">
-        <div class="section-eyebrow-row">
-          <span class="section-category">Əsas Həqiqət</span>
-        </div>
-
-        <div class="matters-layout">
-          <div class="matters-aside">
-            <h2 id="matters-heading" class="section-editorial-title" tabindex="-1">Bir neçə sakit vərdiş hər şeyinizi necə qoruyur</h2>
-            <p>Kiber cinayətlərin böyük əksəriyyəti kompüterləri qırmaqla yox, insan psixologiyasındakı tələskənlik və narahatlıq hisslərindən sui-istifadə etməklə törədilir.</p>
+      <div id="matters" class="editorial-section fade-in-section">
+        <div class="container">
+          <div class="section-modern-header">
+            <span class="badge badge-neutral section-badge-label">
+              <span class="badge-dot" aria-hidden="true"></span>
+              Əsas Həqiqət
+            </span>
+            <h2 id="matters-heading" class="section-modern-title" tabindex="-1">Bir neçə sakit vərdiş hər şeyinizi necə qoruyur</h2>
+            <p class="section-modern-subtitle">Kiber cinayətlərin böyük əksəriyyəti kompüterləri qırmaqla yox, insan psixologiyasındakı tələskənlik və narahatlıq hisslərindən sui-istifadə etməklə törədilir.</p>
           </div>
 
-          <div class="matters-rows">
-            <article class="matter-row">
-              <h3 class="matter-heading">Şəxsi məlumatlar köhnəlmir</h3>
-              <p class="matter-text">Şifrəni bir neçə saniyəyə yeniləmək mümkündür. Lakin FİN kodunuz, şəxsiyyət vəsiqənizin seriyası və ünvanınız dəyişmir. Bu məlumatlar sızarsa, illərlə adınıza kredit və ya qeydiyyat cəhdləri edilə bilər.</p>
+          <div class="stat-cards-grid">
+            <!-- Kart 1: İnsan Faktoru -->
+            <article class="card stat-card">
+              <div class="stat-card-top">
+                <div class="icon-box icon-box-warning" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                </div>
+                <span class="badge badge-warning">Kritik amil</span>
+              </div>
+              <div class="stat-value">90%+</div>
+              <h3 class="stat-heading">İnsan faktoru tələsi</h3>
+              <p class="stat-desc">Kiber cinayətlərin böyük əksəriyyəti kompüterləri qırmaqla yox, insan psixologiyasındakı tələskənlik və narahatlıq hisslərindən sui-istifadə etməklə törədilir.</p>
             </article>
 
-            <article class="matter-row">
-              <h3 class="matter-heading">Oğurlanmış hesab qohumlarınızı hədəf alır</h3>
-              <p class="matter-text">WhatsApp və ya e-poçtunuz ələ keçdikdə dələduzlar sizin adınızdan valideynlərinizə, övladlarınıza və dostlarınıza yazaraq "təcili xəstəxanadayam, karta pul atın" deyə pul tələb edirlər.</p>
+            <!-- Kart 2: Şəxsi məlumatlar köhnəlmir -->
+            <article class="card stat-card">
+              <div class="stat-card-top">
+                <div class="icon-box icon-box-danger" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                    <circle cx="9" cy="10" r="2"></circle>
+                    <line x1="15" y1="8" x2="17" y2="8"></line>
+                    <line x1="15" y1="12" x2="17" y2="12"></line>
+                    <line x1="7" y1="16" x2="17" y2="16"></line>
+                  </svg>
+                </div>
+                <span class="badge badge-danger">Daimi risk</span>
+              </div>
+              <div class="stat-value">1 dəfə</div>
+              <h3 class="stat-heading">Şəxsi məlumatlar köhnəlmir</h3>
+              <p class="stat-desc">Şifrəni bir neçə saniyəyə yeniləmək mümkündür. Lakin FİN kodunuz, şəxsiyyət vəsiqənizin seriyası və ünvanınız dəyişmir. Bu məlumatlar sızarsa, illərlə adınıza kredit və ya qeydiyyat cəhdləri edilə bilər.</p>
             </article>
 
-            <article class="matter-row">
-              <h3 class="matter-heading">Geri qaytarılması mümkünsüz köçürmələr</h3>
-              <p class="matter-text">Rəsmi kart ödənişlərində etiraz (chargeback) hüququ olsa da, dələduza edilən kartdan-karta (C2C) köçürmələr saniyələr içində nağdlaşdırılır və geri qaytarılması son dərəcə çətin olur.</p>
+            <!-- Kart 3: Oğurlanmış hesab qohumları hədəf alır -->
+            <article class="card stat-card">
+              <div class="stat-card-top">
+                <div class="icon-box icon-box-danger" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <span class="badge badge-danger">Zəncirvari təsir</span>
+              </div>
+              <div class="stat-value">80%</div>
+              <h3 class="stat-heading">Oğurlanmış hesab qohumları hədəfləyir</h3>
+              <p class="stat-desc">WhatsApp və ya e-poçtunuz ələ keçdikdə dələduzlar sizin adınızdan valideynlərinizə, övladlarınıza və dostlarınıza yazaraq "təcili xəstəxanadayam, karta pul atın" deyə pul tələb edirlər.</p>
+            </article>
+
+            <!-- Kart 4: Geri qaytarılması mümkünsüz köçürmələr -->
+            <article class="card stat-card">
+              <div class="stat-card-top">
+                <div class="icon-box icon-box-neutral" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                  </svg>
+                </div>
+                <span class="badge badge-neutral">Geri qaytarılmır</span>
+              </div>
+              <div class="stat-value">0 AZN</div>
+              <h3 class="stat-heading">Geri qaytarılması mümkünsüz köçürmə</h3>
+              <p class="stat-desc">Rəsmi kart ödənişlərində etiraz (chargeback) hüququ olsa da, dələduza edilən kartdan-karta (C2C) köçürmələr saniyələr içində nağdlaşdırılır və geri qaytarılması son dərəcə çətin olur.</p>
             </article>
           </div>
         </div>
       </div>
-    </div>
 
       <!-- Növbəti Səhifə Keçidi -->
       <div class="container next-page-rule-container">
@@ -401,396 +563,521 @@
       </div>
     </section>
 
-    <!-- Səhifə: Əsas bələdçilər (#/beledciler) -->
+        <!-- Səhifə: Əsas bələdçilər (#/beledciler) -->
     <section data-page="/beledciler" class="view-page" id="view-topics" hidden aria-labelledby="topics-heading">
-<div id="topics" class="editorial-section" aria-labelledby="topics-heading">
-      <div class="container">
-        <div class="section-eyebrow-row">
-          <span class="section-category">Təlimat Kitabçası</span>
-        </div>
-
-        <div class="section-editorial-header">
-          <h2 id="topics-heading" class="section-editorial-title" tabindex="-1">Doqquz əsas təhlükəsizlik ssenarisi</h2>
-          <p class="section-editorial-lede">Hər bir mövzunu açaraq hadisənin mahiyyəti, əsas əlamətləri və dərhal görülməli addımlarla tanış olun.</p>
-        </div>
-
-        <!-- Mövzu Axtarışı -->
-        <div class="topics-search-section">
-          <label for="topics-search-input" class="topics-search-label">Axtarış</label>
-          <div class="topics-search-box">
-            <svg class="topics-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="search" id="topics-search-input" class="topics-search-input" placeholder="Mövzu axtarın..." aria-label="Mövzu axtarın" autocomplete="off" spellcheck="false">
-            <button id="topics-search-clear" class="topics-search-clear" type="button" aria-label="Axtarışı təmizlə" style="display: none;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
+      <div id="topics" class="editorial-section fade-in-section">
+        <div class="container">
+          <div class="section-modern-header">
+            <span class="badge badge-neutral section-badge-label">
+              <span class="badge-dot" aria-hidden="true"></span>
+              Təlimat Kitabçası
+            </span>
+            <h2 id="topics-heading" class="section-modern-title" tabindex="-1">Doqquz əsas təhlükəsizlik ssenarisi</h2>
+            <p class="section-modern-subtitle">Hər bir mövzunu açaraq hadisənin mahiyyəti, əsas əlamətləri və dərhal görülməli addımlarla tanış olun.</p>
           </div>
-        </div>
 
-        <div class="topics-toolbar-row">
-          <span class="topics-count">9 əsas mövzu</span>
-          <div class="topics-toggle-btns">
-            <button id="btn-expand-all" type="button" class="btn-text-action">Hamısını aç</button>
-            <button id="btn-collapse-all" type="button" class="btn-text-action">Hamısını bağla</button>
-          </div>
-        </div>
+          <!-- Pill Tabs Category Filter + Search Box -->
+          <div class="topics-filter-bar">
+            <div class="tabs topics-filter-tabs" role="tablist" aria-label="Bələdçi kateqoriyaları">
+              <button type="button" class="tab tab-active" data-filter="all" role="tab" aria-selected="true">Hamısı (9)</button>
+              <button type="button" class="tab" data-filter="traps" role="tab" aria-selected="false">Tələlər və Zənglər</button>
+              <button type="button" class="tab" data-filter="accounts" role="tab" aria-selected="false">Hesab və Şifrə</button>
+              <button type="button" class="tab" data-filter="payments" role="tab" aria-selected="false">Ödəniş və Kart</button>
+              <button type="button" class="tab" data-filter="devices" role="tab" aria-selected="false">Cihaz və Ailə</button>
+            </div>
 
-        <div class="topics-accordion" role="region" aria-label="Təhlükəsizlik bələdçiləri">
-
-          <!-- Mövzu 1: Fişinq -->
-          <div id="topic-row-0" class="topic-row is-open">
-            <button class="topic-row-trigger" type="button" aria-expanded="true">
-              <div class="topic-header-text">
-                <h3>Fişinq (saxta SMS bildirişləri, aldadıcı e-poçtlar və saxta keçidlər)</h3>
-                <p>Poçt bağlaması, bank xəbərdarlığı və ya kommunal borc adı ilə göndərilən tələ linkləri.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Sizə Azərpoçt, bankınız və ya vergi orqanı adından təcili mesaj gəlir. Bağlamanızın saxlanıldığı və ya kartınızın bloklandığı iddia edilir. Daxil edilən link isə bank kartı məlumatlarınızı oğurlamaq üçün qurulmuş saxta surətdir.</p>
-                </div>
-                <div class="topic-col">
-                  <h4>Əsas şübhəli əlamətlər</h4>
-                  <ul>
-                    <li>Süni tələskənlik: "2 saat ərzində təsdiqləməsəniz, hesabınız ləğv ediləcək!"</li>
-                    <li>Göndərən adı şirkət kimi görünsə də, arxasındakı nömrə adi xarici və ya naməlum mobil nömrədir.</li>
-                    <li>Rəsmi saytın hərflərini dəyişərək saxtalaşdırılmış domenlər (məsələn, <code>kapitalbank-odenis24.info</code>).</li>
-                  </ul>
-                </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Gözlənilmədən gələn mesajlardakı keçidlərə heç vaxt daxil olmayın.</li>
-                    <li>Brauzerdə həmin qurumun rəsmi tətbiqini və ya saytını birbaşa özünüz açıb yoxlayın.</li>
-                    <li>Şübhəli SMS-i "Spam" olaraq qeyd edib silin, nömrəyə cavab yazmayın.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Rəsmi təşkilatlar məlumatı rəsmi saytından yoxlamaq üçün 5 dəqiqə vaxt ayırdığınıza görə sizə heç vaxt cərimə tətbiq etməz.
+            <div class="topics-search-mini">
+              <div class="topics-search-box">
+                <svg class="topics-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="search" id="topics-search-input" class="topics-search-input" placeholder="Bələdçilərdə axtarın..." aria-label="Bələdçilərdə axtarın" autocomplete="off" spellcheck="false">
+                <button id="topics-search-clear" class="topics-search-clear" type="button" aria-label="Axtarışı təmizlə" style="display: none;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
 
-          <!-- Mövzu 2: Güclü Şifrələr -->
-          <div id="topic-row-1" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>Şifrə-ifadələri və şifrə menecerləri</h3>
-                <p>Onlarla mürəkkəb kombinasiyanı əzbərləmədən etibarlı giriş yaratmağın ən asan yolu.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Eyni şifrəni hər yerdə istifadə etdikdə, qeydiyyatdan keçdiyiniz sadə bir forumdan sızan şifrə ilə dələduzlar dərhal əsas e-poçtunuzu, sosial şəbəkələrinizi və bank tətbiqlərinizi açmağa cəhd edirlər.</p>
-                </div>
-                <div class="topic-col">
-                  <h4>Zəif vərdişlər</h4>
-                  <ul>
-                    <li>Ad, doğum ili, uşaqların və ya ev heyvanlarının adından ibarət şifrələr.</li>
-                    <li>Bir şifrənin kiçik dəyişiklikləri (məsələn: <code>Baki2025!</code> və <code>Baki2026!</code>).</li>
-                    <li>Şifrələri monitorda yapışqanlı kağızda və ya telefondakı qeydlər bölməsində saxlamaq.</li>
-                  </ul>
-                </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Şifrə-ifadələri qurun: bir-biri ilə əlaqəsi olmayan 4-5 sözü birləşdirin (məsələn: <code>qarpiz-durna-sahil-bulaq</code>).</li>
-                    <li>Etibarlı şifrə menecerindən (Bitwarden, Apple Keychain və ya Google Şifrə Meneceri) istifadə edin.</li>
-                    <li>Sizə yalnız şifrə menecerinizin bir əsas açar şifrəsini yadda saxlamaq kifayətdir.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Şifrənin uzunluğu onun qəlizliyindən daha önəmlidir. Sözlərdən ibarət uzun şifrəni proqramların tapması onilliklər tələb edir.
-              </div>
-            </div>
-          </div>
+          <div class="topics-cards-grid" role="region" aria-label="Təhlükəsizlik bələdçiləri">
 
-          <!-- Mövzu 3: İki Mərhələli Təsdiqləmə (2FA) -->
-          <div id="topic-row-2" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>İki mərhələli təsdiqləmə (2FA)</h3>
-                <p>Şifrəniz oğurlansa belə, kənar şəxslərin hesaba girməsinin qarşısını alan ikinci qıfıl.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>İki mərhələli təsdiqləmə (2FA) hesaba giriş üçün iki sübut tələb edir: bildiyiniz şey (şifrəniz) və sahib olduğunuz şey (fiziki telefonunuza gələn təsdiq və ya autentifikator kodu).</p>
+            <!-- Mövzu 1: Fişinq -->
+            <article class="card topic-card" id="topic-row-0" data-category="traps" data-topic-index="0">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-danger" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
                 </div>
-                <div class="topic-col">
-                  <h4>Niyə mütləq lazımdır?</h4>
-                  <ul>
-                    <li>Şifrəniz internetə sızsa belə, telefonunuz olmadan heç kim hesabınıza daxil ola bilməz.</li>
-                    <li>Avtomatlaşdırılmış kiber hücumların 99%-i sadəcə 2FA açıq olduqda tamamilə zərərsizləşir.</li>
-                    <li>Telefonunuza gözlənilmədən təsdiq kodu gəlirsə, deməli kimsə şifrənizi yoxlayır.</li>
-                  </ul>
+                <span class="badge badge-neutral topic-tag-badge">Tələlər</span>
+              </div>
+              <h3 class="topic-card-title">Fişinq (saxta SMS, e-poçt və keçidlər)</h3>
+              <p class="topic-card-desc">Poçt bağlaması, bank xəbərdarlığı və ya kommunal borc adı ilə göndərilən tələ linkləri.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-0">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-0" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Sizə Azərpoçt, bankınız və ya vergi orqanı adından təcili mesaj gəlir. Bağlamanızın saxlanıldığı və ya kartınızın bloklandığı iddia edilir. Daxil edilən link isə bank kartı məlumatlarınızı oğurlamaq üçün qurulmuş saxta surətdir.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Əsas şübhəli əlamətlər</h4>
+                    <ul>
+                      <li>Süni tələskənlik: "2 saat ərzində təsdiqləməsəniz, hesabınız ləğv ediləcək!"</li>
+                      <li>Göndərən adı şirkət kimi görünsə də, arxasındakı nömrə adi xarici və ya naməlum mobil nömrədir.</li>
+                      <li>Rəsmi saytın hərflərini dəyişərək saxtalaşdırılmış domenlər (məsələn, <code>kapitalbank-odenis24.info</code>).</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Gözlənilmədən gələn mesajlardakı keçidlərə heç vaxt daxil olmayın.</li>
+                      <li>Brauzerdə həmin qurumun rəsmi tətbiqini və ya saytını birbaşa özünüz açıb yoxlayın.</li>
+                      <li>Şübhəli SMS-i "Spam" olaraq qeyd edib silin, nömrəyə cavab yazmayın.</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Əsas e-poçtunuzda (Gmail, Outlook və s.), WhatsApp və bank tətbiqlərində 2FA-nı aktivləşdirin.</li>
-                    <li>Mümkün olduqda SMS yerinə autentifikator tətbiqindən (Google Authenticator) istifadə edin.</li>
-                    <li>Sistem tərəfindən verilən ehtiyat bərpa kodlarını dəftərə qeyd edib evdə təhlükəsiz yerdə saxlayın.</li>
-                  </ul>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Rəsmi təşkilatlar məlumatı rəsmi saytından yoxlamaq üçün 5 dəqiqə vaxt ayırdığınıza görə sizə heç vaxt cərimə tətbiq etməz.
                 </div>
               </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Telefonunuza gələn birdəfəlik təsdiq kodunu telefon zəngində heç kimə deməyin. Heç bir bank əməkdaşı bu kodu sizdən istəyə bilməz.
-              </div>
-            </div>
-          </div>
+            </article>
 
-          <!-- Mövzu 4: Sosial Mühəndislik və Zənglər -->
-          <div id="topic-row-3" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>Sosial mühəndislik və saxta telefon zəngləri</h3>
-                <p>"Bankın təhlükəsizlik xidmətindən zəng edirik" və "Qohumunuz qəzaya düşüb" ssenariləri.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Sosial mühəndislik texnologiyanı yox, insan emosiyalarını hədəf alır. Dələduzlar qorxu, həyəcan və ya hörmət hisslərindən istifadə edərək sizi təcili pul köçürməyə və ya kart məlumatlarınızı verməyə inandırırlar.</p>
+            <!-- Mövzu 2: Güclü Şifrələr -->
+            <article class="card topic-card" id="topic-row-1" data-category="accounts" data-topic-index="1">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-warning" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="8" cy="15" r="4"></circle>
+                    <line x1="10.85" y1="12.15" x2="19" y2="4"></line>
+                    <line x1="18" y1="5" x2="20" y2="7"></line>
+                    <line x1="15" y1="8" x2="17" y2="10"></line>
+                  </svg>
                 </div>
-                <div class="topic-col">
-                  <h4>Əsas şübhəli əlamətlər</h4>
-                  <ul>
-                    <li>Nömrə saxtalaşdırması: Ekranda bankın və ya polis şöbəsinin nömrəsi görünsə də, xətt dələduzlar tərəfindən manipulyasiya edilmiş ola bilər.</li>
-                    <li>Dəstəyi asmamaq tələbi: "Dəstəyi asmayın, bank əməkdaşlarına heç nə demədən pulu nağdlaşdırıb dediyimiz hesaba göndərin."</li>
-                    <li>Təcili bədbəxt hadisə nağılı: "Nəvəniz qəza törədib, həbs olunmaması üçün kuryerlə pul göndərməlisiniz."</li>
-                  </ul>
+                <span class="badge badge-neutral topic-tag-badge">Şifrələr</span>
+              </div>
+              <h3 class="topic-card-title">Şifrə-ifadələri və şifrə menecerləri</h3>
+              <p class="topic-card-desc">Onlarla mürəkkəb kombinasiyanı əzbərləmədən etibarlı giriş yaratmağın ən asan yolu.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-1">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-1" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Eyni şifrəni hər yerdə istifadə etdikdə, qeydiyyatdan keçdiyiniz sadə bir forumdan sızan şifrə ilə dələduzlar dərhal əsas e-poçtunuzu, sosial şəbəkələrinizi və bank tətbiqlərinizi açmağa cəhd edirlər.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Zəif vərdişlər</h4>
+                    <ul>
+                      <li>Ad, doğum ili, uşaqların və ya ev heyvanlarının adından ibarət şifrələr.</li>
+                      <li>Bir şifrənin kiçik dəyişiklikləri (məsələn: <code>Baki2025!</code> və <code>Baki2026!</code>).</li>
+                      <li>Şifrələri monitorda yapışqanlı kağızda və ya telefondakı qeydlər bölməsində saxlamaq.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Şifrə-ifadələri qurun: bir-biri ilə əlaqəsi olmayan 4-5 sözü birləşdirin (məsələn: <code>qarpiz-durna-sahil-bulaq</code>).</li>
+                      <li>Etibarlı şifrə menecerindən (Bitwarden, Apple Keychain və ya Google Şifrə Meneceri) istifadə edin.</li>
+                      <li>Sizə yalnız şifrə menecerinizin bir əsas açar şifrəsini yadda saxlamaq kifayətdir.</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Dərhal zəngi sonlandırın. Naməlum şəxsin zəngini dayandırmaqda heç bir ədəbsizlik yoxdur.</li>
-                    <li>Bank kartınızın arxasında yazılmış rəsmi qaynar xətt nömrəsinə özünüz zəng edin.</li>
-                    <li>Ailənizlə gizli təhlükəsizlik parolu müəyyən edin; belə zənglərdə həmin parolu soruşun.</li>
-                  </ul>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Şifrənin uzunluğu onun mürəkkəbliyindən daha önəmlidir. Dörd fərqli adi sözdən ibarət ifadə sındırılması ən çətin şifrədir.
                 </div>
               </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Polis və ya rəsmi orqanlar cinayət işini bağlamaq və ya xilas etmək adı ilə kuryer göndərib nağd pul tələb etməz.
-              </div>
-            </div>
-          </div>
+            </article>
 
-          <!-- Mövzu 5: WhatsApp və Sosial Şəbəkələr -->
-          <div id="topic-row-4" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>WhatsApp və sosial şəbəkə dələduzluğu</h3>
-                <p>"Salam ana, nömrəm xarab oldu" mesajları, klonlaşdırılmış profillər və tələ linklər.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Dələduzlar naməlum nömrədən övladınızın adından yazıb telefonunun suya düşdüyünü deyir, borc ödəmək üçün təcili karta pul köçürməyinizi xahiş edirlər. Yaxud dostunuzun sındırılmış profilindən "Bu videodakı sənsən?" deyə viruslu link göndərilir.</p>
+            <!-- Mövzu 3: İki Mərhələli Təsdiqləmə (2FA) -->
+            <article class="card topic-card" id="topic-row-2" data-category="accounts" data-topic-index="2">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-success" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                  </svg>
                 </div>
-                <div class="topic-col">
-                  <h4>Əsas şübhəli əlamətlər</h4>
-                  <ul>
-                    <li>"Salam ata, bu mənim müvəqqəti nömrəmdir, təcili karta 150 manat göndərə bilərsən?" tipli israrlı mesajlar.</li>
-                    <li>"Səhvən sizin nömrəyə 6 rəqəmli kod getdi, zəhmət olmasa onu mənə göndərin" xahişi (Bu, WhatsApp hesabınızı ələ keçirmək cəhdidir!).</li>
-                    <li>Tanışınızın profilindən qəfil "sərfəli investisiya" və ya "kriptovalyuta qazancı" təklifləri.</li>
-                  </ul>
+                <span class="badge badge-success">Müdafiə</span>
+              </div>
+              <h3 class="topic-card-title">İki mərhələli təsdiqləmə (2FA)</h3>
+              <p class="topic-card-desc">Şifrəniz oğurlansa belə, hesabınızı qoruyan ən güclü ikinci qapı kilidi.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-2">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-2" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Dələduz şifrənizi bilsə belə, hesabınıza daxil ola bilmir, çünki sistem yalnız sizin şəxsi telefonunuza gələn birdəfəlik kodu və ya təsdiq bildirişini tələb edir.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Təhlükəli hallar</h4>
+                    <ul>
+                      <li>Telefonunuza qəflətən gələn təsdiq kodunu "Səhv göndərmişik, zəhmət olmasa kodu oxuyun" deyən şəxslərə vermək.</li>
+                      <li>"Narahat edir" deyə 2FA bildirişlərini tamamilə söndürmək.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Ən vacib hesablarınızda (Google/Apple, WhatsApp, bank tətbiqləri) 2FA-nı mütləq aktivləşdirin.</li>
+                      <li>Mümkün olduqda SMS yerinə autentifikator tətbiqindən (Google Authenticator, Microsoft Authenticator) istifadə edin.</li>
+                      <li>Sistem tərəfindən verilən birdəfəlik ehtiyat bərpa kodlarını kağızda yazıb təhlükəsiz yerdə saxlayın.</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>WhatsApp qeydiyyat kodunu heç kimə göndərməyin. O kodu vermək hesabınızı dələduza hədiyyə etməkdir.</li>
-                    <li>Qohumunuza həmişə zəng etdiyiniz köhnə nömrəsi ilə birbaşa səsli zəng edin.</li>
-                    <li>WhatsApp tənzimləmələrinə daxil olub "İki addımlı doğrulama" (PIN kod) funksiyasını aktivləşdirin.</li>
-                  </ul>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Telefonunuza gələn 6 rəqəmli təsdiq kodunu heç kimə — hətta özünü bank işçisi, polis və ya mobil operator adlandıranlara belə oxumayın.
                 </div>
               </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Yalnız mətn mesajına inanaraq heç vaxt pul göndərməyin. Şəxsin canlı səsini eşitmədən heç bir köçürmə etməyin.
-              </div>
-            </div>
-          </div>
+            </article>
 
-          <!-- Mövzu 6: İctimai Wi-Fi -->
-          <div id="topic-row-5" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>İctimai Wi-Fi şəbəkələri</h3>
-                <p>Kafe, otel, hava limanı və parklardakı açıq simsiz şəbəkələrin təhlükələri.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Şifrəsiz ictimai Wi-Fi şəbəkələrində məlumatlar şifrələnmir. Yaxınlıqdakı bədniyyətli şəxs eyni adlı saxta giriş nöqtəsi ("Kafe_Pulsuz_WiFi") yaradaraq daxil etdiyiniz saytları izləyə bilər.</p>
+            <!-- Mövzu 4: Sosial Mühəndislik və Saxta Zənglər -->
+            <article class="card topic-card" id="topic-row-3" data-category="traps" data-topic-index="3">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-danger" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
                 </div>
-                <div class="topic-col">
-                  <h4>Əsas şübhəli əlamətlər</h4>
-                  <ul>
-                    <li>Məkanda bir-birinə çox oxşar bir neçə açıq şəbəkə adı (məsələn, "Otel_Qonaq" və "Otel_Pulsuz_WiFi").</li>
-                    <li>Brauzerdə qəfil görünən "Bağlantınız təhlükəsiz deyil" və ya sertifikat xətası xəbərdarlıqları.</li>
-                  </ul>
+                <span class="badge badge-neutral topic-tag-badge">Zənglər</span>
+              </div>
+              <h3 class="topic-card-title">Sosial mühəndislik və saxta zənglər</h3>
+              <p class="topic-card-desc">Özünü bank işçisi, polis və ya usta kimi təqdim edən dələduzların psixoloji hiylələri.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-3">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-3" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Sizə rəsmi orqanlardan zəng etdiyini bildirən inandırıcı bir səs müraciət edir. "Kartınızdan şübhəli pul köçürülür" və ya "Yaxınınız qəzaya düşüb" deyərək sizi təşvişə salır və dərhal pul köçürməyi tələb edir.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Əsas şübhəli əlamətlər</h4>
+                    <ul>
+                      <li>Qorxu və həyəcan yaratmaq ("Pulu dərhal təhlükəsiz hesaba köçürməsəniz, hamısı batacaq!").</li>
+                      <li>Kompüter və ya telefonunuza uzaqdan idarəetmə proqramı (AnyDesk, TeamViewer) yükləməyi tələb etmək.</li>
+                      <li>Heç kimə deməməyi, məsələnin "tam məxfi dövlət əməliyyatı" olduğunu iddia etmək.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Dəstəyi dərhal asın.</li>
+                      <li>Həmin bankın və ya orqanın rəsmi, kartınızın arxasında yazılmış nömrəsinə özünüz zəng edib məsələni dəqiqləşdirin.</li>
+                      <li>Uzaqdan idarəetmə proqramlarını heç kimin göstərişi ilə cihazınıza quraşdırmayın.</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Bank əməliyyatları və alış-veriş üçün ictimai Wi-Fi əvəzinə telefonunuzun mobil internetindən istifadə edin.</li>
-                    <li>İctimai şəbəkələrə qoşulduqda etibarlı VPN xidmətindən istifadə edərək trafiki şifrələyin.</li>
-                    <li>Telefonunuzda "Açıq şəbəkələrə avtomatik qoşul" funksiyasını söndürün.</li>
-                  </ul>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Əsl bank heç vaxt müştəriyə zəng edib pulu "təhlükəsiz hesaba" köçürməyi və ya telefonuna uzaqdan giriş proqramı yükləməyi xahiş etməz.
                 </div>
               </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Mobil operatorların 4G/5G interneti simsiz ictimai Wi-Fi şəbəkələrinə nisbətən qat-qat təhlükəsizdir.
-              </div>
-            </div>
-          </div>
+            </article>
 
-          <!-- Mövzu 7: Onlayn Alış-veriş və Kartlar -->
-          <div id="topic-row-6" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>Onlayn alış-veriş və bank kartlarının təhlükəsizliyi</h3>
-                <p>Saxta mağazaları tanımaq və vəsaitinizi qoruyan düzgün ödəniş vərdişləri.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Dələduzlar məşhur brendlərin (geyim, telefon, məişət texnikası) şəkillərini qoyaraq 80% endirim elan edirlər. Siz ödəniş edirsiniz, lakin ya heç nə göndərilmir, ya da kartınızdakı bütün qalıq silinir.</p>
+            <!-- Mövzu 5: Sosial Şəbəkələrdə Paylaşım -->
+            <article class="card topic-card" id="topic-row-4" data-category="devices" data-topic-index="4">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-warning" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
                 </div>
-                <div class="topic-col">
-                  <h4>Əsas şübhəli əlamətlər</h4>
-                  <ul>
-                    <li>Məntiqsiz qiymətlər: 500 manatlıq orijinal gödəkcənin 29 manata təklif olunması.</li>
-                    <li>Ödəniş üçün rəsmi bank keçidi yerinə yalnız kartdan-karta birbaşa pul atmağı tələb edən səhifələr.</li>
-                    <li>Saytda hüquqi ünvan, VÖEN, əlaqə telefonu və geri qaytarma şərtlərinin olmaması.</li>
-                  </ul>
+                <span class="badge badge-neutral topic-tag-badge">Məxfilik</span>
+              </div>
+              <h3 class="topic-card-title">Sosial şəbəkələrdə həddən artıq paylaşım</h3>
+              <p class="topic-card-desc">Paylaşdığınız hər bir xırda detalın dələduzlar tərəfindən sizə qarşı istifadəsi.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-4">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-4" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Paylaşdığınız minik talonu (bilet), pasportun küncü, uşağınızın məktəb nömrəsi və ya evinizin yeri cinayətkarlar üçün zəngin məlumat bazası yaradır. Onlar bu detallardan istifadə edərək sizi tanıyan biri kimi zəng vururlar.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Təhlükəli paylaşımlar</h4>
+                    <ul>
+                      <li>Barkod və ya QR kodu görünən təyyarə biletləri və konsert biletləri.</li>
+                      <li>"2 həftəlik xaricə uçuruq" tipli evinizin boş qalacağını elan edən paylaşımlar.</li>
+                      <li>Şəxsiyyət vəsiqəsi, maşın nömrəsi və ya rəsmi sənəd fotoları.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Sosial şəbəkə hesablarınızı "Yalnız dostlar" üçün qapalı rejimdə saxlayın.</li>
+                      <li>Səfər və tətil fotolarını evə qayıtdıqdan sonra paylaşın.</li>
+                      <li>Sənəd və bilet şəkillərini heç vaxt tam aydın şəkildə sosial mediaya yükləməyin.</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Onlayn sifarişlər üçün bank tətbiqinizdə ayrıca "Virtual Kart" açın və yalnız alış-veriş məbləği qədər pul qoyun.</li>
-                    <li>Saytın adını internetdə axtarıb digər alıcıların rəylərini yoxlayın.</li>
-                    <li>Əsas maaş və ya yığım kartınızın CVV kodunu heç vaxt şübhəli saytlarda saxlamayın.</li>
-                  </ul>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Bilet və sənədlərdəki ştrix-kodlar adınız, soyadınız və sifariş nömrənizlə birbaşa əlaqəlidir; kənar şəxs onları skan edərək bütün səfərinizi ləğv edə bilər.
                 </div>
               </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Kartınızın arxasındakı 3 rəqəmli CVV kodunu və SMS-lə gələn 3D Secure təsdiq kodunu heç vaxt heç kimə bildirməyin.
-              </div>
-            </div>
-          </div>
+            </article>
 
-          <!-- Mövzu 8: Yenilənmələr və Nüsxələmə -->
-          <div id="topic-row-7" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>Cihazların yenilənməsi, antivirus və nüsxələmə qaydaları</h3>
-                <p>Telefon və kompüterinizi əlavə proqramlara pul xərcləmədən müdafiə etmək.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Əməliyyat sistemlərində və brauzerlərdə mütəmadi olaraq təhlükəsizlik boşluqları aşkarlanır. İstehsalçılar bu deşikləri bağlamaq üçün yenilənmələr buraxır; yeniləmədikdə isə cihazlar müdafiəsiz qalır.</p>
+            <!-- Mövzu 6: İctimai Wi-Fi və VPN -->
+            <article class="card topic-card" id="topic-row-5" data-category="devices" data-topic-index="5">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-neutral" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                    <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                  </svg>
                 </div>
-                <div class="topic-col">
-                  <h4>Təhlükəli vərdişlər</h4>
-                  <ul>
-                    <li>Sistem yenilənmələrini aylarla təxirə salmaq.</li>
-                    <li>İnternetdə qarşınıza çıxan "Kompüterinizdə 27 virus var, təmizləmək üçün klikləyin" bildirişlərinə inanmaq.</li>
-                    <li>Əhəmiyyətli ailə arxivlərini və sənədləri yalnız bircə yerdə (məsələn, köhnə noutbukda) saxlamaq.</li>
-                  </ul>
+                <span class="badge badge-neutral topic-tag-badge">Şəbəkə</span>
+              </div>
+              <h3 class="topic-card-title">İctimai Wi-Fi və VPN xidmətləri</h3>
+              <p class="topic-card-desc">Kafelərdə, otellərdə və hava limanlarında açıq şəbəkələrin yaratdığı təhlükələr.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-5">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-5" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Dələduz kafedə və ya parkda "Free_Cafe_WiFi" adlı saxta giriş nöqtəsi açır. Həmin şəbəkəyə qoşulduqda ötürdüyünüz bütün şifrəsiz məlumatlar birbaşa cinayətkarın ekranında görünür.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Əsas şübhəli əlamətlər</h4>
+                    <ul>
+                      <li>Məkanda bir-birinə çox oxşar bir neçə açıq şəbəkə adı (məsələn, "Otel_Qonaq" və "Otel_Pulsuz_WiFi").</li>
+                      <li>Brauzerdə qəfil görünən "Bağlantınız təhlükəsiz deyil" və ya sertifikat xətası xəbərdarlıqları.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Bank əməliyyatları və alış-veriş üçün ictimai Wi-Fi əvəzinə telefonunuzun mobil internetindən istifadə edin.</li>
+                      <li>İctimai şəbəkələrə qoşulduqda etibarlı VPN xidmətindən istifadə edərək trafiki şifrələyin.</li>
+                      <li>Telefonunuzda "Açıq şəbəkələrə avtomatik qoşul" funksiyasını söndürün.</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Smartfon və kompüterinizdə rəsmi "Avtomatik yenilənmə" seçimini aktiv saxlayın.</li>
-                    <li>Kompüterin öz daxili mühafizə sistemlərinə (Windows Təhlükəsizliyi / Apple daxili müdafiəsi) etibar edin.</li>
-                    <li>3-2-1 ehtiyat nüsxə qaydası: vacib sənədlərin 3 nüsxəsi olsun, 2 müxtəlif daşıyıcıda (kompüter və xarici disk), 1-i isə kənarda (bulud yaddaşında).</li>
-                  </ul>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Mobil operatorların 4G/5G interneti simsiz ictimai Wi-Fi şəbəkələrinə nisbətən qat-qat təhlükəsizdir.
                 </div>
               </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Saytlar kompüterinizin içini skan edə bilməz. İnternet səhifəsində çıxan "Virus tapıldı" pəncərələri saxta aldatma vasitəsidir.
-              </div>
-            </div>
-          </div>
+            </article>
 
-          <!-- Mövzu 9: Uşaqlar və Yaşlı Qohumlar -->
-          <div id="topic-row-8" class="topic-row">
-            <button class="topic-row-trigger" type="button" aria-expanded="false">
-              <div class="topic-header-text">
-                <h3>Uşaqlar və yaşlı qohumlar üçün təhlükəsizlik vərdişləri</h3>
-                <p>Dələduzların ən çox hədəf aldığı ailə üzvlərimiz üçün nəzakətli və sakit dəstək.</p>
-              </div>
-              <span class="topic-indicator" aria-hidden="true">+</span>
-            </button>
-            <div class="topic-body">
-              <div class="topic-columns">
-                <div class="topic-col">
-                  <h4>Hadisə necə baş verir?</h4>
-                  <p>Uşaqlar oyunlarda pulsuz hədiyyələr (Roblox, Brawl Stars) vədləri ilə aldadılır. Yaşlı nəsil isə təqaüd, pensiya artımı və ya "polisdən zəng edirik" hədələri ilə psixoloji təzyiq altına salınır.</p>
+            <!-- Mövzu 7: Onlayn Alış-veriş və Kartlar -->
+            <article class="card topic-card" id="topic-row-6" data-category="payments" data-topic-index="6">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-danger" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                  </svg>
                 </div>
-                <div class="topic-col">
-                  <h4>Xəbərdaredici davranışlar</h4>
-                  <ul>
-                    <li>Uşaqların şübhəli saytlardan naməlum proqram və mod (.apk/.exe) yükləməsi.</li>
-                    <li>Yaşlı ailə üzvünün qəfil həyəcanlanması, telefonda kimsə ilə pıçıltı ilə danışıb banka qaçması.</li>
-                    <li>Zəng edən şəxsin kompüterə uzaqdan qoşulma proqramı (AnyDesk, TeamViewer) quraşdırmağı tələb etməsi.</li>
-                  </ul>
+                <span class="badge badge-neutral topic-tag-badge">Ödənişlər</span>
+              </div>
+              <h3 class="topic-card-title">Onlayn alış-veriş və bank kartlarının təhlükəsizliyi</h3>
+              <p class="topic-card-desc">Saxta mağazaları tanımaq və vəsaitinizi qoruyan düzgün ödəniş vərdişləri.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-6">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-6" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Dələduzlar məşhur brendlərin (geyim, telefon, məişət texnikası) şəkillərini qoyaraq 80% endirim elan edirlər. Siz ödəniş edirsiniz, lakin ya heç nə göndərilmir, ya da kartınızdakı bütün qalıq silinir.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Əsas şübhəli əlamətlər</h4>
+                    <ul>
+                      <li>Məntiqsiz qiymətlər: 500 manatlıq orijinal gödəkcənin 29 manata təklif olunması.</li>
+                      <li>Ödəniş üçün rəsmi bank keçidi yerinə yalnız kartdan-karta birbaşa pul atmağı tələb edən səhifələr.</li>
+                      <li>Saytda hüquqi ünvan, VÖEN, əlaqə telefonu və geri qaytarma şərtlərinin olmaması.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Onlayn sifarişlər üçün bank tətbiqinizdə ayrıca "Virtual Kart" açın və yalnız alış-veriş məbləği qədər pul qoyun.</li>
+                      <li>Saytın adını internetdə axtarıb digər alıcıların rəylərini yoxlayın.</li>
+                      <li>Əsas maaş və ya yığım kartınızın CVV kodunu heç vaxt şübhəli saytlarda saxlamayın.</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="topic-col">
-                  <h4>Nə etməlisiniz?</h4>
-                  <ul>
-                    <li>Heç vaxt tanımadığınız zəng edənin kompüterinizə uzaqdan giriş proqramı qurmasına icazə verməyin.</li>
-                    <li>Uşaqların cihazlarında tətbiq yükləmələri və ödənişlər üçün valideyn icazəsini aktiv edin.</li>
-                    <li>Ailədə qınaqsız mühit yaradın: kimsə səhvən şübhəli linkə klikləyibsə, qorxmadan sizə deyə bilməlidir.</li>
-                  </ul>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Kartınızın arxasındakı 3 rəqəmli CVV kodunu və SMS-lə gələn 3D Secure təsdiq kodunu heç vaxt heç kimə bildirməyin.
                 </div>
               </div>
-              <div class="topic-takeaway">
-                <strong>Əsas qayda:</strong> Dələduzlar qurbanların utanaraq susmasına ümid edirlər. Ailədə sakit və etibarlı ünsiyyət ən güclü qalxandır.
+            </article>
+
+            <!-- Mövzu 8: Yenilənmələr və Nüsxələmə -->
+            <article class="card topic-card" id="topic-row-7" data-category="devices" data-topic-index="7">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-neutral" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                  </svg>
+                </div>
+                <span class="badge badge-neutral topic-tag-badge">Cihazlar</span>
               </div>
-            </div>
+              <h3 class="topic-card-title">Cihazların yenilənməsi, antivirus və nüsxələmə qaydaları</h3>
+              <p class="topic-card-desc">Telefon və kompüterinizi əlavə proqramlara pul xərcləmədən müdafiə etmək.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-7">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-7" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Əməliyyat sistemlərində və brauzerlərdə mütəmadi olaraq təhlükəsizlik boşluqları aşkarlanır. İstehsalçılar bu deşikləri bağlamaq üçün yenilənmələr buraxır; yeniləmədikdə isə cihazlar müdafiəsiz qalır.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Təhlükəli vərdişlər</h4>
+                    <ul>
+                      <li>Sistem yenilənmələrini aylarla təxirə salmaq.</li>
+                      <li>İnternetdə qarşınıza çıxan "Kompüterinizdə 27 virus var, təmizləmək üçün klikləyin" bildirişlərinə inanmaq.</li>
+                      <li>Əhəmiyyətli ailə arxivlərini və sənədləri yalnız bircə yerdə (məsələn, köhnə noutbukda) saxlamaq.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Smartfon və kompüterinizdə rəsmi "Avtomatik yenilənmə" seçimini aktiv saxlayın.</li>
+                      <li>Kompüterin öz daxili mühafizə sistemlərinə (Windows Təhlükəsizliyi / Apple daxili müdafiəsi) etibar edin.</li>
+                      <li>3-2-1 ehtiyat nüsxə qaydası: vacib sənədlərin 3 nüsxəsi olsun, 2 müxtəlif daşıyıcıda (kompüter və xarici disk), 1-i isə kənarda (bulud yaddaşında).</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Saytlar kompüterinizin içini skan edə bilməz. İnternet səhifəsində çıxan "Virus tapıldı" pəncərələri saxta aldatma vasitəsidir.
+                </div>
+              </div>
+            </article>
+
+            <!-- Mövzu 9: Uşaqlar və Yaşlı Qohumlar -->
+            <article class="card topic-card" id="topic-row-8" data-category="devices" data-topic-index="8">
+              <div class="topic-card-header">
+                <div class="icon-box icon-box-neutral" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <span class="badge badge-neutral topic-tag-badge">Ailə</span>
+              </div>
+              <h3 class="topic-card-title">Uşaqlar və yaşlı qohumlar üçün təhlükəsizlik vərdişləri</h3>
+              <p class="topic-card-desc">Dələduzların ən çox hədəf aldığı ailə üzvlərimiz üçün nəzakətli və sakit dəstək.</p>
+              <div class="topic-card-footer">
+                <button type="button" class="topic-arrow-link topic-row-trigger" aria-expanded="false" aria-controls="topic-details-8">
+                  <span class="topic-link-text">Ətraflı oxuyun</span>
+                  <svg class="topic-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div id="topic-details-8" class="topic-details-drawer" hidden>
+                <div class="topic-columns">
+                  <div class="topic-col">
+                    <h4>Hadisə necə baş verir?</h4>
+                    <p>Uşaqlar oyunlarda pulsuz hədiyyələr (Roblox, Brawl Stars) vədləri ilə aldadılır. Yaşlı nəsil isə təqaüd, pensiya artımı və ya "polisdən zəng edirik" hədələri ilə psixoloji təzyiq altına salınır.</p>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Xarakterik əlamətlər</h4>
+                    <ul>
+                      <li>Uşağın qorxaraq telefonunu gizlətməsi və ya evdəki bank kartlarını axtarması.</li>
+                      <li>Yaşlı qohumun tələsik və narahat halda poçta və ya bankomata getməyə çalışması.</li>
+                    </ul>
+                  </div>
+                  <div class="topic-col">
+                    <h4>Nə etməlisiniz?</h4>
+                    <ul>
+                      <li>Ailədə "Təhlükəsizlik kodu" (kod sözü) təyin edin: qəribə zəng gələndə yalnız sizin bildiyiniz bu gizli sözü soruşsunlar.</li>
+                      <li>Uşaqların cihazlarında valideyn nəzarəti tətbiqindən istifadə edərək kart ödənişlərini məhdudlaşdırın.</li>
+                      <li>Valideynlərinizə izah edin ki, heç bir rəsmi qurum pulu təcili tələb etməz; şübhə olanda dərhal sizə zəng etsinlər.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="topic-takeaway">
+                  <strong>Əsas qayda:</strong> Ən yaxşı kiber müdafiə ailə daxilində qorxusuz və açıq ünsiyyətdir. Aldanan şəxsi danlamaq yox, dərhal dəstək olmaq lazımdır.
+                </div>
+              </div>
+            </article>
+
           </div>
 
           <!-- Axtarış Nəticəsi Yoxdur (Bələdçilər) -->
           <div id="topics-empty-msg" class="search-empty-state" style="display: none;" role="status">
             <p class="search-empty-title">Uyğun gələn bələdçi tapılmadı</p>
-            <p class="search-empty-hint">Axtarışınıza uyğun heç bir təhlükəsizlik mövzusu yoxdur. Fərqli açar söz sınayın (məsələn: "SMS", "şifrə", "kart", "zəng").</p>
+            <p class="search-empty-hint">Axtarışınıza və ya seçilmiş filtrə uyğun heç bir təhlükəsizlik mövzusu tapılmadı. Fərqli açar söz və ya filtr kateqoriyası sınayın.</p>
           </div>
         </div>
       </div>
-    </div>
 
       <!-- Növbəti Səhifə Keçidi -->
       <div class="container next-page-rule-container">
@@ -801,106 +1088,158 @@
       </div>
     </section>
 
-    <!-- Səhifə: Təcili addımlar (#/tecili-addimlar) -->
+        <!-- Səhifə: Təcili addımlar (#/tecili-addimlar) -->
     <section data-page="/tecili-addimlar" class="view-page" id="view-emergency" hidden aria-labelledby="emergency-heading">
-<div id="emergency" class="editorial-section" aria-labelledby="emergency-heading">
-      <div class="container">
-        <div class="section-eyebrow-row">
-          <span class="section-category">Fövqəladə Protokol</span>
-        </div>
-
-        <div class="emergency-wrapper">
-          <div class="emergency-header-row">
-            <div>
-              <h2 id="emergency-heading" class="section-editorial-title" style="margin-bottom: 0.35rem;">Hesabınız ələ keçdikdə nə etməlisiniz?</h2>
-              <p style="margin: 0;">Sakit olun. Hər gün minlərlə insan bu vəziyyətdən uğurla çıxır. Aşağıdakı addımları ardıcıllıqla yerinə yetirin:</p>
-            </div>
-            <div class="checklist-counter-display">
-              <span id="checklist-progress-text">0 / 8 addım tamamlandı</span>
+      <div id="emergency" class="editorial-section fade-in-section">
+        <div class="container">
+          <div class="section-modern-header">
+            <div class="emergency-header-flex">
+              <div>
+                <span class="badge badge-danger section-badge-label">
+                  <span class="badge-dot badge-dot-danger" aria-hidden="true"></span>
+                  Fövqəladə Protokol
+                </span>
+                <h2 id="emergency-heading" class="section-modern-title" tabindex="-1">Hesabınız ələ keçdikdə nə etməlisiniz?</h2>
+                <p class="section-modern-subtitle">Sakit olun. Hər gün minlərlə insan bu vəziyyətdən uğurla çıxır. Aşağıdakı addımları ardıcıllıqla yerinə yetirin.</p>
+              </div>
+              <div class="emergency-counter-pill">
+                <span class="badge badge-neutral" id="checklist-progress-text">0 / 8 addım tamamlandı</span>
+                <button id="btn-reset-checklist" type="button" class="btn-text-action">Siyahını sıfırla</button>
+              </div>
             </div>
           </div>
 
-          <div class="checklist-stack">
-            <!-- Addım 1 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="İnternet bağlantısını kəsin">
-              <div class="check-content">
-                <div class="check-step-name">Uzaqdan qoşulma baş veribsə, dərhal interneti söndürün</div>
-                <p class="check-desc">Əgər zəng edən şəxs kompüterinizə uzaqdan giriş proqramı ilə qoşulubsa, dərhal Wi-Fi-ı söndürün və ya internet kabelini çıxarın.</p>
-              </div>
-            </label>
+          <div class="steps-timeline-wrap">
+            <div class="steps-timeline-line" aria-hidden="true">
+              <div class="steps-timeline-progress-fill" id="steps-progress-fill" style="height: 0%;"></div>
+            </div>
 
-            <!-- Addım 2 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="Rəsmi bərpa səhifəsinə daxil olun">
-              <div class="check-content">
-                <div class="check-step-name">Təmiz cihazdan rəsmi bərpa proseduruna başlayın</div>
-                <p class="check-desc">Şübhəli olmayan telefon və ya kompüterdən xidmətin rəsmi səhifəsinə (məsələn, <code>accounts.google.com</code>) daxil olub "Şifrəni unutdum" bölməsini seçin.</p>
-              </div>
-            </label>
+            <div class="steps-list" role="list">
 
-            <!-- Addım 3 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="Yeni güclü şifrə təyin edin">
-              <div class="check-content">
-                <div class="check-step-name">Tamamilə yeni, 4 sözdən ibarət şifrə-ifadəsi təyin edin</div>
-                <p class="check-desc">Əvvəllər heç vaxt işlətmədiyiniz sözləri seçin. Əsas poçtunuz oğurlanıbsa, ona bağlı olan bank və sosial şəbəkə şifrələrini də dərhal dəyişin.</p>
-              </div>
-            </label>
+              <!-- Addım 1 -->
+              <article class="card step-card" data-step="1">
+                <div class="step-node" aria-hidden="true">1</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="0" aria-label="1-ci addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">Uzaqdan qoşulma baş veribsə, dərhal interneti söndürün</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Əgər zəng edən şəxs kompüterinizə uzaqdan giriş proqramı (AnyDesk, TeamViewer) ilə qoşulubsa, dərhal Wi-Fi-ı söndürün və ya internet kabelini çıxarın.</p>
+                </div>
+              </article>
 
-            <!-- Addım 4 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="Bütün cihazlardan çıxış edin">
-              <div class="check-content">
-                <div class="check-step-name">Bütün digər cihazlardan çıxış edin ("Bütün sessiyaları sonlandır")</div>
-                <p class="check-desc">Hesabınızın təhlükəsizlik bölməsindən "Aktiv cihazlar" siyahısına baxın və kənar şəxsi sistemdən atmaq üçün bütün digər girişləri ləğv edin.</p>
-              </div>
-            </label>
+              <!-- Addım 2 -->
+              <article class="card step-card" data-step="2">
+                <div class="step-node" aria-hidden="true">2</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="1" aria-label="2-ci addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">Təmiz cihazdan rəsmi bərpa proseduruna başlayın</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Şübhəli olmayan telefon və ya kompüterdən xidmətin rəsmi səhifəsinə (məsələn, <code>accounts.google.com</code>) daxil olub "Şifrəni unutdum" bölməsini seçin.</p>
+                </div>
+              </article>
 
-            <!-- Addım 5 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="Bərpa məlumatlarını yoxlayın">
-              <div class="check-content">
-                <div class="check-step-name">Bərpa nömrəsini və yönləndirmə qaydalarını yoxlayın</div>
-                <p class="check-desc">Dələduzlar tez-tez gizlicə öz e-poçtlarını bərpa ünvanı kimi əlavə edir və ya məktub yönləndirməsi qururlar. Tanımadığınız bütün ünvanları silin.</p>
-              </div>
-            </label>
+              <!-- Addım 3 -->
+              <article class="card step-card" data-step="3">
+                <div class="step-node" aria-hidden="true">3</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="2" aria-label="3-cü addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">Tamamilə yeni, 4 sözdən ibarət şifrə-ifadəsi təyin edin</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Əvvəllər heç vaxt işlətmədiyiniz sözləri seçin. Əsas poçtunuz oğurlanıbsa, ona bağlı olan bank və sosial şəbəkə şifrələrini də dərhal dəyişin.</p>
+                </div>
+              </article>
 
-            <!-- Addım 6 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="2FA-nı aktivləşdirin">
-              <div class="check-content">
-                <div class="check-step-name">İki mərhələli təsdiqləməni (2FA) dərhal qoşun</div>
-                <p class="check-desc">Hesabınıza autentifikator tətbiqini və ya telefon təsdiqini bağlayın. Bu, dələduzun yenidən qapını açmasına qəti mane olacaq.</p>
-              </div>
-            </label>
+              <!-- Addım 4 -->
+              <article class="card step-card" data-step="4">
+                <div class="step-node" aria-hidden="true">4</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="3" aria-label="4-cü addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">Bütün digər cihazlardan çıxış edin ("Bütün sessiyaları sonlandır")</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Hesabınızın təhlükəsizlik bölməsindən "Aktiv cihazlar" siyahısına baxın və kənar şəxsi sistemdən atmaq üçün bütün digər girişləri ləğv edin.</p>
+                </div>
+              </article>
 
-            <!-- Addım 7 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="Bankla əlaqə saxlayın">
-              <div class="check-content">
-                <div class="check-step-name">Hesabda kart qeyd olunubsa, bankınıza məlumat verin</div>
-                <p class="check-desc">Əgər həmin hesabda yadda saxlanılmış bank kartı məlumatları olubsa, dərhal kartınızı müvəqqəti bloklayın və son əməliyyatları yoxlayın.</p>
-              </div>
-            </label>
+              <!-- Addım 5 -->
+              <article class="card step-card" data-step="5">
+                <div class="step-node" aria-hidden="true">5</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="4" aria-label="5-ci addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">Bərpa nömrəsini və yönləndirmə qaydalarını yoxlayın</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Dələduzlar tez-tez gizlicə öz e-poçtlarını bərpa ünvanı kimi əlavə edir və ya məktub yönləndirməsi qururlar. Tanımadığınız bütün ünvanları silin.</p>
+                </div>
+              </article>
 
-            <!-- Addım 8 -->
-            <label class="check-item">
-              <input type="checkbox" class="check-input" aria-label="Yaxınlarınıza xəbərdarlıq edin">
-              <div class="check-content">
-                <div class="check-step-name">Yaxınlarınıza və dostlarınıza xəbərdarlıq edin</div>
-                <p class="check-desc">Ailənizə və tanışlarınıza xəbər verin ki, hesabınızdan sizin adınızla gələn təcili borc və ya link mesajlarına qətiyyən inanmasınlar.</p>
-              </div>
-            </label>
-          </div>
+              <!-- Addım 6 -->
+              <article class="card step-card" data-step="6">
+                <div class="step-node" aria-hidden="true">6</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="5" aria-label="6-cı addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">İki mərhələli təsdiqləməni (2FA) dərhal qoşun</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Hesabınıza autentifikator tətbiqini və ya telefon təsdiqini bağlayın. Bu, dələduzun yenidən qapını açmasına qəti mane olacaq.</p>
+                </div>
+              </article>
 
-          <div class="checklist-actions-bar">
-            <span style="font-size: 0.875rem; color: var(--text-muted);">Siyahıdakı irəliləyişiniz brauzerinizdə avtomatik yadda saxlanılır.</span>
-            <button id="btn-reset-checklist" type="button" class="btn-text-action">Siyahını sıfırla</button>
+              <!-- Addım 7 -->
+              <article class="card step-card" data-step="7">
+                <div class="step-node" aria-hidden="true">7</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="6" aria-label="7-ci addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">Hesabda kart qeyd olunubsa, bankınıza məlumat verin</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Əgər həmin hesabda yadda saxlanılmış bank kartı məlumatları olubsa, dərhal kartınızı müvəqqəti bloklayın və son əməliyyatları yoxlayın.</p>
+                </div>
+              </article>
+
+              <!-- Addım 8 -->
+              <article class="card step-card" data-step="8">
+                <div class="step-node" aria-hidden="true">8</div>
+                <div class="step-card-content">
+                  <div class="step-card-header">
+                    <label class="step-checkbox-wrap">
+                      <input type="checkbox" class="check-input" data-step-index="7" aria-label="8-ci addımı tamamlandı kimi qeyd edin">
+                      <span class="step-title">Yaxınlarınıza və dostlarınıza xəbərdarlıq edin</span>
+                    </label>
+                    <span class="badge badge-neutral step-status-badge">Gözləyir</span>
+                  </div>
+                  <p class="step-desc">Ailənizə və tanışlarınıza xəbər verin ki, hesabınızdan sizin adınızla gələn təcili borc və ya link mesajlarına qətiyyən inanmasınlar.</p>
+                </div>
+              </article>
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
       <!-- Növbəti Səhifə Keçidi -->
       <div class="container next-page-rule-container">
@@ -911,59 +1250,139 @@
       </div>
     </section>
 
-    <!-- Səhifə: Dələduz testi (#/test) -->
+        <!-- Səhifə: Dələduz testi (#/test) -->
     <section data-page="/test" class="view-page" id="view-quiz" hidden aria-labelledby="quiz-heading">
-<div id="quiz" class="editorial-section" aria-labelledby="quiz-heading">
-      <div class="container">
-        <div class="section-eyebrow-row">
-          <span class="section-category">Bilik Sınağı</span>
-        </div>
-
-        <div class="section-editorial-header">
-          <h2 id="quiz-heading" class="section-editorial-title" tabindex="-1">Dələduzu tanı: 10 real həyati vəziyyət</h2>
-          <p class="section-editorial-lede">Ekranda qarşınıza çıxa biləcək real mesaj və zəngləri oxuyun, ən təhlükəsiz reaksiyanı seçin.</p>
-        </div>
-
-        <div class="quiz-container">
-          <!-- Aktiv Sual Paneli -->
-          <div id="quiz-card-view">
-            <div class="quiz-meta-bar">
-              <span id="quiz-counter">Vəziyyət 1 / 10</span>
-              <span id="quiz-score-badge" class="quiz-score-indicator">Nəticə: 0 / 0</span>
-            </div>
-
-            <div class="quiz-message-mockup">
-              <span id="quiz-scenario-tag" class="quiz-channel-tag">Gələn SMS Bildirişi</span>
-              <div id="quiz-scenario-content" class="quiz-situation-text">Vəziyyət yüklənir...</div>
-              <div id="quiz-scenario-snippet" class="quiz-simulated-text"></div>
-            </div>
-
-            <h3 id="quiz-prompt" class="quiz-ask-heading">Bu vəziyyətdə ən düzgün və təhlükəsiz addım hansıdır?</h3>
-
-            <div id="quiz-options" class="quiz-answers-grid">
-              <!-- script.js tərəfindən doldurulur -->
-            </div>
-
-            <div id="quiz-feedback" class="quiz-feedback-panel" role="status" aria-live="polite">
-              <div id="feedback-headline" class="feedback-lead"></div>
-              <p id="feedback-text" class="feedback-body"></p>
-            </div>
-
-            <div class="quiz-nav-row">
-              <button id="quiz-next-btn" type="button" class="btn btn-solid" style="display: none;">Növbəti vəziyyət →</button>
-            </div>
+      <div id="quiz" class="editorial-section fade-in-section">
+        <div class="container">
+          <div class="section-modern-header">
+            <span class="badge badge-neutral section-badge-label">
+              <span class="badge-dot" aria-hidden="true"></span>
+              Bilik Sınağı
+            </span>
+            <h2 id="quiz-heading" class="section-modern-title" tabindex="-1">Dələduzu tanı: 10 real həyati vəziyyət</h2>
+            <p class="section-modern-subtitle">Ekranda qarşınıza çıxa biləcək real mesaj və zəngləri oxuyun, ən təhlükəsiz reaksiyanı seçin.</p>
           </div>
 
-          <!-- Yekun Nəticə Ekranı -->
-          <div id="quiz-result-view" class="quiz-results-screen">
-            <h3>Sınaq tamamlandı</h3>
-            <div id="result-score-text" class="quiz-final-score">10 sualdan 10 düzgün cavab</div>
-            <p id="result-message" class="quiz-final-note">Mükəmməl instinkt! Şübhəli əlamətləri və tələləri dərhal ayırd edə bilirsiniz.</p>
-            <button id="quiz-restart-btn" type="button" class="btn btn-solid">Testi yenidən keç</button>
+          <!-- Dashboard-style Quiz Widget Card -->
+          <div class="quiz-widget-card card">
+            <!-- Top Progress Bar along top of card -->
+            <div class="quiz-widget-progress-track" aria-hidden="true">
+              <div id="quiz-top-progress-bar" class="quiz-widget-progress-fill" style="width: 10%;"></div>
+            </div>
+
+            <!-- Aktiv Sual Paneli -->
+            <div id="quiz-card-view" class="quiz-card-view">
+              <div class="quiz-widget-header">
+                <div class="quiz-meta-left">
+                  <span id="quiz-counter" class="badge badge-neutral">Sual 1 / 10</span>
+                  <span id="quiz-scenario-tag" class="badge badge-warning">Gələn SMS Bildirişi</span>
+                </div>
+                <div class="quiz-meta-right">
+                  <span id="quiz-score-badge" class="badge badge-neutral quiz-live-score">Doğru: 0 / 0</span>
+                </div>
+              </div>
+
+              <div class="quiz-scenario-box">
+                <p id="quiz-scenario-content" class="quiz-situation-text">Vəziyyət yüklənir...</p>
+                <div id="quiz-scenario-snippet" class="quiz-snippet-bubble"></div>
+              </div>
+
+              <h3 id="quiz-prompt" class="quiz-question-title">Bu vəziyyətdə ən düzgün və təhlükəsiz addım hansıdır?</h3>
+
+              <div id="quiz-options" class="quiz-options-grid" role="group" aria-label="Cavab variantları">
+                <!-- script.js tərəfindən seçilə bilən kartlar şəklində doldurulur -->
+              </div>
+
+              <div id="quiz-feedback" class="quiz-feedback-box" role="status" aria-live="polite">
+                <div class="quiz-feedback-header">
+                  <span id="feedback-badge" class="badge badge-success">✓ Düzgün</span>
+                  <h4 id="feedback-headline" class="feedback-lead"></h4>
+                </div>
+                <p id="feedback-text" class="feedback-body"></p>
+              </div>
+
+              <div class="quiz-nav-row">
+                <button id="quiz-next-btn" type="button" class="btn btn-primary" style="display: none;">
+                  <span>Növbəti sual</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Yekun Nəticə Ekranı (Result Card with score out of 100, colored badge, circular and bar score indicator, "Yenidən başla" button) -->
+            <div id="quiz-result-view" class="quiz-result-dashboard" style="display: none;">
+              <div class="quiz-result-header">
+                <span id="result-status-badge" class="badge badge-success">Təhlükəsiz</span>
+                <h3 class="quiz-result-title">Sınaq tamamlandı!</h3>
+                <p class="quiz-result-subtitle">10 real vəziyyət üzrə kiber savadlılıq və müdafiə göstəriciniz:</p>
+              </div>
+
+              <!-- Score Indicator: Circular Gauge & Bar -->
+              <div class="quiz-result-score-card">
+                <div class="quiz-score-circle-wrap">
+                  <svg class="quiz-score-circle" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true">
+                    <circle class="score-circle-bg" cx="70" cy="70" r="56" fill="none" stroke-width="10"></circle>
+                    <circle id="score-circle-bar" class="score-circle-fill" cx="70" cy="70" r="56" fill="none" stroke-width="10" stroke-dasharray="351.86" stroke-dashoffset="35.18" stroke-linecap="round"></circle>
+                  </svg>
+                  <div class="quiz-score-circle-inner">
+                    <span id="result-score-100" class="quiz-score-huge">90</span>
+                    <span class="quiz-score-max">/ 100 bal</span>
+                  </div>
+                </div>
+
+                <div class="quiz-result-metrics">
+                  <div class="quiz-score-bar-container">
+                    <div class="quiz-score-bar-label-row">
+                      <span class="quiz-score-metric-name">Kiber Müdafiə İndeksi</span>
+                      <span id="result-score-percent" class="quiz-score-percent-val">90%</span>
+                    </div>
+                    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90">
+                      <div id="result-score-bar" class="progress-bar progress-bar-success" style="width: 90%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="quiz-score-details-row">
+                    <div class="quiz-stat-pill">
+                      <span class="quiz-stat-label">Düzgün cavab</span>
+                      <span id="result-score-text" class="quiz-stat-val">9 / 10</span>
+                    </div>
+                    <div class="quiz-stat-pill">
+                      <span class="quiz-stat-label">Təhlükəsizlik səviyyəsi</span>
+                      <span id="result-level-text" class="quiz-stat-val">Yüksək</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quiz-result-analysis">
+                <p id="result-message" class="quiz-result-note">Mükəmməl instinkt! Şübhəli əlamətləri və tələləri dərhal ayırd edə bilirsiniz.</p>
+              </div>
+
+              <!-- Buttons: "Yenidən başla" button -->
+              <div class="quiz-result-actions">
+                <button id="quiz-restart-btn" type="button" class="btn btn-primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                  </svg>
+                  <span>Yenidən başla</span>
+                </button>
+                <a href="#/beledciler" class="btn btn-secondary">
+                  <span>Bələdçiləri oxuyun</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
       <!-- Növbəti Səhifə Keçidi -->
       <div class="container next-page-rule-container">
@@ -974,139 +1393,283 @@
       </div>
     </section>
 
-    <!-- Səhifə: Lüğət (#/lugat) -->
+        <!-- Səhifə: Lüğət (#/lugat) -->
     <section data-page="/lugat" class="view-page" id="view-glossary" hidden aria-labelledby="glossary-heading">
-<div id="glossary" class="editorial-section" aria-labelledby="glossary-heading">
-      <div class="container">
-        <div class="section-eyebrow-row">
-          <span class="section-category">Arayış</span>
-        </div>
+      <div id="glossary" class="editorial-section fade-in-section">
+        <div class="container">
+          <div class="section-modern-header">
+            <span class="badge badge-neutral section-badge-label">
+              <span class="badge-dot" aria-hidden="true"></span>
+              Arayış
+            </span>
+            <h2 id="glossary-heading" class="section-modern-title" tabindex="-1">Sadə dildə kiber təhlükəsizlik lüğəti</h2>
+            <p class="section-modern-subtitle">Qəliz texniki terminlərin adi insan dilinə tərcüməsi.</p>
+          </div>
 
-        <div class="section-editorial-header">
-          <h2 id="glossary-heading" class="section-editorial-title" tabindex="-1">Sadə dildə kiber təhlükəsizlik lüğəti</h2>
-          <p class="section-editorial-lede">Qəliz texniki terminlərin adi insan dilinə tərcüməsi.</p>
-        </div>
-
-        <div class="glossary-controls">
-          <input type="text" id="glossary-search" class="glossary-input" placeholder="Axtarış üçün yazın (məsələn: Fişinq, 2FA, VPN)..." aria-label="Terminləri axtar">
-        </div>
-
-        <div id="glossary-grid" class="glossary-index">
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Fişinq (Phishing)</span>
-              <span class="glossary-item-cat">Tələ</span>
+          <div class="glossary-search-container">
+            <div class="glossary-search-box">
+              <svg class="glossary-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="glossary-search" class="glossary-search-input" placeholder="Axtarış üçün yazın (məsələn: Fişinq, 2FA, VPN, Şifrə)..." aria-label="Terminləri axtar" autocomplete="off" spellcheck="false">
+              <span class="glossary-search-count" id="glossary-count">12 termin</span>
             </div>
-            <p class="glossary-item-def">Şifrələrinizi, şəxsi məlumatlarınızı və ya kart nömrənizi oğurlamaq üçün qurulmuş saxta e-poçt, SMS və ya saxta veb-sayt tələləri.</p>
-            <div class="glossary-item-plain">Bənzətmə: Saxta kuryerin bağlama gətirmək bəhanəsi ilə evinizin açarını istəməsi.</div>
-          </article>
+          </div>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>İki mərhələli təsdiqləmə (2FA)</span>
-              <span class="glossary-item-cat">Müdafiə</span>
-            </div>
-            <p class="glossary-item-def">Hesaba daxil olarkən iki fərqli sübut tələb edən sistem: bildiyiniz şifrə və telefonunuza gələn təsdiq kodu.</p>
-            <div class="glossary-item-plain">Bənzətmə: Bankomatdan pul çıxarmaq üçün həm plastik kart, həm də 4 rəqəmli PİN kodun tələb olunması.</div>
-          </article>
+          <div id="glossary-grid" class="glossary-cards-list">
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Şifrə meneceri (Password manager)</span>
-              <span class="glossary-item-cat">Alət</span>
-            </div>
-            <p class="glossary-item-def">Hər bir sayt üçün tamamilə fərqli və mürəkkəb şifrələr yaradan, onları şifrələnmiş seyfdə saxlayan və avtomatik dolduran proqram.</p>
-            <div class="glossary-item-plain">Bənzətmə: Bütün qapıların açarlarını etibarlı qoruyan bir dənə əsas seyf açarı.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-danger" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                      <line x1="12" y1="9" x2="12" y2="13"></line>
+                      <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Fişinq (Phishing)</h3>
+                </div>
+                <span class="badge badge-danger">Tələ</span>
+              </div>
+              <p class="glossary-term-def">Şifrələrinizi, şəxsi məlumatlarınızı və ya kart nömrənizi oğurlamaq üçün qurulmuş saxta e-poçt, SMS və ya saxta veb-sayt tələləri.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Saxta kuryerin bağlama gətirmək bəhanəsi ilə evinizin açarını istəməsi.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>VPN (Virtual xüsusi şəbəkə)</span>
-              <span class="glossary-item-cat">Məxfilik</span>
-            </div>
-            <p class="glossary-item-def">Cihazınız ilə internet arasındakı bütün məlumat axınını şifrələyərək kənar şəxslərin (xüsusən ictimai Wi-Fi-da) sizi izləməsinə mane olan xidmət.</p>
-            <div class="glossary-item-plain">Bənzətmə: Açıq küçədə getmək əvəzinə pəncərələri qara zirehli tunellə hərəkət etmək.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-success" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">İki mərhələli təsdiqləmə (2FA)</h3>
+                </div>
+                <span class="badge badge-success">Müdafiə</span>
+              </div>
+              <p class="glossary-term-def">Hesaba daxil olarkən iki fərqli sübut tələb edən sistem: bildiyiniz şifrə və telefonunuza gələn təsdiq kodu.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Bankomatdan pul çıxarmaq üçün həm plastik kart, həm də 4 rəqəmli PİN kodun tələb olunması.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Zərərverici proqram (Malware)</span>
-              <span class="glossary-item-cat">Təhlükə</span>
-            </div>
-            <p class="glossary-item-def">Kompüterinizə və ya telefonunuza gizlicə daxil olub məlumatları oğurlamaq, fəaliyyətinizi izləmək və ya faylları korlamaq üçün yazılmış proqramlar.</p>
-            <div class="glossary-item-plain">Bənzətmə: Evə gələn qonağın cibində gizlətdiyi dinləmə cihazı.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-warning" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="8" cy="15" r="4"></circle>
+                      <line x1="10.85" y1="12.15" x2="19" y2="4"></line>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Şifrə meneceri (Password manager)</h3>
+                </div>
+                <span class="badge badge-neutral">Alət</span>
+              </div>
+              <p class="glossary-term-def">Hər bir sayt üçün tamamilə fərqli və mürəkkəb şifrələr yaradan, onları şifrələnmiş seyfdə saxlayan və avtomatik dolduran proqram.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Bütün qapıların açarlarını etibarlı qoruyan bir dənə əsas seyf açarı.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Fidyə proqramı (Ransomware)</span>
-              <span class="glossary-item-cat">Quldurluq</span>
-            </div>
-            <p class="glossary-item-def">Bütün şəxsi şəkillərinizi və sənədlərinizi şifrələyib kilidləyən, açmaq üçün isə sizdən pul tələb edən təhlükəli virus növü.</p>
-            <div class="glossary-item-plain">Bənzətmə: Oğrunun sənəd şkafınıza öz qıfılını vurub açar üçün nağd pul istəməsi.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-neutral" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">VPN (Virtual xüsusi şəbəkə)</h3>
+                </div>
+                <span class="badge badge-neutral">Məxfilik</span>
+              </div>
+              <p class="glossary-term-def">Cihazınız ilə internet arasındakı bütün məlumat axınını şifrələyərək kənar şəxslərin (xüsusən ictimai Wi-Fi-da) sizi izləməsinə mane olan xidmət.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Açıq küçədə getmək əvəzinə pəncərələri qara zirehli tunellə hərəkət etmək.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Sosial mühəndislik</span>
-              <span class="glossary-item-cat">Aldatma</span>
-            </div>
-            <p class="glossary-item-def">Kompüteri deyil, insan psixologiyasını (tələskənlik, qorxu, nəzakət) manipulyasiya edərək məxfi məlumatları ələ keçirmək kələyi.</p>
-            <div class="glossary-item-plain">Bənzətmə: Formanı geyinib əlində sənəd qovluğu ilə mühafizəçinin yanından rahat keçən dələduz.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-danger" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                      <polyline points="2 17 12 22 22 17"></polyline>
+                      <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Zərərverici proqram (Malware)</h3>
+                </div>
+                <span class="badge badge-danger">Təhlükə</span>
+              </div>
+              <p class="glossary-term-def">Kompüterinizə və ya telefonunuza gizlicə daxil olub məlumatları oğurlamaq, fəaliyyətinizi izləmək və ya faylları korlamaq üçün yazılmış proqramlar.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Evə gələn qonağın cibində gizlətdiyi dinləmə cihazı.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Smişinq və Vişinq (Smishing &amp; Vishing)</span>
-              <span class="glossary-item-cat">Növlər</span>
-            </div>
-            <p class="glossary-item-def">Fişinqin məxsusi olaraq SMS mesajları (Smishing) və ya birbaşa telefon zəngləri (Vishing) vasitəsilə həyata keçirilən forması.</p>
-            <div class="glossary-item-plain">Bənzətmə: Telefonla zəng edib özünü rəsmi idarəçi kimi təqdim edən dələduz.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-danger" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Fidyə proqramı (Ransomware)</h3>
+                </div>
+                <span class="badge badge-danger">Quldurluq</span>
+              </div>
+              <p class="glossary-term-def">Bütün şəxsi şəkillərinizi və sənədlərinizi şifrələyib kilidləyən, açmaq üçün isə sizdən pul tələb edən təhlükəli virus növü.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Oğrunun sənəd şkafınıza öz qıfılını vurub açar üçün nağd pul istəməsi.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Məlumat sızması (Data breach)</span>
-              <span class="glossary-item-cat">Hadisə</span>
-            </div>
-            <p class="glossary-item-def">Hər hansı bir şirkətin və ya saytın bazasından müştərilərin şifrələrinin, kartlarının və ya nömrələrinin kənar şəxslərin əlinə keçməsi.</p>
-            <div class="glossary-item-plain">Bənzətmə: Otelin qeydiyyat dəftərinin oğurlanıb kənar şəxslərə satılması.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-warning" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="16" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Sosial mühəndislik</h3>
+                </div>
+                <span class="badge badge-warning">Aldatma</span>
+              </div>
+              <p class="glossary-term-def">Kompüteri deyil, insan psixologiyasını (tələskənlik, qorxu, nəzakət) manipulyasiya edərək məxfi məlumatları ələ keçirmək kələyi.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Formanı geyinib əlində sənəd qovluğu ilə mühafizəçinin yanından rahat keçən dələduz.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Şifrələmə (Encryption)</span>
-              <span class="glossary-item-cat">Texnologiya</span>
-            </div>
-            <p class="glossary-item-def">Məlumatın yalnız açarı olan şəxs tərəfindən oxuna biləcək gizli riyazi koda çevrilməsi prosesi.</p>
-            <div class="glossary-item-plain">Bənzətmə: Yalnız alıcının oxuya biləcəyi gizli əlifba ilə məktub yazmaq.</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-danger" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Smişinq və Vişinq (Smishing &amp; Vishing)</h3>
+                </div>
+                <span class="badge badge-neutral">Növlər</span>
+              </div>
+              <p class="glossary-term-def">Fişinqin məxsusi olaraq SMS mesajları (Smishing) və ya birbaşa telefon zəngləri (Vishing) vasitəsilə həyata keçirilən forması.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Telefonla zəng edib özünü rəsmi idarəçi kimi təqdim edən dələduz.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>HTTPS (Qıfıl işarəsi)</span>
-              <span class="glossary-item-cat">Standart</span>
-            </div>
-            <p class="glossary-item-def">Brauzerinizlə sayt arasındakı əlaqənin şifrələndiyini göstərir. Diqqət: Bu işarə rabitə xəttinin qorunduğunu bildirir, sayt sahibinin vicdanlı olduğunu yox!</p>
-            <div class="glossary-item-plain">Bənzətmə: Məktubun möhürlü zərfdə getməsi (poçtalyon oxuya bilməz, amma məktubun mətni yalan ola bilər).</div>
-          </article>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-danger" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Məlumat sızması (Data breach)</h3>
+                </div>
+                <span class="badge badge-danger">Hadisə</span>
+              </div>
+              <p class="glossary-term-def">Hər hansı bir şirkətin və ya saytın bazasından müştərilərin şifrələrinin, kartlarının və ya nömrələrinin kənar şəxslərin əlinə keçməsi.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Otelin qeydiyyat dəftərinin oğurlanıb kənar şəxslərə satılması.</p>
+              </div>
+            </article>
 
-          <article class="glossary-item">
-            <div class="glossary-item-term">
-              <span>Şifrə-ifadəsi (Passphrase)</span>
-              <span class="glossary-item-cat">Müdafiə</span>
-            </div>
-            <p class="glossary-item-def">Bir-biri ilə əlaqəsiz dörd və ya daha çox sözdən ibarət, yadda saxlanması asan, lakin sındırılması qeyri-mümkün olan güclü şifrə.</p>
-            <div class="glossary-item-plain">Bənzətmə: "Q@rp!z123" əvəzinə "qarpiz-durna-sahil-bulaq" yazmaq.</div>
-          </article>
-        </div>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-neutral" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Şifrələmə (Encryption)</h3>
+                </div>
+                <span class="badge badge-neutral">Texnologiya</span>
+              </div>
+              <p class="glossary-term-def">Məlumatın yalnız açarı olan şəxs tərəfindən oxuna biləcək gizli riyazi koda çevrilməsi prosesi.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Yalnız alıcının oxuya biləcəyi gizli əlifba ilə məktub yazmaq.</p>
+              </div>
+            </article>
 
-        <div id="glossary-empty-msg" class="search-empty-state" style="display: none;" role="status">
-          <p class="search-empty-title">Uyğun gələn termin tapılmadı</p>
-          <p class="search-empty-hint">Lüğətdə bu sözə uyğun termin yoxdur. "Fişinq", "2FA" və ya "VPN" sözlərini yoxlayın.</p>
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-success" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">HTTPS (Qıfıl işarəsi)</h3>
+                </div>
+                <span class="badge badge-success">Standart</span>
+              </div>
+              <p class="glossary-term-def">Brauzerinizlə sayt arasındakı əlaqənin şifrələndiyini göstərir. Diqqət: Bu işarə rabitə xəttinin qorunduğunu bildirir, sayt sahibinin vicdanlı olduğunu yox!</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">Məktubun möhürlü zərfdə getməsi (poçtalyon oxuya bilməz, amma məktubun mətni yalan ola bilər).</p>
+              </div>
+            </article>
+
+            <article class="card glossary-card-row">
+              <div class="glossary-row-header">
+                <div class="glossary-row-title-group">
+                  <div class="icon-box icon-box-success" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="8" cy="15" r="4"></circle>
+                      <line x1="10.85" y1="12.15" x2="19" y2="4"></line>
+                    </svg>
+                  </div>
+                  <h3 class="glossary-term-name">Şifrə-ifadəsi (Passphrase)</h3>
+                </div>
+                <span class="badge badge-success">Müdafiə</span>
+              </div>
+              <p class="glossary-term-def">Bir-biri ilə əlaqəsiz dörd və ya daha çox sözdən ibarət, yadda saxlanması asan, lakin sındırılması qeyri-mümkün olan güclü şifrə.</p>
+              <div class="glossary-analogy-box">
+                <span class="glossary-analogy-label">Sadə bənzətmə:</span>
+                <p class="glossary-analogy-text">"Q@rp!z123" əvəzinə "qarpiz-durna-sahil-bulaq" yazmaq.</p>
+              </div>
+            </article>
+
+          </div>
+
+          <div id="glossary-empty-msg" class="search-empty-state" style="display: none;" role="status">
+            <p class="search-empty-title">Uyğun gələn termin tapılmadı</p>
+            <p class="search-empty-hint">Lüğətdə bu sözə uyğun termin tapılmadı. "Fişinq", "2FA", "VPN" və ya "Şifrə" sözlərini yoxlayın.</p>
+          </div>
         </div>
       </div>
-    </div>
 
       <!-- Növbəti Səhifə Keçidi -->
       <div class="container next-page-rule-container">
@@ -1117,59 +1680,188 @@
       </div>
     </section>
 
-    <!-- Səhifə: Rəsmi qurumlar (#/qurumlar) -->
+        <!-- Səhifə: Rəsmi qurumlar (#/qurumlar) -->
     <section data-page="/qurumlar" class="view-page" id="view-resources" hidden aria-labelledby="resources-heading">
-<div id="resources" class="editorial-section" aria-labelledby="resources-heading">
-      <div class="container">
-        <div class="section-eyebrow-row">
-          <span class="section-category">Rəsmi Dəstək</span>
+      <div id="resources" class="editorial-section fade-in-section">
+        <div class="container">
+          <div class="section-modern-header">
+            <span class="badge badge-neutral section-badge-label">
+              <span class="badge-dot" aria-hidden="true"></span>
+              Rəsmi Dəstək
+            </span>
+            <h2 id="resources-heading" class="section-modern-title" tabindex="-1">Rəsmi müraciət və yoxlama orqanları</h2>
+            <p class="section-modern-subtitle">Azərbaycan Respublikasında kiber insidentlərin bildirilməsi və təhlükəsizlik yoxlamaları üçün rəsmi resurslar.</p>
+          </div>
+
+          <div class="resources-cards-grid">
+
+            <!-- 1. CERT.GOV.AZ -->
+            <article class="card resource-card">
+              <div class="resource-card-top">
+                <div class="icon-box icon-box-neutral" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
+                <span class="badge badge-neutral">XRİTDX</span>
+              </div>
+              <div class="resource-meta-org">XRİTDX Kompüter İnsidentlərinə qarşı Mübarizə Mərkəzi</div>
+              <h3 class="resource-title">CERT.GOV.AZ (KİMM)</h3>
+              <p class="resource-desc">Azərbaycan Respublikasının Xüsusi Rabitə və İnformasiya Təhlükəsizliyi Dövlət Xidmətinin Kompüter İnsidentlərinə qarşı Mübarizə Mərkəzi. Kiber hücum və insidentləri bildirmək üçün rəsmi mərkəz.</p>
+              
+              <!-- Phone Highlighted Box with Copy Button -->
+              <div class="phone-highlight-box">
+                <div class="phone-info">
+                  <span class="phone-label">Qaynar xətt</span>
+                  <span class="phone-number">1654</span>
+                </div>
+                <button type="button" class="btn btn-secondary copy-phone-btn" data-phone="1654" aria-label="1654 nömrəsini kopyala">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span class="copy-btn-text">Kopyala</span>
+                </button>
+              </div>
+
+              <div class="resource-card-footer">
+                <a href="https://cert.gov.az" target="_blank" rel="noopener noreferrer" class="resource-external-link">
+                  <span>cert.gov.az portalına keçid</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- 2. Daxili İşlər Nazirliyi -->
+            <article class="card resource-card">
+              <div class="resource-card-top">
+                <div class="icon-box icon-box-danger" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                </div>
+                <span class="badge badge-danger">Hüquq-mühafizə</span>
+              </div>
+              <div class="resource-meta-org">Daxili İşlər Nazirliyi</div>
+              <h3 class="resource-title">DİN Kibercinayətkarlıqla Mübarizə</h3>
+              <p class="resource-desc">Kartlardan vəsait oğurluğu, qanunsuz müdaxilələr və dələduzluq cinayətləri ilə bağlı 102 Zəng Mərkəzi və ya rəsmi polis idarələrinə birbaşa müraciət edin.</p>
+              
+              <!-- Phone Highlighted Box with Copy Button -->
+              <div class="phone-highlight-box">
+                <div class="phone-info">
+                  <span class="phone-label">Təcili polis xətti</span>
+                  <span class="phone-number">102</span>
+                </div>
+                <button type="button" class="btn btn-secondary copy-phone-btn" data-phone="102" aria-label="102 nömrəsini kopyala">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span class="copy-btn-text">Kopyala</span>
+                </button>
+              </div>
+
+              <div class="resource-card-footer">
+                <a href="https://mia.gov.az" target="_blank" rel="noopener noreferrer" class="resource-external-link">
+                  <span>mia.gov.az rəsmi səhifəsi</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- 3. Mərkəzi Bank -->
+            <article class="card resource-card">
+              <div class="resource-card-top">
+                <div class="icon-box icon-box-warning" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                </div>
+                <span class="badge badge-warning">Maliyyə Nəzarəti</span>
+              </div>
+              <div class="resource-meta-org">Azərbaycan Respublikasının Mərkəzi Bankı</div>
+              <h3 class="resource-title">Mərkəzi Bank — Maliyyə Savadlılığı</h3>
+              <p class="resource-desc">Azərbaycan Respublikasının Mərkəzi Bankı tərəfindən bank kartı təhlükəsizliyi və ödəniş sistemlərində dələduzluqdan qorunma üzrə rəsmi tövsiyələr.</p>
+              
+              <!-- Phone Highlighted Box with Copy Button -->
+              <div class="phone-highlight-box">
+                <div class="phone-info">
+                  <span class="phone-label">Qaynar xətt</span>
+                  <span class="phone-number">966</span>
+                </div>
+                <button type="button" class="btn btn-secondary copy-phone-btn" data-phone="966" aria-label="966 nömrəsini kopyala">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span class="copy-btn-text">Kopyala</span>
+                </button>
+              </div>
+
+              <div class="resource-card-footer">
+                <a href="https://cbar.az" target="_blank" rel="noopener noreferrer" class="resource-external-link">
+                  <span>cbar.az portalına keçid</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- 4. Elektron Təhlükəsizlik Xidməti (ETX) -->
+            <article class="card resource-card">
+              <div class="resource-card-top">
+                <div class="icon-box icon-box-neutral" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                </div>
+                <span class="badge badge-neutral">RİNN ETX</span>
+              </div>
+              <div class="resource-meta-org">Rəqəmsal İnkişaf və Nəqliyyat Nazirliyi</div>
+              <h3 class="resource-title">Elektron Təhlükəsizlik Xidməti (ETX)</h3>
+              <p class="resource-desc">Fərdi istifadəçilər və təşkilatlar üçün kibertəhlükəsizlik üzrə koordinasiya, maarifləndirmə və fişinq hücumlarının qeydiyyatı xidməti.</p>
+              
+              <!-- Phone Highlighted Box with Copy Button -->
+              <div class="phone-highlight-box">
+                <div class="phone-info">
+                  <span class="phone-label">Qaynar xətt</span>
+                  <span class="phone-number">1655</span>
+                </div>
+                <button type="button" class="btn btn-secondary copy-phone-btn" data-phone="1655" aria-label="1655 nömrəsini kopyala">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span class="copy-btn-text">Kopyala</span>
+                </button>
+              </div>
+
+              <div class="resource-card-footer">
+                <a href="https://cert.az" target="_blank" rel="noopener noreferrer" class="resource-external-link">
+                  <span>cert.az portalına keçid</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+          </div>
         </div>
-
-        <div class="section-editorial-header">
-          <h2 id="resources-heading" class="section-editorial-title" tabindex="-1">Rəsmi müraciət və yoxlama orqanları</h2>
-          <p class="section-editorial-lede">Azərbaycan Respublikasında kiber insidentlərin bildirilməsi və təhlükəsizlik yoxlamaları üçün rəsmi resurslar.</p>
-        </div>
-
-        <div class="resources-list">
-          <a href="https://cert.gov.az" target="_blank" rel="noopener noreferrer" class="resource-entry">
-            <span class="resource-origin">CERT.GOV.AZ (KİMM)</span>
-            <div class="resource-headline">
-              <span>cert.gov.az</span>
-              <span aria-hidden="true">↗</span>
-            </div>
-            <p class="resource-desc">Azərbaycan Respublikasının Xüsusi Rabitə və İnformasiya Təhlükəsizliyi Dövlət Xidmətinin Kompüter İnsidentlərinə qarşı Mübarizə Mərkəzi. Kiber hücum və insidentləri bildirmək üçün rəsmi mərkəz.</p>
-            <span class="resource-action-link">CERT.GOV.AZ portalına keçid</span>
-          </a>
-
-          <a href="https://mia.gov.az" target="_blank" rel="noopener noreferrer" class="resource-entry">
-            <span class="resource-origin">Daxili İşlər Nazirliyi</span>
-            <div class="resource-headline">
-              <span>DİN Kibercinayətkarlıqla Mübarizə</span>
-              <span aria-hidden="true">↗</span>
-            </div>
-            <p class="resource-desc">Kartlardan vəsait oğurluğu, qanunsuz müdaxilələr və dələduzluq cinayətləri ilə bağlı 102 Zəng Mərkəzi və ya rəsmi polis idarələrinə birbaşa müraciət.</p>
-            <span class="resource-action-link">DİN rəsmi səhifəsi</span>
-          </a>
-
-          <a href="https://cbar.az" target="_blank" rel="noopener noreferrer" class="resource-entry">
-            <span class="resource-origin">Mərkəzi Bank</span>
-            <div class="resource-headline">
-              <span>Mərkəzi Bank — Maliyyə Savadlılığı</span>
-              <span aria-hidden="true">↗</span>
-            </div>
-            <p class="resource-desc">Azərbaycan Respublikasının Mərkəzi Bankı tərəfindən bank kartı təhlükəsizliyi və ödəniş sistemlərində dələduzluqdan qorunma üzrə rəsmi tövsiyələr.</p>
-            <span class="resource-action-link">Mərkəzi Bank portalına keçid</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-      <!-- Növbəti Səhifə Keçidi -->
-      <div class="container next-page-rule-container">
-        <a href="#/" class="next-page-rule-block">
-          <span class="next-page-rule-label">Növbəti bölmə</span>
-          <p class="next-page-rule-text">Növbəti: Ana səhifə →</p>
-        </a>
       </div>
     </section>
   </main>
