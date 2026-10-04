@@ -1068,3 +1068,96 @@
   }
 
   initSectionScrollAnimations();
+/* ===== Mobil menyu (hamburger) ===== */
+(function () {
+  var header = document.querySelector('header');
+  if (!header) return;
+
+  var panel = document.createElement('nav');
+  panel.className = 'ks-mobile-nav';
+  panel.setAttribute('aria-label', 'Mobil menyu');
+  document.body.appendChild(panel);
+
+  var btnRef = null;
+  var ICON_MENU = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  var ICON_CLOSE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+
+  function build() {
+    panel.innerHTML = '';
+    var seen = {};
+    header.querySelectorAll('nav a, nav button').forEach(function (src) {
+      var text = src.textContent.trim();
+      if (!text || seen[text]) return;
+      seen[text] = true;
+      var a = document.createElement('a');
+      a.href = src.getAttribute('href') || '#';
+      a.textContent = text;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        close();
+        src.click();
+      });
+      panel.appendChild(a);
+    });
+
+    var cta = Array.prototype.slice.call(header.querySelectorAll('a, button')).filter(function (el) {
+      return el.textContent.indexOf('Testə başla') !== -1;
+    })[0];
+    if (cta) {
+      var c = document.createElement('a');
+      c.href = cta.getAttribute('href') || '#';
+      c.className = 'ks-cta';
+      c.textContent = 'Testə başla →';
+      c.addEventListener('click', function (e) {
+        e.preventDefault();
+        close();
+        cta.click();
+      });
+      panel.appendChild(c);
+    }
+  }
+
+  function position() {
+    panel.style.top = Math.max(header.getBoundingClientRect().bottom, 0) + 'px';
+  }
+
+  function setState(isOpen) {
+    if (!btnRef) return;
+    btnRef.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btnRef.innerHTML = isOpen ? ICON_CLOSE : ICON_MENU;
+  }
+
+  function open() {
+    build();
+    position();
+    panel.classList.add('is-open');
+    setState(true);
+  }
+
+  function close() {
+    panel.classList.remove('is-open');
+    setState(false);
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('header button[aria-expanded]');
+    if (btn) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      btnRef = btn;
+      panel.classList.contains('is-open') ? close() : open();
+      return;
+    }
+    if (panel.classList.contains('is-open') && !panel.contains(e.target)) close();
+  }, true);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+  window.addEventListener('scroll', function () {
+    if (panel.classList.contains('is-open')) position();
+  }, { passive: true });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 1024) close();
+  });
+})();
