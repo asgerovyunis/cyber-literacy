@@ -225,142 +225,142 @@
     {
       channel: "SMS Bildirişi",
       situation: "Naməlum nömrədən belə bir SMS alırsınız:",
-      snippet: "Azərpoçt: #AZ-9812 bağlamanızın ünvanı natamamdır. Bağlamanın geri qayıtmaması üçün 12 saatda məlumatları təsdiqləyin və 1.85 AZN rüsum ödəyin: http://azerpoct-kuryer-catdirilma.info/ode",
-      prompt: "Bu vəziyyətdə ən təhlükəsiz və düzgün addım hansıdır?",
+      snippet: "Azərpoçt: #AZ-9812 bağlamanızın ünvanı natamamdır. Bağlamanın geri qayıtmaması üçün 12 saatda məlumatları təsdiqləyin və 1.85 AZN rüsum ödəyin: http://azerpoct-kuryer.info/ode",
+      prompt: "Bu vəziyyətdə ən təhlükəsiz addım hansıdır?",
       options: [
-        "Bağlamanın geri getməməsi üçün dərhal linkə daxil olub ödəniş etmək.",
-        "Mesaja 'STOP' yazıb göndərmək.",
-        "Mesajı silmək. Bağlama gözləyirsinizsə, Azərpoçtun rəsmi saytından (azerpost.az) birbaşa yoxlamaq.",
-        "1.85 AZN xırda məbləğ olduğu üçün şübhələnmədən ödəmək."
+        "Bağlamanın geri qayıtmaması üçün dərhal linkə girib ödəmək.",
+        "Mesaja 'STOP' yazıb cavab vermək.",
+        "Mesajı silmək; bağlama varsa, rəsmi azerpost.az saytından yoxlamaq.",
+        "1.85 AZN az məbləğ olduğu üçün ödəmək."
       ],
       correct: 2,
-      explanation: "Klassik SMS fişinqi (smişinq). Poçt xidməti heç vaxt adi mobil nömrədən şübhəli .info domenli linklə təcili ödəniş tələb etmir. Məlumatı yalnız rəsmi azerpost.az portalından yoxlayın."
+      explanation: "Bu, saxta SMS-dir. Poçt heç vaxt mobil nömrədən şübhəli linklə təcili ödəniş istəmir."
     },
     {
-      channel: "Daxil Olan Telefon Zəngi",
-      situation: "Zəng edənin nömrəsi bankınızın adı ilə görünür. Zəng edən şəxs deyir:",
-      snippet: "'Bankın təhlükəsizlik xidmətindən narahat edirik. Kartınızdan 450 AZN şübhəli əməliyyat qeydə alınıb. Əməliyyatı ləğv etmək üçün telefonunuza gələn 6 rəqəmli SMS kodu deyin.'",
+      channel: "Daxil Olan Zəng",
+      situation: "Zəng edən şəxs bank adından danışır:",
+      snippet: "'Bankın təhlükəsizlik xidmətindən narahat edirik. Kartınızdan 450 AZN şübhəli köçürmə var. Əməliyyatı ləğv etmək üçün SMS-lə gələn 6 rəqəmli kodu deyin.'",
       prompt: "Necə davranmalısınız?",
       options: [
-        "Əməliyyatın dərhal dayandırılması üçün kodu zəng edənə oxumaq.",
-        "Dəstəyi dərhal asmaq. Əsl bank əməkdaşları heç vaxt birdəfəlik SMS kodu istəmir.",
-        "Zəng edəndən vəzifəsini və adını soruşub, sonra kodu bildirmək.",
-        "Pulu xilas etmək üçün təcili başqa hesaba köçürməyi təklif etmək."
+        "Əməliyyatı dayandırmaq üçün kodu zəng edənə oxumaq.",
+        "Dəstəyi dərhal asmaq; bank əməkdaşı heç vaxt SMS kodu istəmir.",
+        "Zəng edənin adını və vəzifəsini soruşub kodu vermək.",
+        "Pulu xilas etmək üçün başqa hesaba köçürməyə razılaşmaq."
       ],
       correct: 1,
-      explanation: "Nömrə saxtalaşdırılıb (spoofing). Həmin 6 rəqəmli kod əslində dələduzun sizin bank tətbiqinizə giriş və ya şifrə sıfırlama cəhdidir! Kodu verdiyiniz anda kartınızdakı bütün pul çıxarılır."
+      explanation: "Nömrə saxtalaşdırılıb. Həmin kod dələduzun hesabınıza girməsi üçündür; kodu versəniz, pulunuz çıxarılacaq."
     },
     {
       channel: "E-poçt Mesajı",
-      situation: "İş yerinizin rəhbərinin adından qısa e-poçt alırsınız:",
-      snippet: "'Mən hazırda Nazirlikdə iclasdayam, zənglərə cavab verə bilmirəm. Təcili olaraq 3 ədəd 100 manatlıq Apple və ya Google Play hədiyyə kartı alıb arxasındakı kodları mənə göndər, sonra xərcləri ödəyəcəyəm.'",
+      situation: "İş yerinizin rəhbərindən təcili e-poçt gəlir:",
+      snippet: "'İclasdayam, zəng etmə. Təcili 3 ədəd 100 manatlıq Apple və ya Google Play kartı alıb kodlarını mənə göndər, pulunu sonra verəcəyəm.'",
       prompt: "Necə hərəkət etməlisiniz?",
       options: [
-        "Rəhbərin tapşırığı olduğu üçün dərhal yaxınlıqdakı mağazaya gedib kartları almaq.",
-        "Özü onlayn alsın deyə ona öz kart məlumatlarınızı yazmaq.",
-        "Bunun saxta olduğunu başa düşmək; rəhbərə şəxsən zəng edib və ya yanına gedib dəqiqləşdirmək.",
-        "İş yoldaşlarına yönləndirib kimin tez ala biləcəyini soruşmaq."
+        "Rəhbərin tapşırığı olduğu üçün dərhal mağazaya gedib kartları almaq.",
+        "Özü alsın deyə öz kart məlumatlarınızı ona yazmaq.",
+        "Mesaja inanmamaq; rəhbərə adi zəng edib məsələni dəqiqləşdirmək.",
+        "İş yoldaşlarına göndərib kömək istəmək."
       ],
       correct: 2,
-      explanation: "Hədiyyə kartları və qeyri-rəsmi kodlar kiber dələduzların ən sevdiyi vasitədir. Tələsiklik yaratmaq və 'iclasdayam' bəhanəsi rəhbər adından istifadə edilən dələduzluğun klassik əlamətidir."
+      explanation: "Hədiyyə kartı kodları dələduzların ən sevdiyi üsuldur. Rəhbərin adı ilə tələsiklik yaradılır."
     },
     {
       channel: "Şifrə Seçimi",
-      situation: "Əsas e-poçtunuz üçün yeni şifrə təyin edirsiniz:",
-      snippet: "Namizəd variantlar: A) B@k1_2026!  |  B) durna-sahil-qarpiz-bulaq  |  C) Memmed1985  |  D) 1234567890",
-      prompt: "Hansı seçim sındırma proqramlarına qarşı ən güclü müdafiəni təmin edir?",
+      situation: "E-poçtunuz üçün yeni şifrə təyin edirsiniz:",
+      snippet: "Variantlar: A) B@k1_2026!  |  B) durna-sahil-qarpiz-bulaq  |  C) Memmed1985  |  D) 1234567890",
+      prompt: "Hansı seçim daha etibarlıdır?",
       options: [
-        "B@k1_2026! (Rəmzlər və böyük-kiçik hərflər var)",
-        "durna-sahil-qarpiz-bulaq (Uzun, dörd fərqli sözdən ibarət şifrə-ifadəsi)",
-        "Memmed1985 (Ad və doğum ili ilə yadda qalan kombinasiya)",
-        "1234567890 (Tez yığılan sadə rəqəm ardıcıllığı)"
+        "B@k1_2026! (Rəmz və böyük-kiçik hərflər)",
+        "durna-sahil-qarpiz-bulaq (Dörd fərqli sözdən ibarət uzun ifadə)",
+        "Memmed1985 (Ad və doğum ili)",
+        "1234567890 (Sadə rəqəm sırası)"
       ],
       correct: 1,
-      explanation: "Uzunluq mürəkkəblikdən güclüdür. Şifrə sındıran proqramlar 'B@k1' kimi adi hərfləri rəmzlə əvəzləmə üsullarını saniyəyə tapır. Bir-biri ilə əlaqəsiz dörd sözü tapmaq isə əsrlər tələb edir."
+      explanation: "Uzunluq mürəkkəblikdən vacibdir. Əlaqəsiz dörd sözdən ibarət şifrəni sındırmaq proqramlar üçün ən çətinidir."
     },
     {
       channel: "İctimai Şəbəkə",
-      situation: "Hava limanında gözləyirsiniz və bank hesabınızı yoxlamaq lazımdır:",
-      snippet: "Aşkarlanan şəbəkələr: 'Free_Airport_WiFi_Fast' (Qıfıl işarəsi yoxdur, açıq giriş).",
+      situation: "Hava limanında bank hesabınıza baxmaq lazımdır:",
+      snippet: "Görünən şəbəkə: 'Free_Airport_WiFi_Fast' (Qıfıl işarəsi yoxdur, açıq giriş).",
       prompt: "Ən təhlükəsiz yol hansıdır?",
       options: [
         "Adında 'Airport' sözü olduğu üçün açıq şəbəkəyə qoşulmaq.",
-        "Telefonun mobil internetini (hotspot) açıb öz şəxsi internetinizdən istifadə etmək.",
-        "Yaxınlıqdakı sərnişindən hansı şəbəkənin təhlükəsiz olduğunu soruşmaq.",
-        "Kimsə görməsin deyə tətbiqə çox sürətlə daxil olub çıxmaq."
+        "Telefonun mobil internetindən (4G/5G) istifadə etmək.",
+        "Yandakı sərnişindən hansı şəbəkənin yaxşı olduğunu soruşmaq.",
+        "Tez daxil olub çıxmaq."
       ],
       correct: 1,
-      explanation: "İstənilən şəxs bir neçə dəqiqəyə saxta Wi-Fi nöqtəsi açıb şifrəsiz trafikinizi izləyə bilər. Bank və ya ödəniş əməliyyatları üçün hər zaman mobil şəbəkə (4G/5G) məlumatından istifadə edin."
+      explanation: "İstənilən adam açıq Wi-Fi açıb məlumatlarınızı izləyə bilər. Bank əməliyyatları üçün həmişə mobil internet işlədin."
     },
     {
       channel: "Sosial Şəbəkə Mesajı",
-      situation: "Yaxın dostunuzun profilindən qəfil mesaj gəlir:",
-      snippet: "'Gör bu qəzada kim həlak olub... bu videodakı doğrudan da sənsən?! 😢 http://xeberler-trend-baki.cc/video?id=712'",
-      prompt: "Necə hərəkət etməlisiniz?",
+      situation: "Dostunuzun profilindən qəfil mesaj gəlir:",
+      snippet: "'Gör bu qəzada kim həlak olub... bu videodakı doğrudan da sənsən?! http://xeberler-trend.cc/video?id=712'",
+      prompt: "Nə etməlisiniz?",
       options: [
-        "Haqqınızda nə paylaşıldığını görmək üçün təcili linkə daxil olmaq.",
-        "Keçidə klikləməmək. Dərhal dostunuza adi zəng edib hesabının ələ keçirildiyini xəbər vermək.",
-        "Açılan səhifə yaşınızı təsdiqləmək üçün şifrə istədikdə məlumatları yazmaq.",
-        "Mesajı digər dostlara göndərib videonu görüb-görmədiklərini soruşmaq."
+        "Nə paylaşıldığını görmək üçün linkə daxil olmaq.",
+        "Keçidə toxunmamaq; dostunuza zəng edib hesabının oğurlandığını demək.",
+        "Açılan səhifədə yaşınızı təsdiqləmək üçün şifrə yazmaq.",
+        "Mesajı başqa dostlara göndərib soruşmaq."
       ],
       correct: 1,
-      explanation: "Dələduzlar dostunuzun profilini ələ keçirib bütün kontaktlara maraq oyadan saxta mesajlar göndərirlər. Link sizi saxta giriş səhifəsinə apararaq şifrənizi oğurlamaq üçündür."
+      explanation: "Dostunuzun hesabı ələ keçirilib. Link sizi saxta giriş səhifəsinə aparıb şifrənizi oğurlamaq üçündür."
     },
     {
       channel: "Brauzer Pəncərəsi",
-      situation: "Xəbər oxuyarkən ekranda qəfil qırmızı rəngdə yanıb-sönən pəncərə çıxır:",
-      snippet: "'Diqqət! Kompüterinizdə 17 təhlükəli virus tapıldı! Bütün fayllarınız pozulacaq. Təmizləmək üçün dərhal Antivirus Pro proqramını endirin.'",
+      situation: "Saytda xəbər oxuyarkən qırmızı pəncərə açılır:",
+      snippet: "'Diqqət! Kompüterinizdə 17 virus tapıldı! Təmizləmək üçün dərhal Antivirus Pro proqramını endirin.'",
       prompt: "Bu xəbərdarlıqla nə etmək lazımdır?",
       options: [
-        "Kompüteri təmizləmək üçün 'Endir' düyməsini sıxmaq.",
-        "Ekranda yazılmış pulsuz nömrəyə zəng etmək.",
-        "Brauzer səhifəsini dərhal bağlamaq. Saytlar kompüterin içindəki faylları skan edə bilməz; bu saxta tələdir.",
-        "Kompüteri yenidən başladaraq kart məlumatlarını daxil etmək."
+        "Kompüteri təmizləmək üçün 'Endir' basmaq.",
+        "Ekranda yazılmış nömrəyə zəng etmək.",
+        "Səhifəni dərhal bağlamaq; saytlar kompüterin içini skan edə bilməz.",
+        "Kompüteri söndürüb-yandırmaq."
       ],
       correct: 2,
-      explanation: "Veb səhifələrin kompüterinizin yaddaşını yoxlamaq texniki imkanı yoxdur. Bu bildirişlər (scareware) sizi qorxudaraq zərərverici proqram yüklətmək üçün uydurulur."
+      explanation: "Veb saytlar kompüterin yaddaşını yoxlaya bilməz. Bu, zərərli proqram yüklətmək üçün saxta qorxutma tələsidir."
     },
     {
       channel: "Təsdiq Bildirişi",
-      situation: "Evdə çay içirsiniz, kompüterə toxunmamısınız. Qəfil telefonunuza bildiriş gəlir:",
-      snippet: "Google Təsdiq xəbərdarlığı: 'Moskvadan giriş cəhdini təsdiq edirsiniz?' Düymələr: [Bəli, mənəm] və [Xeyr, mən deyiləm].",
-      prompt: "Bu nə deməkdir və nə etməlisiniz?",
+      situation: "Evdə oturarkən telefonunuza qəfil bildiriş gəlir:",
+      snippet: "Google təsdiqi: 'Moskvadan giriş cəhdini təsdiqləyirsiniz?' Düymələr: [Bəli] və [Xeyr].",
+      prompt: "Nə etməlisiniz?",
       options: [
-        "Ekranda mane olmasın deyə 'Bəli' düyməsini sıxmaq.",
-        "Kimsə şifrənizi tapıb girməyə çalışır! Dərhal 'Xeyr' seçmək və başqa təmiz cihazdan şifrəni dəyişmək.",
-        "Heç nə etməmək; cavab verməsəniz sistem özü icazə verəcək.",
-        "Narahat etməsin deyə iki mərhələli təsdiqləməni tamamilə söndürmək."
+        "Ekrana mane olmasın deyə 'Bəli' basmaq.",
+        "'Xeyr' seçib girişi dayandırmaq və dərhal şifrəni dəyişmək.",
+        "Heç nə etməmək.",
+        "İki mərhələli təsdiqləməni söndürmək."
       ],
       correct: 1,
-      explanation: "İki mərhələli təsdiqləmə (2FA) sizi yenicə xilas etdi! Dələduz şifrənizi bilsə də, telefonunuzdakı qıfıla ilişib. 'Xeyr' seçərək girişi bloklayın və şifrənizi dərhal yeniləyin."
+      explanation: "Kimsə şifrənizi tapıb girməyə çalışır. 'Xeyr' seçərək girişi dayandırın və şifrənizi dərhal yeniləyin."
     },
     {
       channel: "Onlayn Mağaza",
-      situation: "Sosial şəbəkədəki reklamda qiyməti 300 manat olan idman ayaqqabısı 25 manata satılır:",
-      snippet: "Sifariş səhifəsi: 'Bank kartı qəbul edilmir. Yalnız karta birbaşa köçürmə və ya MilliÖn/eManat ilə ödəniş'.",
-      prompt: "Burada əsas dələduzluq əlaməti hansıdır?",
+      situation: "Sosial şəbəkədəki reklamda 300 manatlıq ayaqqabı 25 manata satılır:",
+      snippet: "Sifariş şərti: 'Kart qəbul edilmir. Yalnız karta birbaşa köçürmə və ya terminal ödənişi'.",
+      prompt: "Əsas dələduzluq əlaməti hansıdır?",
       options: [
-        "Endirimin böyük olması, amma mövsüm sonu belə endirimlər mümkündür.",
-        "Rəsmi mağazalar təhlükəsiz bank ödəniş şlüzü istifadə edir; karta birbaşa köçürmə və ya terminal ödənişində vəsaitin heç bir zəmanəti yoxdur.",
-        "Məhsulun şəkli səliqəli olduğu üçün narahat olmağa əsas yoxdur.",
-        "Faiz hesablanmasın deyə debet kartından köçürmək daha yaxşıdır."
+        "Endirimin böyük olması.",
+        "Rəsmi bank ödənişi yerinə karta birbaşa köçürmə tələb olunması.",
+        "Məhsulun şəklinin səliqəli olması.",
+        "Debet kartından köçürmək."
       ],
       correct: 1,
-      explanation: "Bank kartı ilə rəsmi ödənişi qəbul etməyib yalnız fərdi karta köçürmə tələb edən anonim səhifələr saxtadır. Pul köçürülən kimi profil sizi bloklayır və pul batır."
+      explanation: "Karta birbaşa pul köçürməsi tələb edən anonim səhifələr saxtadır. Pul köçürülən kimi profil sizi bloklayacaq."
     },
     {
       channel: "Təcili Telefon Zəngi",
-      situation: "Yaşlı ailə üzvünüzə həyəcanlı və ağlamaklı bir səs zəng edir:",
-      snippet: "'Nənə, mənəm! Maşınla qəza törətmişəm, polisdəyəm. Anama heç nə demə! Bir nəfər evə gəlib pulu götürəcək, təcili 3000 manat nağd pul ver, yoxsa həbs edirlər.'",
-      prompt: "Təcili nağd pul istəyən belə zənglərdə ən vacib qayda nədir?",
+      situation: "Yaşlı qohumunuza ağlamaq qarışıq bir səs zəng edir:",
+      snippet: "'Nənə, qəza törətmişəm, polisdəyəm! Təcili 3000 manat ver, kuryer gəlib götürəcək, yoxsa həbs edirlər.'",
+      prompt: "Ən vacib qayda nədir?",
       options: [
-        "Nəvənin həbsdə qalmaması üçün gələn kuryerə dərhal pulu vermək.",
-        "Dərin nəfəs alıb dəstəyi asmaq və nəvənizin və ya valideynlərinin öz daimi nömrəsinə zəng edib məsələni aydınlaşdırmaq.",
-        "Heç kimlə danışmadan dərhal banka gedib pulu çıxarmaq.",
-        "Zəng edəndən pulu gələn ay qaytaracağına söz verməsini istəmək."
+        "Nəvənin həbsdə qalmaması üçün gələn adama pulu vermək.",
+        "Dəstəyi asıb nəvənin və ya valideyninin öz nömrəsinə zəng etmək.",
+        "Heç kimə demədən bankdan pul çıxarmaq.",
+        "Zəng edəndən pulu qaytaracağını soruşmaq."
       ],
       correct: 1,
-      explanation: "Bu, yaşlı insanları şoka salmaq üçün qurulan 'Qohum təhlükədədir' dələduzluğudur. Qorxu və tələskənlik hissini dayandırmağın yeganə yolu dəstəyi asıb doğma nömrəyə zəng etməkdir."
+      explanation: "Bu, yaşlı insanları qorxutmaq üçün qurulan köhnə tələdir. Dəstəyi asıb doğma nömrəyə zəng etmək kifayətdir."
     }
   ];
 
@@ -467,8 +467,8 @@
       }
       if (feedbackHeadline) {
         feedbackHeadline.textContent = isCorrect
-          ? 'Təhlükəsiz və düzgün seçim!'
-          : 'Diqqət: bu tələyə düşmək olmaz!';
+          ? 'Düzgün seçim!'
+          : 'Diqqət: bu dələduz tələsidir!';
       }
       if (feedbackText) {
         feedbackText.textContent = item.explanation;
@@ -533,7 +533,7 @@
       if (circleBar) circleBar.style.stroke = 'var(--color-success)';
       if (resultBar) resultBar.style.backgroundColor = 'var(--color-success)';
       if (resultMessage) {
-        resultMessage.textContent = 'Mükəmməl instinkt! Əksər insanları aldadan süni tələskənliyi, saxta nömrələri və şübhəli keçidləri dərhal ayırd edirsiniz. Rəqəmsal müdafiə vərdişləriniz olduqca etibarlıdır.';
+        resultMessage.textContent = 'Əla nəticə! Saxta mesajları və şübhəli zəngləri asanlıqla ayırd edirsiniz.';
       }
     } else if (points >= 50) {
       if (statusBadge) {
@@ -544,7 +544,7 @@
       if (circleBar) circleBar.style.stroke = 'var(--color-warning)';
       if (resultBar) resultBar.style.backgroundColor = 'var(--color-warning)';
       if (resultMessage) {
-        resultMessage.textContent = 'Yaxşı nəticə! Əsas dələduzluq üsullarını tanıyırsınız. Tam təhlükəsiz olmaq və riskləri minimuma endirmək üçün səhv etdiyiniz vəziyyətlərin izahını və əsas bələdçiləri bir daha nəzərdən keçirin.';
+        resultMessage.textContent = 'Yaxşı nəticədir. Səhv etdiyiniz vəziyyətlərin izahını oxuyub vərdişlərinizi möhkəmləndirin.';
       }
     } else {
       if (statusBadge) {
@@ -555,7 +555,7 @@
       if (circleBar) circleBar.style.stroke = 'var(--color-danger)';
       if (resultBar) resultBar.style.backgroundColor = 'var(--color-danger)';
       if (resultMessage) {
-        resultMessage.textContent = 'Yüksək risk aşkarlandı! Dələduzlar adətən bu cür tələlərdən istifadə edərək vəsaitləri ələ keçirirlər. Şəxsi təhlükəsizliyinizi təmin etmək üçün saytdakı doqquz əsas bələdçini və təcili addımları mütləq oxuyun.';
+        resultMessage.textContent = 'Diqqətli olun. Dələduzların tələlərinə düşməmək üçün saytdakı qaydaları mütləq oxuyun.';
       }
     }
   }
